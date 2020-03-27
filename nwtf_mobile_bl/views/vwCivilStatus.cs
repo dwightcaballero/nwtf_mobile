@@ -7,11 +7,11 @@ namespace nwtf_mobile_bl.views
 {
     public class vwCivilStatus
     {
-        [PrimaryKey, NotNull] Guid id { get; set; }
-        string civilStatusCode { get; set; }
-        string description { get; set; }
-        Boolean isMarried { get; set; }
-        string status { get; set; }
-        DateTime endDate { get; set; }
+        [PrimaryKey, NotNull] public Guid id { get; set; }
+        public string civilStatusCode { get; set; }
+        public string description { get; set; }
+        public Boolean isMarried { get; set; }
+        public string status { get; set; }
+        public DateTime endDate { get; set; }
     }
 }

@@ -19,8 +19,4 @@
   <ItemGroup>
     <ProjectReference Include="..\nwtf_mobile_bl\nwtf_mobile_bl.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="app\" />
-  </ItemGroup>
 </Project>
