@@ -8,24 +8,24 @@ namespace nwtf_mobile_bl.views
     public class vwCustomer
     {
         
-        [PrimaryKey, NotNull] Guid id { get; set; }
-        [NotNull] string customerID { get; set; }
-        [NotNull] string dungannonID { get; set; }
-        [NotNull] string customerFirstName { get; set; }
-        [NotNull] string customerMiddleName { get; set; }
-        [NotNull] string customerLasttName { get; set; }
-        string customerSuffix { get; set; }
-        [NotNull] DateTime customerBirthdate { get; set; }
-        [NotNull] string customerCivilStatus { get; set; }
-        [NotNull] DateTime customerMembershipDate { get; set; }
-        string spouseID { get; set; }
-        string spouseFirstName { get; set; }
-        string spouseMiddleName { get; set; }
-        string spouseLastName { get; set; }
-        string spouseSuffix { get; set; }
-        DateTime spouseBirthdate { get; set; }
-        [NotNull] string branchCode { get; set; }
-        [NotNull] string blockNo { get; set; }
-        [NotNull] string CenterNo { get; set; }
+        [PrimaryKey, NotNull] public Guid id { get; set; }
+        [NotNull] public string customerID { get; set; }
+        [NotNull] public string dungannonID { get; set; }
+        [NotNull] public string customerFirstName { get; set; }
+        [NotNull] public string customerMiddleName { get; set; }
+        [NotNull] public string customerLasttName { get; set; }
+        public string customerSuffix { get; set; }
+        [NotNull] public DateTime customerBirthdate { get; set; }
+        [NotNull] public string customerCivilStatus { get; set; }
+        [NotNull] public DateTime customerMembershipDate { get; set; }
+        public string spouseID { get; set; }
+        public string spouseFirstName { get; set; }
+        public string spouseMiddleName { get; set; }
+        public string spouseLastName { get; set; }
+        public string spouseSuffix { get; set; }
+        public DateTime spouseBirthdate { get; set; }
+        [NotNull] public string branchCode { get; set; }
+        [NotNull] public string blockNo { get; set; }
+        [NotNull] public string CenterNo { get; set; }
     }
 }

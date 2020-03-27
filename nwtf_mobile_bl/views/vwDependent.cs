@@ -7,11 +7,11 @@ namespace nwtf_mobile_bl.views
 {
     public class vwDependent
     {
-        [PrimaryKey, NotNull] Guid id { get; set; }
-        [NotNull] string dependentID { get; set; }
-        [NotNull] Guid customerID { get; set; }
-        [NotNull] string dependentFullName { get; set; }
-        [NotNull] string dependentBirthdate { get; set; }
-        [NotNull] string dependentRelationship { get; set; }
+        [PrimaryKey, NotNull] public Guid id { get; set; }
+        [NotNull] public string dependentID { get; set; }
+        [NotNull] public Guid customerID { get; set; }
+        [NotNull] public string dependentFullName { get; set; }
+        [NotNull] public string dependentBirthdate { get; set; }
+        [NotNull] public string dependentRelationship { get; set; }
     }
 }

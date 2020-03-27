@@ -7,14 +7,14 @@ namespace nwtf_mobile_bl.views
 {
     public class vwProduct
     {
-        [PrimaryKey, NotNull] Guid id { get; set; }
-        [NotNull] string productID { get; set; }
-        [NotNull] string productName { get; set; }
-        [NotNull] Boolean generalInsurance { get; set; }
-        [NotNull] Boolean inHouseInsurance { get; set; }
-        [NotNull] Boolean requireSavingsLoans { get; set; }
-        [NotNull] Boolean usableForTransactions { get; set; }
-        string status { get; set; }
-        DateTime endDate { get; set; }
+        [PrimaryKey, NotNull] public Guid id { get; set; }
+        [NotNull] public string productID { get; set; }
+        [NotNull] public string productName { get; set; }
+        [NotNull] public Boolean generalInsurance { get; set; }
+        [NotNull] public Boolean inHouseInsurance { get; set; }
+        [NotNull] public Boolean requireSavingsLoans { get; set; }
+        [NotNull] public Boolean usableForTransactions { get; set; }
+        public string status { get; set; }
+        public DateTime endDate { get; set; }
     }
 }
