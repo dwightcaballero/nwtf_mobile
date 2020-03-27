@@ -8,7 +8,6 @@
     <Folder Include="controllers\" />
     <Folder Include="dto\" />
     <Folder Include="entities\" />
-    <Folder Include="views\" />
   </ItemGroup>
 
   <ItemGroup>
