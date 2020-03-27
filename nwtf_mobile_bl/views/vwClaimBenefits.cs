@@ -19,10 +19,13 @@ namespace nwtf_mobile_bl.views
         string dateTo { get; set; }
         DateTime dateFromVal { get; set; }
         DateTime dateToVal { get; set; }
+        //Based from the productclaimanttypeclaimbenefits views
         //decimal maximumAmountTemp { get; set; }
         //decimal maximumValueTemp { get; set; }
         //decimal accumulatedAmount { get; set; }
         //decimal accumulatedValue { get; set; }
+        //string claimTypeName { get; set; }
+        //Guid claimTypeClaimTransactionUID { get; set; }
 
     }
 }
