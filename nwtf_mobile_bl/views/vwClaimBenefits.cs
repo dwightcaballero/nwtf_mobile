@@ -12,13 +12,14 @@ namespace nwtf_mobile_bl.views
         public Guid productClaimTypeUID { get; set; }
         public int claimBenefitsLimits { get; set; }
         public int claimantType { get; set; }
-        public decimal maximumAmount { get; set; }
+        public double maximumAmount { get; set; }
         public int maximumBasis { get; set; }
-        public decimal maximumValue { get; set; }
+        public double maximumValue { get; set; }
         public string dateFrom { get; set; }
         public string dateTo { get; set; }
         public DateTime dateFromVal { get; set; }
         public DateTime dateToVal { get; set; }
+        public double amount { get; set; }
         //Based from the productclaimanttypeclaimbenefits views
         //decimal maximumAmountTemp { get; set; }
         //decimal maximumValueTemp { get; set; }
