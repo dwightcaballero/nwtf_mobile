@@ -8,8 +8,8 @@ namespace nwtf_mobile_bl.views
     public class vwBranchEmployee
     {
         [PrimaryKey, NotNull] static Guid id { get; set; }
-        [NotNull] string employeeName { get; set; }
-        [NotNull] string payeeID { get; set; }
+        string employeeName { get; set; }
+        string payeeID { get; set; }
         [NotNull] Guid branchID { get; set; }
     }
 }

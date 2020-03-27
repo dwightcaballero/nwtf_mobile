@@ -9,8 +9,8 @@ namespace nwtf_mobile_bl.views
     {
         [PrimaryKey, NotNull] static Guid id { get; set; }
         [NotNull] Guid productUID { get; set; }
-        [NotNull] int fromDays { get; set; }
-        [NotNull] int toDays { get; set; }
-        [NotNull] decimal amount { get; set; }
+        int fromDays { get; set; }
+        int toDays { get; set; }
+        decimal amount { get; set; }
     }
 }

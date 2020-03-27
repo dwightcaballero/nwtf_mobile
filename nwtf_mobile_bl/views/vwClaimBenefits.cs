@@ -9,9 +9,9 @@ namespace nwtf_mobile_bl.views
     {
         [PrimaryKey, NotNull] static Guid id { get; set; }
         [NotNull] Guid productUID { get; set; }
-        [NotNull] Guid productClaimTypeUID { get; set; }
-        [NotNull] int claimBenefitsLimits { get; set; }
-        [NotNull] int claimantType { get; set; }
+        Guid productClaimTypeUID { get; set; }
+        int claimBenefitsLimits { get; set; }
+        int claimantType { get; set; }
         decimal maximumAmount { get; set; }
         int maximumBasis { get; set; }
         decimal maximumValue { get; set; }
