@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="controllers\" />
-    <Folder Include="dataservices\" />
     <Folder Include="dto\" />
     <Folder Include="entities\" />
     <Folder Include="views\" />
