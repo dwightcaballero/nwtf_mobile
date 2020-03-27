@@ -13,7 +13,7 @@ namespace nwtf_mobile_bl.views
         public String DisbursementTypeName { get; set; }
         public int PayeeType { get; set; }
         public int AmountType { get; set; }
-        public Decimal AmountValue { get; set; }
+        public Double AmountValue { get; set; }
         public Guid claimTypeID { get; set; }
         public Boolean isFinalPayee { get; set; }
         public Guid payeeGUID { get; set; }
@@ -24,5 +24,6 @@ namespace nwtf_mobile_bl.views
         public String typeCode { get; set; }
         public Boolean include { get; set; }
         public String claimTypeClaimTransactionId { get; set; }
+        public int claimantType { get; set; }
     }
 }
