@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SQLite;
 
 namespace nwtf_mobile_bl.dataservices
 {
@@ -27,46 +28,31 @@ namespace nwtf_mobile_bl.dataservices
             }
         }
 
-        public static void initData()
+        public static void initializeDB()
         {
-            var db = new SQLiteConnection(DatabasePath);
-            
-            var lstbranchEmployee = new List<views.vwBranchEmployee>
+            using (SQLiteConnection conn = new SQLiteConnection(DatabasePath))
             {
-                new views.vwBranchEmployee
-                {
-                    id= Guid.NewGuid(),
-                    employeeName= "Leslie Hererro",
-                    payeeID="123ABC",
-                    branchID=Guid.Parse("34a1738a-27ac-4e86-ac7e-8eb52467366e")
-                },
-                new views.vwBranchEmployee
-                {
-                    id= Guid.NewGuid(),
-                    employeeName= "Joseph Alonsabe",
-                    payeeID="123ABC",
-                    branchID=Guid.Parse("34a1738a-27ac-4e86-ac7e-8eb52467366e")
-                }
-            };
-            db.InsertAll(lstbranchEmployee);
-
-            var lstCivilStatus = new List<views.vwCivilStatus>
-            {
-                new views.vwCivilStatus
-                {
-                    id= Guid.NewGuid(),
-                    civilStatusCode = "102001",
-                    description = "Single",
-                    isMarried=false
-                },
-                new views.vwCivilStatus
-                {
-                    id= Guid.NewGuid(),
-                    civilStatusCode = "102001",
-                    description = "Single",
-                    isMarried=false
-                }
-            };
+                conn.CreateTable<views.vwBranchEmployee>();
+                conn.CreateTable<views.vwCivilStatus>();
+                conn.CreateTable<views.vwClaimBenefits>();
+                conn.CreateTable<views.vwClaimTypeRequiredDocuments>();
+                conn.CreateTable<views.vwClaimTypes>();
+                conn.CreateTable<views.vwClaimTypeSubgroup>();
+                conn.CreateTable<views.vwCustomer>();
+                conn.CreateTable<views.vwDependent>();
+                conn.CreateTable<views.vwDisbursementPayee>();
+                conn.CreateTable<views.vwDisbursementType>();
+                conn.CreateTable<views.vwMafEnrollmentClosure>();
+                conn.CreateTable<views.vwPremiumsPaid>();
+                conn.CreateTable<views.vwProduct>();
+                conn.CreateTable<views.vwProductClaimType>();
+                conn.CreateTable<views.vwProductMembership>();
+                conn.CreateTable<views.vwRequiredDocuments>();
+                conn.CreateTable<views.vwRequiredFields>();
+                conn.CreateTable<views.vwSubgroupRequiredFields>();
+                conn.CreateTable<views.vwSubgroups>();
+                conn.CreateTable<views.vwTempUsers>();
+            }
         }
     }
 }

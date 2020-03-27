@@ -9,7 +9,7 @@ namespace nwtf_mobile_bl.views
     {
         [PrimaryKey,NotNull]
         public Guid id {get; set;}
-       public String claimTypeName { get; set; }
+        public String claimTypeName { get; set; }
         public Boolean include { get; set; }
         public String claimTypeCode { get; set; }
         public String claimTypeShortName { get; set; }
