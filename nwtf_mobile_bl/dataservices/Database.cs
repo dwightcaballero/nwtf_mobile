@@ -27,38 +27,6 @@ namespace nwtf_mobile_bl.dataservices
             }
         }
 
-        public static void init()
-        {
-            InitTbl();
-            initData();
-        }
-
-        public static void InitTbl()
-        {
-            var db = new SQLiteConnection(DatabasePath);
-
-            db.CreateTable<views.vwBranchEmployee>();
-            db.CreateTable<views.vwCivilStatus>();
-            db.CreateTable<views.vwClaimBenefits>();
-            db.CreateTable<views.vwClaimTypeRequiredDocuments>();
-            db.CreateTable<views.vwClaimTypes>();
-            db.CreateTable<views.vwClaimTypeSubgroup>();
-            db.CreateTable<views.vwCustomer>();
-            db.CreateTable<views.vwDependent>();
-            db.CreateTable<views.vwDisbursementPayee>();
-            db.CreateTable<views.vwDisbursementType>();
-            db.CreateTable<views.vwMafEnrollmentClosure>();
-            db.CreateTable<views.vwPremiumsPaid>();
-            db.CreateTable<views.vwProduct>();
-            db.CreateTable<views.vwProductClaimType>();
-            db.CreateTable<views.vwProductMembership>();
-            db.CreateTable<views.vwRequiredDocuments>();
-            db.CreateTable<views.vwRequiredFields>();
-            db.CreateTable<views.vwSubgroupRequiredFields>();
-            db.CreateTable<views.vwSubgroups>();
-            db.CreateTable<views.vwTempUsers>();
-        }
-
         public static void initData()
         {
             var db = new SQLiteConnection(DatabasePath);
