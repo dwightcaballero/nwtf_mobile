@@ -12,7 +12,7 @@ namespace nwtf_mobile
             InitializeComponent();
 
             //one time initialization
-            nwtf_mobile_bl.dataservices.Database.initializeDB();
+            //nwtf_mobile_bl.dataservices.Database.initializeDB();
 
             MainPage = new MainPage();
         }
