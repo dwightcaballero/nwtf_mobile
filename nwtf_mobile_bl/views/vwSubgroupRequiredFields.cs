@@ -12,6 +12,6 @@ namespace nwtf_mobile_bl.views
         [NotNull]
         public Guid subgroupUID { get; set; }
         [NotNull]
-        public Guid requiredDocumentUID { get; set; }
+        public Guid requiredFieldUID { get; set; }
     }
 }

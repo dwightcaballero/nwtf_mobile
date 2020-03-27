@@ -5,7 +5,7 @@ using SQLite;
 
 namespace nwtf_mobile_bl.views
 {
-    class vwMafEnrollmentClosure
+    public class vwMafEnrollmentClosure
     {
         [PrimaryKey, NotNull] public Guid id { get; set; }
         [NotNull] public string customerID { get; set; }

@@ -7,13 +7,12 @@ namespace nwtf_mobile_bl.views
 {
     public class vwCustomer
     {
-        
         [PrimaryKey, NotNull] public Guid id { get; set; }
         [NotNull] public string customerID { get; set; }
-        [NotNull] public string dungannonID { get; set; }
+        [NotNull] public string dungganonID { get; set; }
         [NotNull] public string customerFirstName { get; set; }
         [NotNull] public string customerMiddleName { get; set; }
-        [NotNull] public string customerLasttName { get; set; }
+        [NotNull] public string customerLastName { get; set; }
         public string customerSuffix { get; set; }
         [NotNull] public DateTime customerBirthdate { get; set; }
         [NotNull] public string customerCivilStatus { get; set; }
@@ -27,5 +26,10 @@ namespace nwtf_mobile_bl.views
         [NotNull] public string branchCode { get; set; }
         [NotNull] public string blockNo { get; set; }
         [NotNull] public string CenterNo { get; set; }
+
+        public static List<views.vwCustomer> getAllCustomerForGrid()
+        {
+            return dataservices.claimTransaction.getListCustomers();
+        }
     }
 }
