@@ -74,15 +74,15 @@ namespace nwtf_mobile_bl.dataservices
                 {
                     new views.vwCustomer{id=Guid.Parse("10d9a217-1e28-4b24-a364-03e212cf2dcd"), blockNo="111", branchCode="112", CenterNo="113", customerBirthdate=new DateTime(1993, 3, 17), customerCivilStatus="102002",
                                          customerFirstName="Jom", customerID="123456789",  customerLastName="Gapuz", customerMembershipDate=new DateTime(2009, 8, 23), customerMiddleName="Lazo",
-                                         customerSuffix="", dungannonID="123456789", spouseBirthdate=new DateTime(1982, 5, 4), spouseFirstName="Joana", spouseID="123123123", spouseLastName="Peligor",
+                                         customerSuffix="", dungganonID="123456789", spouseBirthdate=new DateTime(1982, 5, 4), spouseFirstName="Joana", spouseID="123123123", spouseLastName="Peligor",
                                          spouseMiddleName="Destor", spouseSuffix=""},
                     new views.vwCustomer{id=Guid.Parse("b1a15115-75f0-4dc3-9aee-ce84cdf09515"), blockNo="221", branchCode="222", CenterNo="223", customerBirthdate=new DateTime(1982, 2, 11), customerCivilStatus="102002",
                                          customerFirstName="John", customerID="987654321",  customerLastName="Amarillo", customerMembershipDate=new DateTime(2012, 11, 3), customerMiddleName="Enero",
-                                         customerSuffix="", dungannonID="987654321", spouseBirthdate=new DateTime(1989, 7, 30), spouseFirstName="Lyka", spouseID="987987987", spouseLastName="Casuyac",
+                                         customerSuffix="", dungganonID="987654321", spouseBirthdate=new DateTime(1989, 7, 30), spouseFirstName="Lyka", spouseID="987987987", spouseLastName="Casuyac",
                                          spouseMiddleName="Dapedran", spouseSuffix=""},
                     new views.vwCustomer{id=Guid.Parse("e79c1cf7-99b9-4494-b894-37f27517b4d2"), blockNo="331", branchCode="332", CenterNo="333", customerBirthdate=new DateTime(1989, 11, 21), customerCivilStatus="102001",
                                          customerFirstName="Creselle", customerID="147852369",  customerLastName="Yaranon", customerMembershipDate=new DateTime(2017, 1, 15), customerMiddleName="Mejorada",
-                                         customerSuffix="", dungannonID="147147147"}
+                                         customerSuffix="", dungganonID="147147147"}
                 };
                 conn.InsertAll(listCustomer);
 

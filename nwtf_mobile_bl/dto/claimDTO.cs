@@ -7,26 +7,26 @@ namespace nwtf_mobile_bl.dto
     public class claimDTO
     {
 
-        Guid id { get; set; }
-        string claimTransactionReferenceNumber { get; set; }
+        public Guid id { get; set; }
+        public string claimTransactionReferenceNumber { get; set; }
 
-        views.vwCustomer customer { get; set; }
-        views.vwMafEnrollmentClosure maf { get; set; }
+        public views.vwCustomer customer { get; set; }
+        public views.vwMafEnrollmentClosure maf { get; set; }
 
-        string claimantID { get; set; }
-        int claimantType { get; set; }
-        string defaultPayeeID { get; set; }
-        string defaultPayeeName { get; set; }
-        int defaultPayeeType { get; set; }
+        public string claimantID { get; set; }
+        public int claimantType { get; set; }
+        public string defaultPayeeID { get; set; }
+        public string defaultPayeeName { get; set; }
+        public int defaultPayeeType { get; set; }
 
-        Guid blockID { get; set; }
-        Guid branchID { get; set; }
+        public  Guid blockID { get; set; }
+        public Guid branchID { get; set; }
 
-        List<views.vwCustomer> listCustomer { get; set; }
-        List<views.vwMafEnrollmentClosure> listMAF { get; set; }
-        List<views.vwClaimant> listClaimants { get; set; }
-        List<views.vwClaimTypes> listClaimTypes { get; set; }
-        List<views.vwClaimTypes> listSelectedClaimTypes { get; set; }
+        public List<views.vwCustomer> listCustomer { get; set; }
+        public List<views.vwMafEnrollmentClosure> listMAF { get; set; }
+        public List<views.vwClaimant> listClaimants { get; set; }
+        public List<views.vwClaimTypes> listClaimTypes { get; set; }
+        public List<views.vwClaimTypes> listSelectedClaimTypes { get; set; }
 
         claimDTO()
         {
