@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="controllers\" />
     <Folder Include="dataservices\" />
     <Folder Include="dto\" />
-    <Folder Include="controllers\" />
     <Folder Include="entities\" />
     <Folder Include="views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
 
 </Project>
