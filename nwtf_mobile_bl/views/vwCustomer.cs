@@ -13,7 +13,7 @@ namespace nwtf_mobile_bl.views
         [NotNull] public string dungannonID { get; set; }
         [NotNull] public string customerFirstName { get; set; }
         [NotNull] public string customerMiddleName { get; set; }
-        [NotNull] public string customerLasttName { get; set; }
+        [NotNull] public string customerLastName { get; set; }
         public string customerSuffix { get; set; }
         [NotNull] public DateTime customerBirthdate { get; set; }
         [NotNull] public string customerCivilStatus { get; set; }

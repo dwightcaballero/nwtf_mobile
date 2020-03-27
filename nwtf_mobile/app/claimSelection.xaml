@@ -8,9 +8,152 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout x:Name="stackCustomer">
+
+                <Label Text="List of Customers" FontSize="Large" TextColor="Black"/>
+                <ListView x:Name="listCustomer">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Dungganon ID" HorizontalOptions="Fill" Grid.Column="1"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Last name" HorizontalOptions="Fill" Grid.Column="2"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="First name" HorizontalOptions="Fill" Grid.Column="3"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Middle name" HorizontalOptions="Fill" Grid.Column="4"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding id}" x:Name="lblCustomerID" IsVisible="False"/>
+
+                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
+                                            Clicked="btnCustomer_Clicked"  CommandParameter="{Binding id}"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding dungganonID}" 
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="2" Text ="{Binding customerLastName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="3" Text ="{Binding customerFirstName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text ="{Binding customerMiddleName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <StackLayout x:Name="stackMAF">
+                <Label Text="List of Packages Enrolled" FontSize="Large" TextColor="Black"/>
+
+                <ListView x:Name="listMAF">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Product Code" HorizontalOptions="Fill" Grid.Column="1"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Product Name" HorizontalOptions="Fill" Grid.Column="2"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Enrollment Date" HorizontalOptions="Fill" Grid.Column="3"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Closed Date" HorizontalOptions="Fill" Grid.Column="4"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
+                                            Clicked="btnMAF_Clicked"  CommandParameter="{Binding id}"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding productCode}" 
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="2" Text ="{Binding productName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="3" Text ="{Binding enrollmentDate}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text ="{Binding closedDate}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
