@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nwtf_mobile.Android", "nwtf_mobile.Android\nwtf_mobile.Android.csproj", "{2397EC34-89AA-4179-8BFA-C4EF68DACD77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nwtf_mobile", "nwtf_mobile\nwtf_mobile.csproj", "{22A84BC3-D6C3-4B89-AEFB-8ECC4906C960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nwtf_mobile", "nwtf_mobile\nwtf_mobile.csproj", "{22A84BC3-D6C3-4B89-AEFB-8ECC4906C960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nwtf_mobile_bl", "nwtf_mobile_bl\nwtf_mobile_bl.csproj", "{6A48A9EA-19F9-4F00-B93C-550C0A468865}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{22A84BC3-D6C3-4B89-AEFB-8ECC4906C960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A84BC3-D6C3-4B89-AEFB-8ECC4906C960}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22A84BC3-D6C3-4B89-AEFB-8ECC4906C960}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
