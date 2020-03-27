@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using nwtf_mobile_bl;
 
 namespace nwtf_mobile
 {
@@ -9,6 +10,9 @@ namespace nwtf_mobile
         public App()
         {
             InitializeComponent();
+
+            //one time initialization
+            nwtf_mobile_bl.dataservices.Database.initializeDB();
 
             MainPage = new MainPage();
         }
