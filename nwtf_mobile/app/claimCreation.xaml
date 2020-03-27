@@ -51,7 +51,7 @@
                             <Label Text="Selected Claim Types:"
                                  TextColor="#f35e20" WidthRequest="250" />
                             <Label x:Name="txtClaimTypes" Text="Claim Type 1, Claim Type 2, Claim Type 3, Claim Type 4"
-                                 TextColor="#503026" WidthRequest="780" />
+                                 TextColor="#503026" WidthRequest="760" />
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
