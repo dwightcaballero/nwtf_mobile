@@ -15,7 +15,7 @@ namespace nwtf_mobile
             //one time initialization
             //dataservices.Database.initializeDB();
 
-            MainPage = new SyncPage();
+            MainPage = new NavigationPage(new SyncPage());
         }
 
         protected override void OnStart()
