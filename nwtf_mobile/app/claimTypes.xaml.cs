@@ -23,6 +23,11 @@ namespace nwtf_mobile.app
             claimtypesample.forAdvance = true;
             claimtypesample.claimTypeName = "Claim Type A";                       
             claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Premiums Paid";
+            claimtypesample.forAdvance = true;
+            claimtypesample.claimTypeName = "Claim Type B";
+            claimTypeList.Add(claimtypesample);
             claimTypeRepeater.ItemsSource = claimTypeList;
            
         }
