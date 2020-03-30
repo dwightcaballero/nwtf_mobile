@@ -14,13 +14,12 @@ namespace nwtf_mobile.app
     public partial class claimSelection : ContentPage
     {
         dto.claimDTO claimDTO { get; set; }
-        controllers.claimTransaction pcon;
+        controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public claimSelection()
         {
             InitializeComponent();
-            pcon = new controllers.claimTransaction();
-
+            claimDTO = new dto.claimDTO();
             hideStacks();
             subscribeToAllEvents();
             pcon.getListCustomerForGrid();
