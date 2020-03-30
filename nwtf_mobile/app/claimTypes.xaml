@@ -12,17 +12,19 @@
                 <customcontrols:RepeaterView.ItemTemplate>
                     <DataTemplate x:Name="what">
                         <ViewCell>
+
                             <Grid>
                                 <Label Grid.Column="0" Text="Claim Type Name:"></Label>
                                 <Label Grid.Column="1" Text="{Binding claimTypeName}"></Label>
                                 <Label Grid.Column="2" Text="Claim Benefit:"></Label>
                                 <Label Grid.Column="3" Text="{Binding claimBenefit}"></Label>
+                                <Label x:Name="forAdvancePanel" Grid.Column="4"></Label>
                             </Grid>
+
                         </ViewCell>
                     </DataTemplate>
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
-
         </StackLayout>
   </ContentView.Content>
 </ContentView>
