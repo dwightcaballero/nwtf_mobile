@@ -7,7 +7,7 @@ namespace nwtf_mobile_bl
 {
     public partial class views
     {
-        class vwProductMembership
+        public class vwProductMembership
         {
             [PrimaryKey, NotNull] public Guid id { get; set; }
             [NotNull] public Guid productUID { get; set; }

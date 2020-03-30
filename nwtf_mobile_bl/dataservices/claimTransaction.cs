@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
-namespace nwtf_mobile_bl.dataservices
+namespace nwtf_mobile_bl
 {
-    public class claimTransaction
+    public partial class dataservices
     {
-        public static List<views.vwCustomer> getListCustomers()
+        public class claimTransaction
         {
-            var listCustomers = new List<views.vwCustomer>();
-            using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+            public static views.vwCustomer getCustomerByID(Guid id)
             {
-                string sql = "SELECT dungannonID, customerLastName, customerFirstName, customerMiddleName" +
-                             "ORDER BY customerLastName, customerFirstName;";
-                listCustomers = conn.Query<views.vwCustomer>(sql);
+                views.vwCustomer customer = null;
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    customer = conn.Table<views.vwCustomer>().FirstOrDefault(cust => cust.id == id);
+                }
+                return customer;
             }
-            return listCustomers;
+
+            public static List<views.vwCustomer> getListCustomersForGrid()
+            {
+                List<views.vwCustomer> listCustomers = new List<views.vwCustomer>();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT id, dungganonID, customerLastName, customerFirstName, customerMiddleName " +
+                                 "FROM vwCustomer " +
+                                 "ORDER BY customerLastName, customerFirstName;";
+                    listCustomers = conn.Query<views.vwCustomer>(sql);
+                }
+                return listCustomers;
+            }
         }
     }
 }

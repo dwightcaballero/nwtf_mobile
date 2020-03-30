@@ -4,11 +4,11 @@ using System.Text;
 
 namespace nwtf_mobile_bl
 {
-    public partial class controllers
+    public partial class entities
     {
-        public class claimTransaction
+        class claimTransaction
         {
         }
     }
-       
+    
 }
