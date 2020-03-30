@@ -3,17 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-   public class vwRequiredDocuments
+    public partial class views
     {
-        [PrimaryKey,NotNull]
-        public Guid ID { get; set; }
-        [NotNull]
-        public String requiredDocumentCode { get; set; }
-        [NotNull]
-        public String requiredDocumentName { get; set; }
-        [NotNull]
-        public Byte RequiresHardCopy { get; set; }
+        public class vwRequiredDocuments
+        {
+            [PrimaryKey,NotNull]
+            public Guid ID { get; set; }
+            [NotNull]
+            public String requiredDocumentCode { get; set; }
+            [NotNull]
+            public String requiredDocumentName { get; set; }
+            [NotNull]
+            public Byte RequiresHardCopy { get; set; }
+        }
     }
 }

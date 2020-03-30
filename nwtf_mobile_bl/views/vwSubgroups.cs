@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-   public class vwSubgroups
+    public partial class views
     {
-        [PrimaryKey, NotNull]
-        public Guid id { get; set; }
-        [NotNull]
-        public String subgroupName { get; set; }
+        public class vwSubgroups
+        {
+            [PrimaryKey, NotNull]
+            public Guid id { get; set; }
+            [NotNull]
+            public String subgroupName { get; set; }
+        }
     }
 }

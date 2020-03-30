@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-    public class vwDependent
+    public partial class views
     {
-        [PrimaryKey, NotNull] public Guid id { get; set; }
-        [NotNull] public string dependentID { get; set; }
-        [NotNull] public Guid customerID { get; set; }
-        [NotNull] public string dependentFullName { get; set; }
-        [NotNull] public string dependentBirthdate { get; set; }
-        [NotNull] public string dependentRelationship { get; set; }
+        public class vwDependent
+        {
+            [PrimaryKey, NotNull] public Guid id { get; set; }
+            [NotNull] public string dependentID { get; set; }
+            [NotNull] public Guid customerID { get; set; }
+            [NotNull] public string dependentFullName { get; set; }
+            [NotNull] public string dependentBirthdate { get; set; }
+            [NotNull] public string dependentRelationship { get; set; }
+        }
     }
 }
