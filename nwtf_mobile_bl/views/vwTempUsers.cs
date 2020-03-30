@@ -16,7 +16,7 @@ namespace nwtf_mobile_bl
             [NotNull]
             public String branchCode { get; set; }
             [NotNull]
-            public String blockName { get; set; }
+            public String blockCode { get; set; }
 
 
             public static bool getUser(String username, String Password)

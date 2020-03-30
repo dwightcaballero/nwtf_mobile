@@ -473,9 +473,9 @@ namespace nwtf_mobile_bl
 
                     var listTempUser = new List<views.vwTempUsers>
                     {
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="kenn"},
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="rona"},
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="sweet"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="kenn"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="rona"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="sweet"},
                     };
                     conn.InsertAll(listTempUser);
                 }
