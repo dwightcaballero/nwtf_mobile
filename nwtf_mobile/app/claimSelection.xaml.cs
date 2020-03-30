@@ -13,14 +13,17 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimSelection : ContentPage
     {
-        nwtf_mobile_bl.dto.claimDTO claimDTO { get; set; }
-        nwtf_mobile_bl.controllers.claimTransaction pcon = new nwtf_mobile_bl.controllers.claimTransaction();
+        dto.claimDTO claimDTO { get; set; }
+        controllers.claimTransaction pcon;
 
         public claimSelection()
         {
             InitializeComponent();
+            pcon = new controllers.claimTransaction();
+
             hideStacks();
-            loadCustomers();
+            subscribeToAllEvents();
+            pcon.getListCustomerForGrid();
         }
 
         void hideStacks()
@@ -29,37 +32,43 @@ namespace nwtf_mobile.app
             stackMAF.IsVisible = false;
         }
 
-        void loadCustomers()
+        // subscribe to all events in the controller
+        void subscribeToAllEvents()
+        {
+            pcon.loadCustomerGrid += Pcon_loadCustomerGrid;
+            pcon.loadMAFGrid += Pcon_loadMAFGrid;
+        }
+
+        private void Pcon_loadCustomerGrid(object sender, List<views.vwCustomer> e)
         {
             stackCustomer.IsVisible = true;
 
-            //var customers = nwtf_mobile_bl.views.vwCustomer.getAllCustomerForGrid();
-            //claimDTO.listCustomer = customers;
-            //listCustomer.ItemsSource = customers;
+            claimDTO.listCustomer = e;
+            listCustomer.ItemsSource = e;
         }
 
         private void btnCustomer_Clicked(object sender, System.EventArgs e)
         {
             Button btnSelected = (Button)sender;
             Guid customerID = (Guid)btnSelected.CommandParameter;
-
-            var customerSelected = claimDTO.listCustomer.FirstOrDefault(cust => cust.id == customerID);
-            if (customerSelected != null) claimDTO.customer = customerSelected;
-            loadMAFs(customerID);
+            pcon.getListMAFForGrid(customerID);
         }
 
-        void loadMAFs(Guid customerID)
+        private void Pcon_loadMAFGrid(object sender, (List<views.vwMafEnrollmentClosure>, views.vwCustomer) e)
         {
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = true;
 
-            //get listMAF
+            claimDTO.listMAF = e.Item1;
+            listMAF.ItemsSource = e.Item1;
+            claimDTO.customer = e.Item2;
         }
 
         private void btnMAF_Clicked(object sender, System.EventArgs e)
         {
             Button btnSelected = (Button)sender;
             Guid mafID = (Guid)btnSelected.CommandParameter;
+            // to be continued
         }
     }
 }
