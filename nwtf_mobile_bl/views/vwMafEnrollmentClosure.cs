@@ -16,6 +16,11 @@ namespace nwtf_mobile_bl
             [NotNull] public DateTime effectiveDate { get; set; }
             public DateTime closingDate { get; set; }
             [NotNull] public Boolean deceased { get; set; }
+
+            public static List<vwMafEnrollmentClosure> getListMAFForGrid(string customerID)
+            {
+                return dataservices.mafEnrollmentClosure.getListMAFForGrid(customerID);
+            }
         }
     }
 }

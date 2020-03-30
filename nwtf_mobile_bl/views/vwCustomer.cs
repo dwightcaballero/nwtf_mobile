@@ -31,12 +31,12 @@ namespace nwtf_mobile_bl
 
             public static List<views.vwCustomer> getListCustomersForGrid()
             {
-                return dataservices.claimTransaction.getListCustomersForGrid();
+                return dataservices.customer.getListCustomersForGrid();
             }
 
             public static views.vwCustomer getCustomerByID(Guid id)
             {
-                return dataservices.claimTransaction.getCustomerByID(id);
+                return dataservices.customer.getCustomerByID(id);
             }
         }
     }
