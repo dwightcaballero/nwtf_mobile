@@ -33,9 +33,9 @@ namespace nwtf_mobile.app
         {
             stackCustomer.IsVisible = true;
 
-            var customers = nwtf_mobile_bl.views.vwCustomer.getAllCustomerForGrid();
-            claimDTO.listCustomer = customers;
-            listCustomer.ItemsSource = customers;
+            //var customers = nwtf_mobile_bl.views.vwCustomer.getAllCustomerForGrid();
+            //claimDTO.listCustomer = customers;
+            //listCustomer.ItemsSource = customers;
         }
 
         private void btnCustomer_Clicked(object sender, System.EventArgs e)

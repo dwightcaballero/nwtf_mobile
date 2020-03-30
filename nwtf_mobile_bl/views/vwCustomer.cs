@@ -29,15 +29,15 @@ namespace nwtf_mobile_bl
             [NotNull] public string blockNo { get; set; }
             [NotNull] public string CenterNo { get; set; }
 
-            public static List<views.vwCustomer> getListCustomersForGrid()
-            {
-                return dataservices.claimTransaction.getListCustomersForGrid();
-            }
+            //public static List<views.vwCustomer> getListCustomersForGrid()
+            //{
+            //    return dataservices.claimTransaction.getListCustomersForGrid();
+            //}
 
-            public static views.vwCustomer getCustomerByID(Guid id)
-            {
-                return dataservices.claimTransaction.getCustomerByID(id);
-            }
+            //public static views.vwCustomer getCustomerByID(Guid id)
+            //{
+            //    return dataservices.claimTransaction.getCustomerByID(id);
+            //}
         }
     }
 }

@@ -23,13 +23,13 @@ namespace nwtf_mobile.app
         private async void Button_Clicked(object sender, EventArgs e)
         {
            var isUser = views.vwTempUsers.getUser(usernameEntry.Text, passwordEntry.Text);
-            if (isUser == true)
+            if (isUser != true)
             {
-                await Navigation.PushAsync(new claimSelection());
+                await DisplayAlert("Error", "User is not in the database!", "Ok");
             }
             else
             {
-                await DisplayAlert("Error", "User is not in the database!", "Ok");
+                await Navigation.PushAsync(new claimSelection());
             }
         }
     }
