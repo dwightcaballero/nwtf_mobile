@@ -3,18 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-    public class vwTempUsers
+    public partial class views
     {
-        [PrimaryKey, NotNull]
-        public Guid id { get; set; }
-        [NotNull]
-        public String username { get; set; }
-        [NotNull]
-        public String branchCode { get; set; }
-        [NotNull]
-        public String blockName { get; set; }
+        public class vwTempUsers
+        {
+            [PrimaryKey, NotNull]
+            public Guid id { get; set; }
+            [NotNull]
+            public String username { get; set; }
+            [NotNull]
+            public String branchCode { get; set; }
+            [NotNull]
+            public String blockName { get; set; }
 
+        }
     }
 }

@@ -3,17 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-    class vwProductClaimType
+    public partial class views
     {
-        [PrimaryKey,NotNull]
-        public Guid id { get; set; }
-        [NotNull]
-        public Guid productUID { get; set; }
-        [NotNull]
-        public Guid claimTypeUID { get; set; }
-        [NotNull]
-        public String claimantType { get; set; }
+        class vwProductClaimType
+        {
+            [PrimaryKey,NotNull]
+            public Guid id { get; set; }
+            [NotNull]
+            public Guid productUID { get; set; }
+            [NotNull]
+            public Guid claimTypeUID { get; set; }
+            [NotNull]
+            public String claimantType { get; set; }
+        }
     }
 }

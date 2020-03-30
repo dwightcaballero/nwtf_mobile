@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nwtf_mobile_bl.views
+namespace nwtf_mobile_bl
 {
-    public class vwDisbursementPayee
+    public partial class views
     {
-        [PrimaryKey, NotNull] public Guid id { get; set; }
-        public string businessName { get; set; }
-        public string payeeID { get; set; }
-        [NotNull] public Guid branchID { get; set; }
+        public class vwDisbursementPayee
+        {
+            [PrimaryKey, NotNull] public Guid id { get; set; }
+            public string businessName { get; set; }
+            public string payeeID { get; set; }
+            [NotNull] public Guid branchID { get; set; }
+        }
     }
 }
