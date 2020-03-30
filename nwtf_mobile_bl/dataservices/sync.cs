@@ -15,7 +15,8 @@ namespace nwtf_mobile_bl
             {
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    var testData = conn.Query<views.vwTempUsers>("SELECT id, username, branchCode, blockCode WHERE username='" + username + "'");
+                    string sql = "SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='?';";
+                    var testData = conn.Query<views.vwTempUsers>(sql, username);
                     if (testData !=null)
                     {
                         return true;
