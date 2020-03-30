@@ -30,8 +30,11 @@ namespace nwtf_mobile_bl
             public List<views.vwClaimTypes> listClaimTypes { get; set; }
             public List<views.vwClaimTypes> listSelectedClaimTypes { get; set; }
 
-            claimDTO()
+            public claimDTO()
             {
+                customer = new views.vwCustomer();
+                maf = new views.vwMafEnrollmentClosure();
+
                 listCustomer = new List<views.vwCustomer>();
                 listMAF = new List<views.vwMafEnrollmentClosure>();
                 listClaimants = new List<views.vwClaimant>();

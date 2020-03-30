@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
+using System.Linq;
 
 namespace nwtf_mobile_bl
 {
@@ -14,7 +15,9 @@ namespace nwtf_mobile_bl
                 views.vwCustomer customer = null;
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    customer = conn.Table<views.vwCustomer>().FirstOrDefault(cust => cust.id == id);
+                    string sql = "SELECT * FROM vwCustomer WHERE id='" + id.ToString() + "';";
+                    customer = conn.Query<views.vwCustomer>(sql).FirstOrDefault();
+                    //customer = conn.Table<views.vwCustomer>().FirstOrDefault(cust => cust.id == id);
                 }
                 return customer;
             }

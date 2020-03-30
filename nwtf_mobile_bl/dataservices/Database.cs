@@ -10,7 +10,7 @@ namespace nwtf_mobile_bl
     {
         public static class Database
         {
-            public const string DatabaseFilename = "nwtf_mobile.db3";
+            public const string DatabaseFilename = "nwtf_mobile1.db3";
 
             public const SQLite.SQLiteOpenFlags Flags =
                 // open the database in read/write mode
@@ -473,9 +473,9 @@ namespace nwtf_mobile_bl
 
                     var listTempUser = new List<views.vwTempUsers>
                     {
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="kenn"},
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="rona"},
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockName="012", branchCode="192", username="sweet"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="kenn"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="rona"},
+                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="sweet"},
                     };
                     conn.InsertAll(listTempUser);
                 }

@@ -14,13 +14,12 @@ namespace nwtf_mobile.app
     public partial class claimSelection : ContentPage
     {
         dto.claimDTO claimDTO { get; set; }
-        controllers.claimTransaction pcon;
+        controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public claimSelection()
         {
             InitializeComponent();
-            pcon = new controllers.claimTransaction();
-
+            claimDTO = new dto.claimDTO();
             hideStacks();
             subscribeToAllEvents();
             pcon.getListCustomerForGrid();
@@ -35,12 +34,19 @@ namespace nwtf_mobile.app
         // subscribe to all events in the controller
         void subscribeToAllEvents()
         {
+            pcon.showMessage += Pcon_showMessage;
             pcon.loadCustomerGrid += Pcon_loadCustomerGrid;
             pcon.loadMAFGrid += Pcon_loadMAFGrid;
         }
 
+        private void Pcon_showMessage(object sender, (string, string, string) e)
+        {
+            displayMessage(e.Item1, e.Item2, e.Item3);
+        }
+
         private void Pcon_loadCustomerGrid(object sender, List<views.vwCustomer> e)
         {
+            Title = "Selection of Customer";
             stackCustomer.IsVisible = true;
 
             claimDTO.listCustomer = e;
@@ -54,8 +60,14 @@ namespace nwtf_mobile.app
             pcon.getListMAFForGrid(customerID);
         }
 
+        void displayMessage(string title, string message, string buttonName)
+        {
+            DisplayAlert(title, message, buttonName);
+        }
+
         private void Pcon_loadMAFGrid(object sender, (List<views.vwMafEnrollmentClosure>, views.vwCustomer) e)
         {
+            Title = "Selection of Customer's Enrolled Packages";
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = true;
 

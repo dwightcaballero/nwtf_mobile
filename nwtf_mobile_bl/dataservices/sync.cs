@@ -13,10 +13,10 @@ namespace nwtf_mobile_bl
         {
             public static bool GetUser(String username, String Password)
             {
-                var dbPath = Database.DatabasePath;
-                using (SQLiteConnection conn = new SQLiteConnection(dbPath))
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    var testData = conn.Query<views.vwTempUsers>("SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='" + username + "'").FirstOrDefault();
+                    string sql = "SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='?';";
+                    var testData = conn.Query<views.vwTempUsers>(sql, username);
                     if (testData !=null)
                     {
                         return true;
