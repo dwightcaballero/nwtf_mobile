@@ -14,6 +14,7 @@ namespace nwtf_mobile_bl
                 List<views.vwMafEnrollmentClosure> listMAF = new List<views.vwMafEnrollmentClosure>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
+                    // update query
                     string sql = "";
                     listMAF = conn.Query<views.vwMafEnrollmentClosure>(sql);
                 }
