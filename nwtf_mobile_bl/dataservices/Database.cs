@@ -10,7 +10,7 @@ namespace nwtf_mobile_bl
     {
         public static class Database
         {
-            public const string DatabaseFilename = "nwtf_mobile.db3";
+            public const string DatabaseFilename = "nwtf_mobile1.db3";
 
             public const SQLite.SQLiteOpenFlags Flags =
                 // open the database in read/write mode
