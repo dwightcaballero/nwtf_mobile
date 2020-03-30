@@ -11,6 +11,8 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwCustomer>> loadCustomerGrid;
             public event EventHandler<(List<views.vwMafEnrollmentClosure>, views.vwCustomer)> loadMAFGrid;
 
+            public event EventHandler<(string, string, string)> showMessage;
+
             public void getListCustomerForGrid()
             {
                 loadCustomerGrid?.Invoke(this, views.vwCustomer.getListCustomersForGrid());
@@ -19,8 +21,16 @@ namespace nwtf_mobile_bl
             public void getListMAFForGrid(Guid customerID)
             {
                 var customer = views.vwCustomer.getCustomerByID(customerID);
-                var listMAF = views.vwMafEnrollmentClosure.getListMAFForGrid(customer.customerID);
-                loadMAFGrid?.Invoke(this, (listMAF, customer));
+                if (customer != null)
+                {
+                    var listMAF = views.vwMafEnrollmentClosure.getListMAFForGrid(customer.customerID);
+                    loadMAFGrid?.Invoke(this, (listMAF, customer));
+                }
+                else
+                {
+                    showMessage?.Invoke(this,("Error", "Customer Record Not Found!", "Close"));
+                }
+                
             }
         }
     }

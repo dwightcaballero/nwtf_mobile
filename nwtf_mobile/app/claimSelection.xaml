@@ -7,7 +7,7 @@
              x:Class="nwtf_mobile.app.claimSelection">
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="40, 20">
             <StackLayout x:Name="stackCustomer">
 
                 <Label Text="List of Customers" FontSize="Large" TextColor="Black"/>
