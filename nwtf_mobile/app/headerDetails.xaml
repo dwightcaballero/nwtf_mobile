@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="nwtf_mobile.app.headerDetails">
+  <ContentView.Content>
+        <TableView Intent="Data">
+            <TableRoot>
+                <TableSection Title="Claims Transaction">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            <Label Text="Customer ID:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtCustomerID" Text="12345678"
+                                 TextColor="#503026" WidthRequest="250" />
+                            <Label Text="Customer Name:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtCustomerName" Text="Dwight Kenn Caballero"
+                                 TextColor="#503026" WidthRequest="250" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            <Label Text="Product ID:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtProductID" Text="4567"
+                                 TextColor="#503026" WidthRequest="250" />
+                            <Label Text="Product Name:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtProductName" Text="MAF05"
+                                 TextColor="#503026" WidthRequest="250" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            <Label Text="Claimant Name:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtClaimantName" Text="Sweet Altamera"
+                                 TextColor="#503026" WidthRequest="250" />
+                            <Label Text="Claimant Relation:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtClaimantRelation" Text="Sister"
+                                 TextColor="#503026" WidthRequest="250" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            <Label Text="Selected Claim Types:"
+                                 TextColor="#f35e20" WidthRequest="250" />
+                            <Label x:Name="txtClaimTypes" Text="Claim Type 1, Claim Type 2, Claim Type 3, Claim Type 4"
+                                 TextColor="#503026" WidthRequest="760" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentView.Content>
+</ContentView>

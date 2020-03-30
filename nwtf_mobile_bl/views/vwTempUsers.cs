@@ -18,6 +18,11 @@ namespace nwtf_mobile_bl
             [NotNull]
             public String blockName { get; set; }
 
+
+            public static bool getUser(String username, String Password)
+            {
+                return dataservices.sync.GetUser(username, Password);
+            }
         }
     }
 }

@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:app="clr-namespace:nwtf_mobile.app"
              mc:Ignorable="d"
-             x:Class="nwtf_mobile.app.claimCreation">
+             x:Class="nwtf_mobile.app.SyncPage">
     <ContentPage.Content>
-        <StackLayout Spacing="5" x:Name="layout">
-            <BoxView Color="white" HeightRequest="10"
-        HorizontalOptions="FillAndExpand" />
-            <app:claimTypes></app:claimTypes>
+        <StackLayout>
+            <Entry Placeholder="Username" x:Name="usernameEntry" Keyboard="Text" />
+            <Entry Placeholder="Password" x:Name="passwordEntry" Keyboard="Text" IsPassword="True"/>
+            <Button Text="Sync Now" x:Name="btnSync" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
