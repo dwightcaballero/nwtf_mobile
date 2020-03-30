@@ -5,25 +5,29 @@ using System.Text;
 using nwtf_mobile_bl;
 using System.Linq;
 
-namespace nwtf_mobile_bl.dataservices
+namespace nwtf_mobile_bl
 {
-    public static class sync
+    public partial class dataservices
     {
-        public static bool GetUser(String username, String Password)
+        public static class sync
         {
-            var dbPath = Database.DatabasePath;
-            using (SQLiteConnection conn = new SQLiteConnection(dbPath))
+            public static bool GetUser(String username, String Password)
             {
-                var testData = conn.Query<views.vwTempUsers>("SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='" + username + "'").FirstOrDefault();
-                if (testData !=null)
+                var dbPath = Database.DatabasePath;
+                using (SQLiteConnection conn = new SQLiteConnection(dbPath))
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    var testData = conn.Query<views.vwTempUsers>("SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='" + username + "'").FirstOrDefault();
+                    if (testData !=null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
     }
+
 }
