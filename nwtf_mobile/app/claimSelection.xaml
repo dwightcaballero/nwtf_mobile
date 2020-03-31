@@ -149,7 +149,8 @@
                                     <Label Grid.Column="3" Text ="{Binding effectiveDate, StringFormat='{0:d}'}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}" IsVisible="{Binding closingDate}"
+                                    <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}"
+                                           IsVisible="{Binding closingDate, Converter={StaticResource cvtDatetimeToBoolean}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                 </Grid>
