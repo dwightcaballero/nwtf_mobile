@@ -55,6 +55,7 @@ namespace nwtf_mobile_bl
                     conn.CreateTable<views.vwSubgroupRequiredFields>();
                     conn.CreateTable<views.vwSubgroups>();
                     conn.CreateTable<views.vwTempUsers>();
+                    conn.CreateTable<views.vwSids>();
 
                     // populate tables
                     var lstClaimTypes = new List<views.vwClaimTypes>
@@ -475,9 +476,20 @@ namespace nwtf_mobile_bl
                     {
                         new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="kenn"},
                         new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="rona"},
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="sweet"},
+                        new views.vwTempUsers{id=Guid.Parse("66b47ee0-b4a1-4a55-86b8-c3e801740205"), blockCode="012", branchCode="192", username="sweet"},
                     };
                     conn.InsertAll(listTempUser);
+
+                    var lstSids = new List<views.vwSids>
+                    {
+                        new views.vwSids()
+                        {
+                            id=Guid.NewGuid(),
+                            sid = Guid.Parse("66b47ee0-b4a1-4a55-86b8-c3e801740205"),
+                            authobj= "AF80F4B7DA9079ACF5167BF55AEB6CC854B331",
+                            authref="Z86CXSZ288"
+                        }
+                    };
                 }
             }
         }

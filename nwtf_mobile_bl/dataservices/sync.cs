@@ -11,7 +11,7 @@ namespace nwtf_mobile_bl
     {
         public static class sync
         {
-            public static bool GetUser(String username, String Password)
+            public static views.vwTempUsers GetUser(String username, String Password)
             {
                 views.vwTempUsers tempUser = new views.vwTempUsers();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
@@ -21,11 +21,11 @@ namespace nwtf_mobile_bl
                   
                     if (tempUser == null || tempUser.username != username)
                     {
-                        return false;
+                        return tempUser;
                     }
                     else
                     {
-                        return true;
+                        return tempUser;
                     }
                 }
             }
