@@ -29,6 +29,7 @@ namespace nwtf_mobile.app
         {
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = false;
+            stackClaimant.IsVisible = false;
         }
 
         // subscribe to all events in the controller
@@ -37,6 +38,7 @@ namespace nwtf_mobile.app
             pcon.showMessage += Pcon_showMessage;
             pcon.loadCustomerGrid += Pcon_loadCustomerGrid;
             pcon.loadMAFGrid += Pcon_loadMAFGrid;
+            pcon.loadClaimantGrid += Pcon_loadClaimantGrid;
         }
 
         private void Pcon_showMessage(object sender, (string, string, string) e)
@@ -80,7 +82,27 @@ namespace nwtf_mobile.app
         {
             Button btnSelected = (Button)sender;
             Guid mafID = (Guid)btnSelected.CommandParameter;
-            // to be continued
+
+            pcon.getListClaimantForGrid(mafID);
+        }
+
+        private void Pcon_loadClaimantGrid(object sender, (List<views.vwClaimant>, views.vwMafEnrollmentClosure) e)
+        {
+            Title = "Selection of Claimant";
+            stackMAF.IsVisible = false;
+            stackClaimant.IsVisible = true;
+
+            claimDTO.listClaimant = e.Item1;
+            listClaimant.ItemsSource = e.Item1;
+            claimDTO.maf = e.Item2;
+        }
+
+        private void btnClaimant_Clicked(object sender, EventArgs e)
+        {
+            Button btnSelected = (Button)sender;
+            Guid claimantID = (Guid)btnSelected.CommandParameter;
+
+            //to be continued
         }
 
         private void SearchBar_SearchButtonPressed(object sender, EventArgs e)

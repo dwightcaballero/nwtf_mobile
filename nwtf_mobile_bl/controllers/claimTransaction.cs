@@ -10,6 +10,7 @@ namespace nwtf_mobile_bl
         {
             public event EventHandler<List<views.vwCustomer>> loadCustomerGrid;
             public event EventHandler<(List<views.vwMafEnrollmentClosure>, views.vwCustomer)> loadMAFGrid;
+            public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
 
             public event EventHandler<(string, string, string)> showMessage;
 
@@ -30,7 +31,20 @@ namespace nwtf_mobile_bl
                 {
                     showMessage?.Invoke(this,("Error", "Customer Record Not Found!", "Close"));
                 }
-                
+            }
+
+            public void getListClaimantForGrid(Guid mafID)
+            {
+                var maf = views.vwMafEnrollmentClosure.getMAFByID(mafID);
+                if (maf != null)
+                {
+                    var listClaimant = views.vwClaimant.getListClaimantForGrid();
+                    loadClaimantGrid?.Invoke(this, (listClaimant, maf));
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "Customer Record Not Found!", "Close"));
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using SQLite;
 
@@ -9,6 +10,18 @@ namespace nwtf_mobile_bl
     {
         public class mafEnrollmentClosure
         {
+
+            public static views.vwMafEnrollmentClosure getMAFByID(Guid id)
+            {
+                views.vwMafEnrollmentClosure maf = null;
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT * FROM vwMafEnrollmentClosure WHERE id='" + id.ToString() + "';";
+                    maf = conn.Query<views.vwMafEnrollmentClosure>(sql).FirstOrDefault();
+                }
+                return maf;
+            }
+
             public static List<views.vwMafEnrollmentClosure> getListMAFForGrid(string customerID)
             {
                 List<views.vwMafEnrollmentClosure> listMAF = new List<views.vwMafEnrollmentClosure>();

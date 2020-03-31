@@ -26,9 +26,9 @@ namespace nwtf_mobile_bl
 
             public List<views.vwCustomer> listCustomer { get; set; }
             public List<views.vwMafEnrollmentClosure> listMAF { get; set; }
-            public List<views.vwClaimant> listClaimants { get; set; }
-            public List<views.vwClaimTypes> listClaimTypes { get; set; }
-            public List<views.vwClaimTypes> listSelectedClaimTypes { get; set; }
+            public List<views.vwClaimant> listClaimant { get; set; }
+            public List<views.vwClaimTypes> listClaimType { get; set; }
+            public List<views.vwClaimTypes> listSelectedClaimType { get; set; }
 
             public claimDTO()
             {
@@ -37,9 +37,9 @@ namespace nwtf_mobile_bl
 
                 listCustomer = new List<views.vwCustomer>();
                 listMAF = new List<views.vwMafEnrollmentClosure>();
-                listClaimants = new List<views.vwClaimant>();
-                listClaimTypes = new List<views.vwClaimTypes>();
-                listSelectedClaimTypes = new List<views.vwClaimTypes>();
+                listClaimant = new List<views.vwClaimant>();
+                listClaimType = new List<views.vwClaimTypes>();
+                listSelectedClaimType = new List<views.vwClaimTypes>();
             }
         }
     }
