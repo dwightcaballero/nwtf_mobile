@@ -15,8 +15,8 @@ namespace nwtf_mobile_bl
                 views.vwCustomer customer = null;
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    string sql = "SELECT * FROM vwCustomer WHERE id='?';";
-                    customer = conn.Query<views.vwCustomer>(sql, id).FirstOrDefault();
+                    string sql = "SELECT * FROM vwCustomer WHERE id='" + id.ToString() + "';";
+                    customer = conn.Query<views.vwCustomer>(sql).FirstOrDefault();
                     //customer = conn.Table<views.vwCustomer>().FirstOrDefault(cust => cust.id == id);
                 }
                 return customer;
