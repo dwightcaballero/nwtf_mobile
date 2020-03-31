@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:customcontrols="clr-namespace:Xamarin.CustomControls;assembly=Xamarin.CustomControls.RepeaterView"
+             xmlns:app="clr-namespace:nwtf_mobile.app"
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimTypes">
   <ContentView.Content>
@@ -17,17 +18,30 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
+                                        <RowDefinition Height="*"/>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:"></Label>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
-                                <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:"></Label>
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}"></Label>
-                                <Switch Grid.Row="2" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
-                                <Label Grid.Row="2" Grid.Column="1" Text="For Advance Processing" ></Label>
-                                <Label Grid.Row="2" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
-                                <TableView Intent="Data" Grid.Row="3" Grid.Column="0" IsVisible="false" HeightRequest="200">
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:"></Label>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}"></Label>
+                                    <TableView Grid.Row="2" Intent="Settings" HeightRequest="50">
+                                        <TableRoot>
+                                            <TableSection Title="Getting Started">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" ></Label>
+                                <Label Grid.Row="3" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
+                                <TableView Intent="Data" Grid.Row="4" Grid.Column="0" IsVisible="false" HeightRequest="150">
                                     <TableRoot>
                                         <TableSection Title="Advance Disbursements">
                                                 <ViewCell>

@@ -18,7 +18,6 @@ namespace nwtf_mobile.app
       
         public vwClaimTypes claimtypesample = new vwClaimTypes();
         public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
-
         public void PopulateClaimTypes()
         {
             // Only Sample Data
@@ -42,16 +41,25 @@ namespace nwtf_mobile.app
         public void AccessControlsInRepeater()
         {
             var control = claimTypeRepeater as RepeaterView;
-
+            int claimBenefit = 1;
             if (control == null) return;
+          
             foreach (Grid item1 in control.Children)
             {
-                Switch forAdvancePanelValue = (Switch)item1.Children[4];
-                Label forAdvancePanel = (Label)item1.Children[5];
-                Label checkForAdvance = (Label)item1.Children[6];
+                Switch forAdvancePanelValue = (Switch)item1.Children[5];
+                Label forAdvancePanel = (Label)item1.Children[6];
+                Label checkForAdvance = (Label)item1.Children[7];
+                // Temporary Data
+                if (claimBenefit == 1)
+                {
+                    TableView grd = (TableView)item1.Children[4];
+                    grd.IsVisible = true;
+                }
+                claimBenefit++;
 
                 foreach (vwClaimTypes item in control.ItemsSource)
                 {
+                    
                     if (item.forAdvance == false)
                     {
                         if (checkForAdvance == null) return;
@@ -66,12 +74,13 @@ namespace nwtf_mobile.app
                 }
             }
         }
+
         void OnToggled(object sender, ToggledEventArgs e)
         {
             
             Switch forAdvancePanelValue = (Switch)sender;
             Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-            TableView advancesList = (TableView)parentGrid.Children[7];
+            TableView advancesList = (TableView)parentGrid.Children[8];
             if (forAdvancePanelValue.IsToggled == true)
             {
                 advancesList.IsVisible = true;
@@ -87,7 +96,7 @@ namespace nwtf_mobile.app
             InitializeComponent();
             PopulateClaimTypes();
             AccessControlsInRepeater();
-          
-        }             
+
+        }
     }
 }
