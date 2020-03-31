@@ -10,17 +10,16 @@
       <StackLayout>
             <customcontrols:RepeaterView x:Name="claimTypeRepeater">
                 <customcontrols:RepeaterView.ItemTemplate>
-                    <DataTemplate x:Name="what">
+                    <DataTemplate>
                         <ViewCell>
-
                             <Grid>
                                 <Label Grid.Column="0" Text="Claim Type Name:"></Label>
                                 <Label Grid.Column="1" Text="{Binding claimTypeName}"></Label>
                                 <Label Grid.Column="2" Text="Claim Benefit:"></Label>
                                 <Label Grid.Column="3" Text="{Binding claimBenefit}"></Label>
-                                <Label x:Name="forAdvancePanel" Grid.Column="4"></Label>
+                                <Label Grid.Column="4" Text="For Advance Processing" ></Label>
+                                <Label Grid.Column="4" Text="{Binding allowAdvances}" IsVisible="false"></Label>
                             </Grid>
-
                         </ViewCell>
                     </DataTemplate>
                 </customcontrols:RepeaterView.ItemTemplate>
