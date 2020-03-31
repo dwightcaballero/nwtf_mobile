@@ -17,7 +17,6 @@ namespace nwtf_mobile_bl
                 {
                     string sql = "SELECT * FROM vwCustomer WHERE id='" + id.ToString() + "';";
                     customer = conn.Query<views.vwCustomer>(sql).FirstOrDefault();
-                    //customer = conn.Table<views.vwCustomer>().FirstOrDefault(cust => cust.id == id);
                 }
                 return customer;
             }

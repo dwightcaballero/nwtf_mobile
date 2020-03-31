@@ -34,5 +34,4 @@ namespace nwtf_mobile_bl
             }
         }
     }
-       
 }

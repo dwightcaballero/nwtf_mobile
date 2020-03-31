@@ -19,7 +19,7 @@ namespace nwtf_mobile_bl
             public String blockCode { get; set; }
 
 
-            public static bool getUser(String username, String Password)
+            public static views.vwTempUsers getUser(String username, String Password)
             {
                 return dataservices.sync.GetUser(username, Password);
             }
