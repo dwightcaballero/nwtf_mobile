@@ -4,7 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="nwtf_mobile.app.claimSelection">
+             x:Class="nwtf_mobile.app.claimSelection"
+             
+             xmlns:convert="clr-namespace:nwtf_mobile.converter">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <convert:cvtDatetimeToBoolean x:Key="cvtDatetimeToBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
@@ -62,8 +70,6 @@
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-
-                                    <Label Text="{Binding id}" x:Name="lblCustomerID" IsVisible="False"/>
 
                                     <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
                                             Clicked="btnCustomer_Clicked"  CommandParameter="{Binding id}"/>
@@ -147,10 +153,82 @@
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="3" Text ="{Binding effectiveDate, StringFormat='{0:d}'}"
+                                           IsVisible="{Binding closingDate, Converter={StaticResource cvtDatetimeToBoolean}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}"
                                            IsVisible="{Binding closingDate, Converter={StaticResource cvtDatetimeToBoolean}}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                </Grid> 
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+            <StackLayout x:Name="stackClaimant">
+                <Label Text="List of Claimant" FontSize="Large" TextColor="Black" />
+                <ListView x:Name="listClaimant" Margin="0">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Full Name" HorizontalOptions="Fill" Grid.Column="1"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Date of Birth" HorizontalOptions="Fill" Grid.Column="2"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Claimant Type" HorizontalOptions="Fill" Grid.Column="3"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Relation" HorizontalOptions="Fill" Grid.Column="4"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
+                                            Clicked="btnClaimant_Clicked"  CommandParameter="{Binding id}"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding claimantFullName}" 
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="2" Text ="{Binding claiamantBirthdate}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="3" Text ="{Binding claimantType}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text ="{Binding claimantRelation}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                 </Grid>

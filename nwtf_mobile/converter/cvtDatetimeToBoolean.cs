@@ -10,7 +10,7 @@ namespace nwtf_mobile.converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null;
+            return (DateTime)value != DateTime.MinValue;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

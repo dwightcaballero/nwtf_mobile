@@ -16,6 +16,11 @@ namespace nwtf_mobile_bl
             public DateTime claiamantBirthdate { get; set; }
             public string claimantType { get; set; }
             public string claimantRelation { get; set; }
+
+            public static List<vwClaimant> getListClaimantForGrid()
+            {
+                return dataservices.claimant.getListClaimantForGrid();
+            }
         }
     }
 }

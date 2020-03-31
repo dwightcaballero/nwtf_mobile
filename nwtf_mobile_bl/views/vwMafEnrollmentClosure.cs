@@ -14,11 +14,16 @@ namespace nwtf_mobile_bl
             [NotNull] public string accountNo { get; set; }
             [NotNull] public string productID { get; set; }
             [NotNull] public DateTime effectiveDate { get; set; }
-            public DateTime? closingDate { get; set; }
+            public DateTime closingDate { get; set; }
             [NotNull] public Boolean deceased { get; set; }
 
             // for package selection (listview property)
             public string productName { get; set; }
+
+            public static vwMafEnrollmentClosure getMAFByID(Guid id)
+            {
+                return dataservices.mafEnrollmentClosure.getMAFByID(id);
+            }
 
             public static List<vwMafEnrollmentClosure> getListMAFForGrid(string customerID)
             {
