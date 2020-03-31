@@ -7,23 +7,46 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimTypes">
   <ContentView.Content>
-      <StackLayout>
+        <ScrollView>
+            <StackLayout>
             <customcontrols:RepeaterView x:Name="claimTypeRepeater">
                 <customcontrols:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Label Grid.Column="0" Text="Claim Type Name:"></Label>
-                                <Label Grid.Column="1" Text="{Binding claimTypeName}"></Label>
-                                <Label Grid.Column="2" Text="Claim Benefit:"></Label>
-                                <Label Grid.Column="3" Text="{Binding claimBenefit}"></Label>
-                                <Label Grid.Column="4" Text="For Advance Processing" ></Label>
-                                <Label Grid.Column="4" Text="{Binding allowAdvances}" IsVisible="false"></Label>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="200"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:"></Label>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}"></Label>
+                                <Switch Grid.Row="2" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="For Advance Processing" ></Label>
+                                <Label Grid.Row="2" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
+                                <TableView Intent="Data" Grid.Row="3" Grid.Column="0" IsVisible="false">
+                                    <TableRoot>
+                                        <TableSection Title="Advance Disbursements">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="Action"/>
+                                                        <Label Text="Disbursement Type"/>
+                                                        <Label Text="Amount Type"/>
+                                                        <Label Text="Payee Type"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                    </TableRoot>
+                                </TableView>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
         </StackLayout>
-  </ContentView.Content>
+        </ScrollView>
+    </ContentView.Content>
 </ContentView>

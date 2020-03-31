@@ -23,13 +23,18 @@ namespace nwtf_mobile.app
         {
             // Only Sample Data
             claimtypesample.claimBenefit = "Number of Days";
-            claimtypesample.allowAdvances = true;
+            claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type A";
             claimTypeList.Add(claimtypesample);
             claimtypesample = new vwClaimTypes();
             claimtypesample.claimBenefit = "Premiums Paid";
-            claimtypesample.allowAdvances = false;
+            claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type B";
+            claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Number of Weeks";
+            claimtypesample.allowAdvances = true;
+            claimtypesample.claimTypeName = "Claim Type C";
             claimTypeList.Add(claimtypesample);
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
@@ -41,8 +46,9 @@ namespace nwtf_mobile.app
             if (control == null) return;
             foreach (Grid item1 in control.Children)
             {
-                Label forAdvancePanel = (Label)item1.Children[4];
-                Label checkForAdvance = (Label)item1.Children[5];
+                Switch forAdvancePanelValue = (Switch)item1.Children[4];
+                Label forAdvancePanel = (Label)item1.Children[5];
+                Label checkForAdvance = (Label)item1.Children[6];
 
                 foreach (vwClaimTypes item in control.ItemsSource)
                 {
@@ -53,13 +59,31 @@ namespace nwtf_mobile.app
                         {
                             if (forAdvancePanel == null) return;
                             //  set for advance panel visible to false
+                            forAdvancePanelValue.IsVisible = false;
                             forAdvancePanel.IsVisible = false;
                         }
-                        continue;
                     }                  
                 }
             }
         }
+        void OnToggled(object sender, ToggledEventArgs e)
+        {
+            
+            Switch forAdvancePanelValue = (Switch)sender;
+            if (forAdvancePanelValue.IsToggled == true)
+            {
+                Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
+                TableView advancesList = (TableView)parentGrid.Children[7];
+                advancesList.IsVisible = true;
+            }
+            else
+            {
+                Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
+                TableView advancesList = (TableView)parentGrid.Children[7];
+                advancesList.IsVisible = false;
+            }
+        }
+
         public claimTypes()
         {
             InitializeComponent();
