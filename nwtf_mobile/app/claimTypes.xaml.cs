@@ -21,21 +21,61 @@ namespace nwtf_mobile.app
         public void PopulateClaimTypes()
         {
             // Only Sample Data
-            claimtypesample.claimBenefit = "Number of Days";
+            claimtypesample.claimBenefit = "LO Provides Amount";
             claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type A";
             claimTypeList.Add(claimtypesample);
             claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Premiums Paid";
+            claimtypesample.claimBenefit = "Number of Days";
             claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type B";
             claimTypeList.Add(claimtypesample);
             claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Weeks";
+            claimtypesample.claimBenefit = "Number of Premiums Paid";
             claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type C";
             claimTypeList.Add(claimtypesample);
             claimTypeRepeater.ItemsSource = claimTypeList;
+        }
+
+        public void setClaimBenefit(int cbl, Grid control)
+        {
+            // Temporary Data
+            if (cbl == 1)
+            {
+                TableView grd = (TableView)control.Children[4];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 2)
+            {
+                TableView grd = (TableView)control.Children[5];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 3)
+            {
+                TableView grd = (TableView)control.Children[6];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 4)
+            {
+                TableView grd = (TableView)control.Children[7];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 5)
+            {
+                TableView grd = (TableView)control.Children[8];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 6)
+            {
+                TableView grd = (TableView)control.Children[9];
+                grd.IsVisible = true;
+            }
+            else if (cbl == 7)
+            {
+                TableView grd = (TableView)control.Children[10];
+                grd.IsVisible = true;
+            }        
         }
 
         public void AccessControlsInRepeater()
@@ -46,15 +86,10 @@ namespace nwtf_mobile.app
           
             foreach (Grid item1 in control.Children)
             {
-                Switch forAdvancePanelValue = (Switch)item1.Children[5];
-                Label forAdvancePanel = (Label)item1.Children[6];
-                Label checkForAdvance = (Label)item1.Children[7];
-                // Temporary Data
-                if (claimBenefit == 1)
-                {
-                    TableView grd = (TableView)item1.Children[4];
-                    grd.IsVisible = true;
-                }
+                Switch forAdvancePanelValue = (Switch)item1.Children[11];
+                Label forAdvancePanel = (Label)item1.Children[12];
+                Label checkForAdvance = (Label)item1.Children[13];
+                setClaimBenefit(claimBenefit, item1);
                 claimBenefit++;
 
                 foreach (vwClaimTypes item in control.ItemsSource)
@@ -80,7 +115,7 @@ namespace nwtf_mobile.app
             
             Switch forAdvancePanelValue = (Switch)sender;
             Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-            TableView advancesList = (TableView)parentGrid.Children[8];
+            TableView advancesList = (TableView)parentGrid.Children[14];
             if (forAdvancePanelValue.IsToggled == true)
             {
                 advancesList.IsVisible = true;
