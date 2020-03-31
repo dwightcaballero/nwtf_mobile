@@ -15,7 +15,10 @@ namespace nwtf_mobile
             //one time initialization
             //dataservices.Database.initializeDB();
 
-            MainPage = new NavigationPage(new SyncPage());
+            //comment this after using
+            //dataservices.Database.modifyInitialization();
+
+            MainPage = new NavigationPage(new claimSelection());
         }
 
         protected override void OnStart()
