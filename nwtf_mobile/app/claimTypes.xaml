@@ -18,7 +18,7 @@
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30"/>
-                                        <RowDefinition Height="200"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:"></Label>
                                 <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
@@ -27,7 +27,7 @@
                                 <Switch Grid.Row="2" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
                                 <Label Grid.Row="2" Grid.Column="1" Text="For Advance Processing" ></Label>
                                 <Label Grid.Row="2" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
-                                <TableView Intent="Data" Grid.Row="3" Grid.Column="0" IsVisible="false">
+                                <TableView Intent="Data" Grid.Row="3" Grid.Column="0" IsVisible="false" HeightRequest="200">
                                     <TableRoot>
                                         <TableSection Title="Advance Disbursements">
                                                 <ViewCell>

@@ -70,16 +70,14 @@ namespace nwtf_mobile.app
         {
             
             Switch forAdvancePanelValue = (Switch)sender;
+            Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
+            TableView advancesList = (TableView)parentGrid.Children[7];
             if (forAdvancePanelValue.IsToggled == true)
             {
-                Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-                TableView advancesList = (TableView)parentGrid.Children[7];
                 advancesList.IsVisible = true;
             }
             else
             {
-                Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-                TableView advancesList = (TableView)parentGrid.Children[7];
                 advancesList.IsVisible = false;
             }
         }
