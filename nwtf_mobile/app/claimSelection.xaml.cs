@@ -82,5 +82,34 @@ namespace nwtf_mobile.app
             Guid mafID = (Guid)btnSelected.CommandParameter;
             // to be continued
         }
+
+        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+        {
+            SearchBar sbar = (SearchBar)sender;
+            if (!string.IsNullOrWhiteSpace(sbar.Text))
+            {
+                // capitalize search text (uncomment if database changed)
+                // string searchText = sbar.Text.ToUpper();
+
+                var listFilteredCustomer = (from cust in claimDTO.listCustomer
+                                           where cust.dungganonID.Contains(sbar.Text) ||
+                                                 cust.customerLastName.Contains(sbar.Text) ||
+                                                 cust.customerFirstName.Contains(sbar.Text) ||
+                                                 cust.customerMiddleName.Contains(sbar.Text)
+                                           orderby cust.customerLastName, cust.customerFirstName
+                                           select cust).ToList();
+
+                listCustomer.ItemsSource = listFilteredCustomer;
+            }
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchBar sbar = (SearchBar)sender;
+            if (string.IsNullOrWhiteSpace(sbar.Text))
+            {
+                listCustomer.ItemsSource = claimDTO.listCustomer;
+            }
+        }
     }
 }

@@ -10,8 +10,13 @@
         <StackLayout Margin="40, 20">
             <StackLayout x:Name="stackCustomer">
 
-                <Label Text="List of Customers" FontSize="Large" TextColor="Black"/>
-                <ListView x:Name="listCustomer">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="List of Customers" FontSize="Large" TextColor="Black" HorizontalOptions="StartAndExpand" />
+                    <SearchBar Placeholder="Dunganon ID or Name" SearchButtonPressed="SearchBar_SearchButtonPressed"
+                               VerticalTextAlignment="Center" TextChanged="SearchBar_TextChanged" HorizontalOptions="EndAndExpand"></SearchBar>
+                </StackLayout>
+                
+                <ListView x:Name="listCustomer" Margin="0">
                     <ListView.Header>
                         <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
@@ -135,16 +140,16 @@
                                     <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
                                             Clicked="btnMAF_Clicked"  CommandParameter="{Binding id}"/>
 
-                                    <Label Grid.Column="1" Text ="{Binding productCode}" 
+                                    <Label Grid.Column="1" Text ="{Binding productID}" 
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="2" Text ="{Binding productName}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="3" Text ="{Binding enrollmentDate}"
+                                    <Label Grid.Column="3" Text ="{Binding effectiveDate, StringFormat='{0:d}'}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="4" Text ="{Binding closedDate}"
+                                    <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}" IsVisible="{Binding closingDate}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                 </Grid>
