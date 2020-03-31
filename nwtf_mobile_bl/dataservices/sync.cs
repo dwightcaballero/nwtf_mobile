@@ -13,17 +13,19 @@ namespace nwtf_mobile_bl
         {
             public static bool GetUser(String username, String Password)
             {
+                views.vwTempUsers tempUser = new views.vwTempUsers();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    string sql = "SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username='?';";
-                    var testData = conn.Query<views.vwTempUsers>(sql, username);
-                    if (testData !=null)
+                    string sql = "SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username=?";
+                    tempUser = conn.Query<views.vwTempUsers>(sql, username).FirstOrDefault();
+                  
+                    if (tempUser == null || tempUser.username != username)
                     {
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        return true;
                     }
                 }
             }
