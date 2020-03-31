@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -228,49 +228,49 @@ namespace nwtf_mobile_bl
         //            LettersArray = Key_Letters.ToCharArray();
         //            NumbersArray = Key_Numbers.ToCharArray();
 
-        //            for (i_key = 1; i_key <= Key_Chars; i_key++)
-        //            {
-        //                // START THE CLOCK    - LAITH - 27/07/2005 18:01:18 -
-        //                VBMath.Randomize();
-        //                Random1 = VBMath.Rnd();
-        //                arrIndex = -1;
-        //                // IF THE VALUE IS AN EVEN NUMBER WE GENERATE A LETTER,
-        //                // OTHERWISE WE GENERATE A NUMBER  
-        //                // - LAITH - 27/07/2005 18:02:55 -
-        //                // THE NUMBER '111' WAS RANDOMLY CHOSEN. ANY NUMBER
-        //                // WILL DO, WE JUST NEED TO BRING THE VALUE
-        //                // ABOVE '0'     - LAITH - 27/07/2005 18:40:48 -
-        //                if ((System.Convert.ToInt32(Random1 * 111)) % 2 == 0)
-        //                {
-        //                    // GENERATE A RANDOM INDEX IN THE LETTERS
-        //                    // CHARACTER ARRAY   - LAITH - 27/07/2005 18:47:44 -
-        //                    while (arrIndex < 0)
-        //                        arrIndex = Convert.ToInt16(LettersArray.GetUpperBound(0)
-        //                         * Random1);
-        //                    RandomLetter = LettersArray[arrIndex];
-        //                    // CREATE ANOTHER RANDOM NUMBER. IF IT IS ODD,
-        //                    // WE CAPITALIZE THE LETTER
-        //                    // - LAITH - 27/07/2005 18:55:59 -
-        //                    if ((System.Convert.ToInt32(arrIndex * Random1 * 99)) % 2 != 0)
-        //                    {
-        //                        RandomLetter = LettersArray[arrIndex].ToString();
-        //                        RandomLetter = RandomLetter.ToUpper();
-        //                    }
-        //                    sb.Append(RandomLetter);
-        //                }
-        //                else
-        //                {
-        //                    // GENERATE A RANDOM INDEX IN THE NUMBERS
-        //                    // CHARACTER ARRAY   - LAITH - 27/07/2005 18:47:44 -
-        //                    while (arrIndex < 0)
-        //                        arrIndex = Convert.ToInt16(NumbersArray.GetUpperBound(0)
-        //                          * Random1);
-        //                    sb.Append(NumbersArray[arrIndex]);
-        //                }
-        //            }
-        //            return sb.ToString();
-        //        }
-        //    }
+                    //for (i_key = 1; i_key <= Key_Chars; i_key++)
+                    //{
+                    //    // START THE CLOCK    - LAITH - 27/07/2005 18:01:18 -
+                    //    VBMath.Randomize();
+                    //    Random1 = VBMath.Rnd();
+                    //    arrIndex = -1;
+                    //    // IF THE VALUE IS AN EVEN NUMBER WE GENERATE A LETTER,
+                    //    // OTHERWISE WE GENERATE A NUMBER  
+                    //    // - LAITH - 27/07/2005 18:02:55 -
+                    //    // THE NUMBER '111' WAS RANDOMLY CHOSEN. ANY NUMBER
+                    //    // WILL DO, WE JUST NEED TO BRING THE VALUE
+                    //    // ABOVE '0'     - LAITH - 27/07/2005 18:40:48 -
+                    //    if ((System.Convert.ToInt32(Random1 * 111)) % 2 == 0)
+                    //    {
+                    //        // GENERATE A RANDOM INDEX IN THE LETTERS
+                    //        // CHARACTER ARRAY   - LAITH - 27/07/2005 18:47:44 -
+                    //        while (arrIndex < 0)
+                    //            arrIndex = Convert.ToInt16(LettersArray.GetUpperBound(0)
+                    //             * Random1);
+                    //        RandomLetter = LettersArray[arrIndex];
+                    //        // CREATE ANOTHER RANDOM NUMBER. IF IT IS ODD,
+                    //        // WE CAPITALIZE THE LETTER
+                    //        // - LAITH - 27/07/2005 18:55:59 -
+                    //        if ((System.Convert.ToInt32(arrIndex * Random1 * 99)) % 2 != 0)
+                    //        {
+                    //            RandomLetter = LettersArray[arrIndex].ToString();
+                    //            RandomLetter = RandomLetter.ToUpper();
+                    //        }
+                    //        sb.Append(RandomLetter);
+                    //    }
+                    //    else
+                    //    {
+                    //        // GENERATE A RANDOM INDEX IN THE NUMBERS
+                    //        // CHARACTER ARRAY   - LAITH - 27/07/2005 18:47:44 -
+                    //        while (arrIndex < 0)
+                    //            arrIndex = Convert.ToInt16(NumbersArray.GetUpperBound(0)
+                    //              * Random1);
+                    //        sb.Append(NumbersArray[arrIndex]);
+                    //    }
+                    //}
+                    return sb.ToString();
+                }
+            }
         }
     }
 }

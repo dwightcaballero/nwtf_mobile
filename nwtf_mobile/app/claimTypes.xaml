@@ -18,7 +18,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="30" />
-                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50"/>
                                         <RowDefinition Height="30"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
@@ -26,9 +26,81 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:"></Label>
                                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}"></Label>
-                                    <TableView Grid.Row="2" Intent="Settings" HeightRequest="50">
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
                                         <TableRoot>
-                                            <TableSection Title="Getting Started">
+                                            <TableSection Title="LO Provides Amount">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Number of Days">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Number of Premiums Paid">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Number of Weeks">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Fixed Amount">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Membership Date">
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="left"/>
+                                                        <Label Text="right"/>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </TableSection>
+                                        </TableRoot>
+                                    </TableView>
+                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
+                                        <TableRoot>
+                                            <TableSection Title="Insurer Approved Amount">
                                                 <ViewCell>
                                                     <StackLayout Orientation="Horizontal">
                                                         <Label Text="left"/>
@@ -41,7 +113,7 @@
                                     <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
                                 <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" ></Label>
                                 <Label Grid.Row="3" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
-                                <TableView Intent="Data" Grid.Row="4" Grid.Column="0" IsVisible="false" HeightRequest="150">
+                                    <TableView Grid.Row="4" Grid.Column="0" Intent="Data" IsVisible="false" HeightRequest="150">
                                     <TableRoot>
                                         <TableSection Title="Advance Disbursements">
                                                 <ViewCell>
