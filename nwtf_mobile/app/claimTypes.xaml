@@ -16,104 +16,66 @@
                         <ViewCell>
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="30" />
-                                        <RowDefinition Height="30" />
-                                        <RowDefinition Height="50"/>
-                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="35"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:"></Label>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}"></Label>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:"></Label>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}"></Label>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="LO Provides Amount">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Number of Days">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Number of Premiums Paid">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Number of Weeks">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Fixed Amount">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Membership Date">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <TableView Grid.Row="2" Grid.Column="0" Intent="Settings" IsVisible="false">
-                                        <TableRoot>
-                                            <TableSection Title="Insurer Approved Amount">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="left"/>
-                                                        <Label Text="right"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                        </TableRoot>
-                                    </TableView>
-                                    <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled"/>
-                                <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" ></Label>
-                                <Label Grid.Row="3" Grid.Column="2" Text="{Binding allowAdvances}" IsVisible="false"></Label>
-                                    <TableView Grid.Row="4" Grid.Column="0" Intent="Data" IsVisible="false" HeightRequest="150">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="500" />
+                                        <ColumnDefinition Width="500" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}" VerticalTextAlignment="Center"/>
+                                    
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="35" />
+                                            <RowDefinition Height="35" />
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    </Grid>
+                                    
+                                    <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Start" HeightRequest="35"/>
+                                    <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Start" HeightRequest="35"/>
+                                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
+                                    <TableView Grid.Row="4" Grid.ColumnSpan="2" Intent="Data" IsVisible="false" MinimumHeightRequest="10" HeightRequest="140">
                                     <TableRoot>
                                         <TableSection Title="Advance Disbursements">
                                                 <ViewCell>

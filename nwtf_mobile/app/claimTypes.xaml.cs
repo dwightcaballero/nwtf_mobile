@@ -40,40 +40,46 @@ namespace nwtf_mobile.app
 
         public void setClaimBenefit(int cbl, Grid control)
         {
-            // Temporary Data
+            // LO Provides Amount
             if (cbl == 1)
             {
-                TableView grd = (TableView)control.Children[4];
+                Grid grd = (Grid)control.Children[4];
                 grd.IsVisible = true;
             }
+            // Number of Days
             else if (cbl == 2)
             {
-                TableView grd = (TableView)control.Children[5];
+                Grid grd = (Grid)control.Children[5];
                 grd.IsVisible = true;
             }
+            // Number of Premiums Paid
             else if (cbl == 3)
             {
-                TableView grd = (TableView)control.Children[6];
+                Grid grd = (Grid)control.Children[6];
                 grd.IsVisible = true;
             }
+            // Number of Weeks
             else if (cbl == 4)
             {
-                TableView grd = (TableView)control.Children[7];
+                Grid grd = (Grid)control.Children[7];
                 grd.IsVisible = true;
             }
+            // Fixed Amount
             else if (cbl == 5)
             {
-                TableView grd = (TableView)control.Children[8];
+                Grid grd = (Grid)control.Children[8];
                 grd.IsVisible = true;
             }
+            // Membership Date
             else if (cbl == 6)
             {
-                TableView grd = (TableView)control.Children[9];
+                Grid grd = (Grid)control.Children[9];
                 grd.IsVisible = true;
             }
+            // Insurer Approved Amount
             else if (cbl == 7)
             {
-                TableView grd = (TableView)control.Children[10];
+                Grid grd = (Grid)control.Children[10];
                 grd.IsVisible = true;
             }        
         }
