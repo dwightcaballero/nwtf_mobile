@@ -10,7 +10,7 @@
         <ScrollView>
             <StackLayout Spacing="5" x:Name="layout">
                 <app:headerDetails></app:headerDetails>
-                <BoxView Color="white" HeightRequest="10" HorizontalOptions="FillAndExpand" />
+                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:claimTypes></app:claimTypes>
             </StackLayout>
         </ScrollView>

@@ -37,24 +37,47 @@ namespace nwtf_mobile.app
             claimTypeList.Add(claimtypesample);
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-
+        
+        // Add system constants and replace other values
         public void setClaimBenefit(int cbl, Grid control)
         {
             // LO Provides Amount
             if (cbl == 1)
             {
                 Grid grd = (Grid)control.Children[4];
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = "600.00";
                 grd.IsVisible = true;
             }
             // Number of Days
             else if (cbl == 2)
             {
+                int maxBasis = 1;
                 Grid grd = (Grid)control.Children[5];
-                // Change Date Texts
+                // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
                 dateFrom.Text = "New Date From";
                 Label dateTo = (Label)grd.Children[2];
                 dateTo.Text = "New Date To";
+                // Change Date Values
+                DatePicker dateFromVal = (DatePicker)grd.Children[1];
+                DatePicker dateToVal = (DatePicker)grd.Children[3];
+                // Change Other Labels (Depending on Basis)
+                Label maxLabel = (Label)grd.Children[4];
+                Label maxValue = (Label)grd.Children[5];                
+                // Maximum Basis - Amount
+                if (maxBasis == 1)
+                {                 
+                    maxLabel.Text = "Maximum Amount";
+                    maxValue.Text = "100.00";
+                }
+                // Maximum Basis - Days
+                else if (maxBasis == 2)
+                {
+                    maxLabel.Text = "Maximum Days";
+                    maxValue.Text = "20 Days";
+                }
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
@@ -66,7 +89,31 @@ namespace nwtf_mobile.app
             // Number of Weeks
             else if (cbl == 4)
             {
-                Grid grd = (Grid)control.Children[7];
+                int maxBasis = 1;
+                Grid grd = (Grid)control.Children[5];
+                // Change Date Labels
+                Label dateFrom = (Label)grd.Children[0];
+                dateFrom.Text = "Weeks From";
+                Label dateTo = (Label)grd.Children[2];
+                dateTo.Text = "Weeks To";
+                // Change Date Values
+                DatePicker dateFromVal = (DatePicker)grd.Children[1];
+                DatePicker dateToVal = (DatePicker)grd.Children[3];
+                // Change Other Labels (Depending on Basis)
+                Label maxLabel = (Label)grd.Children[4];
+                Label maxValue = (Label)grd.Children[5];
+                // Maximum Basis - Amount
+                if (maxBasis == 1)
+                {
+                    maxLabel.Text = "Maximum Amount";
+                    maxValue.Text = "100.00";
+                }
+                // Maximum Basis - Weeks
+                else if (maxBasis == 3)
+                {
+                    maxLabel.Text = "Maximum Weeks";
+                    maxValue.Text = "20 Weeks";
+                }
                 grd.IsVisible = true;
             }
             // Fixed Amount

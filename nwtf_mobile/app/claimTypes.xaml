@@ -8,8 +8,8 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimTypes">
   <ContentView.Content>
-            <StackLayout>
-            <customcontrols:RepeaterView x:Name="claimTypeRepeater" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <customcontrols:RepeaterView x:Name="claimTypeRepeater">
                 <customcontrols:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -22,8 +22,8 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="550" />
-                                        <ColumnDefinition Width="550" />
+                                        <ColumnDefinition Width="500" />
+                                        <ColumnDefinition Width="500" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}" VerticalTextAlignment="Center"/>
@@ -38,7 +38,7 @@
                                         <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
                                         <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                                         <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">

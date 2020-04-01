@@ -15,6 +15,21 @@ namespace nwtf_mobile.app
         public headerDetails()
         {
             InitializeComponent();
+            PopulateHeader();
+        }
+
+        private void PopulateHeader()
+        {
+            // Temporary Data
+            Label custID = this.FindByName<Label>("txtCustID");
+            Label custName = this.FindByName<Label>("txtCustName");
+            Label prodID = this.FindByName<Label>("txtProdID");
+            Label prodName = this.FindByName<Label>("txtProdName");
+
+            custID.Text = "1184990001";
+            custName.Text = "Dwight Kenn Caballero";
+            prodID.Text = "12345";
+            prodName.Text = "3104";
         }
     }
 }
