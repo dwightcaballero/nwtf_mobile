@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.headerDetails">
   <ContentView.Content>
-        <TableView Intent="Data">
+        <TableView Intent="Data" HeightRequest="230">
             <TableRoot>
                 <TableSection Title="Claims Transaction">
                     <ViewCell>

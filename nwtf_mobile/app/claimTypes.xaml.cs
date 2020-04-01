@@ -50,6 +50,11 @@ namespace nwtf_mobile.app
             else if (cbl == 2)
             {
                 Grid grd = (Grid)control.Children[5];
+                // Change Date Texts
+                Label dateFrom = (Label)grd.Children[0];
+                dateFrom.Text = "New Date From";
+                Label dateTo = (Label)grd.Children[2];
+                dateTo.Text = "New Date To";
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid

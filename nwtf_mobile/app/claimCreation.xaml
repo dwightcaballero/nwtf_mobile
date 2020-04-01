@@ -7,10 +7,12 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimCreation">
     <ContentPage.Content>
-        <StackLayout Spacing="5" x:Name="layout">
-            <BoxView Color="white" HeightRequest="10"
-        HorizontalOptions="FillAndExpand" />
-            <app:claimTypes></app:claimTypes>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="5" x:Name="layout">
+                <app:headerDetails></app:headerDetails>
+                <BoxView Color="white" HeightRequest="10" HorizontalOptions="FillAndExpand" />
+                <app:claimTypes></app:claimTypes>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
