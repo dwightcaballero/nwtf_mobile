@@ -32,48 +32,138 @@ namespace nwtf_mobile.app
             claimTypeList.Add(claimtypesample);
             claimtypesample = new vwClaimTypes();
             claimtypesample.claimBenefit = "Number of Premiums Paid";
-            claimtypesample.allowAdvances = true;
+            claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type C";
+            claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Number of Weeks";
+            claimtypesample.allowAdvances = false;
+            claimtypesample.claimTypeName = "Claim Type D";
+            claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Fixed Amount";
+            claimtypesample.allowAdvances = false;
+            claimtypesample.claimTypeName = "Claim Type E";
+            claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Membership Date";
+            claimtypesample.allowAdvances = true;
+            claimtypesample.claimTypeName = "Claim Type F";
+            claimTypeList.Add(claimtypesample);
+            claimtypesample = new vwClaimTypes();
+            claimtypesample.claimBenefit = "Insurer Approved Amount";
+            claimtypesample.allowAdvances = true;
+            claimtypesample.claimTypeName = "Claim Type G";
             claimTypeList.Add(claimtypesample);
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-
+        
+        // Add system constants and replace other values
         public void setClaimBenefit(int cbl, Grid control)
         {
-            // Temporary Data
+            // LO Provides Amount
             if (cbl == 1)
             {
-                TableView grd = (TableView)control.Children[4];
+                Grid grd = (Grid)control.Children[4];
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = "600.00";
                 grd.IsVisible = true;
             }
+            // Number of Days
             else if (cbl == 2)
             {
-                TableView grd = (TableView)control.Children[5];
+                int maxBasis = 1;
+                Grid grd = (Grid)control.Children[5];
+                // Change Date Labels
+                Label dateFrom = (Label)grd.Children[0];
+                dateFrom.Text = "New Date From:";
+                Label dateTo = (Label)grd.Children[2];
+                dateTo.Text = "New Date To:";
+                // Change Date Values
+                DatePicker dateFromVal = (DatePicker)grd.Children[1];
+                DatePicker dateToVal = (DatePicker)grd.Children[3];
+                // Change Other Labels (Depending on Basis)
+                Label accumLabel = (Label)grd.Children[4];
+                Label accumValue = (Label)grd.Children[5];
+                Label maxLabel = (Label)grd.Children[6];
+                Label maxValue = (Label)grd.Children[7];
+                // Maximum Basis - Amount
+                if (maxBasis == 1)
+                {                 
+                    maxLabel.Text = "Maximum Amount:";
+                    maxValue.Text = "100.00";
+                    accumLabel.Text = "Accumulated Amount:";
+                    accumValue.Text = "15.00";
+                }
+                // Maximum Basis - Days
+                else if (maxBasis == 2)
+                {
+                    maxLabel.Text = "Maximum Day:s";
+                    maxValue.Text = "20 Days";
+                    accumLabel.Text = "Accumulated Days:";
+                    accumValue.Text = "3 Days";
+                }
                 grd.IsVisible = true;
             }
+            // Number of Premiums Paid
             else if (cbl == 3)
             {
-                TableView grd = (TableView)control.Children[6];
+                Grid grd = (Grid)control.Children[6];
                 grd.IsVisible = true;
             }
+            // Number of Weeks
             else if (cbl == 4)
             {
-                TableView grd = (TableView)control.Children[7];
+                int maxBasis = 1;
+                Grid grd = (Grid)control.Children[5];
+                // Change Date Labels
+                Label dateFrom = (Label)grd.Children[0];
+                dateFrom.Text = "Weeks From:";
+                Label dateTo = (Label)grd.Children[2];
+                dateTo.Text = "Weeks To:";
+                // Change Date Values
+                DatePicker dateFromVal = (DatePicker)grd.Children[1];
+                DatePicker dateToVal = (DatePicker)grd.Children[3];
+                // Change Other Labels (Depending on Basis)
+                Label accumLabel = (Label)grd.Children[4];
+                Label accumValue = (Label)grd.Children[5];
+                Label maxLabel = (Label)grd.Children[6];
+                Label maxValue = (Label)grd.Children[7];
+                // Maximum Basis - Amount
+                if (maxBasis == 1)
+                {
+                    maxLabel.Text = "Maximum Amount:";
+                    maxValue.Text = "100.00";
+                    accumLabel.Text = "Accumulated Amount:";
+                    accumValue.Text = "15.00";
+                }
+                // Maximum Basis - Weeks
+                else if (maxBasis == 3)
+                {
+                    maxLabel.Text = "Maximum Weeks:";
+                    maxValue.Text = "20 Weeks";
+                    accumLabel.Text = "Accumulated Weeks:";
+                    accumValue.Text = "3 Weeks";
+                }
                 grd.IsVisible = true;
             }
+            // Fixed Amount
             else if (cbl == 5)
             {
-                TableView grd = (TableView)control.Children[8];
+                Grid grd = (Grid)control.Children[8];
                 grd.IsVisible = true;
             }
+            // Membership Date
             else if (cbl == 6)
             {
-                TableView grd = (TableView)control.Children[9];
+                Grid grd = (Grid)control.Children[9];
                 grd.IsVisible = true;
             }
+            // Insurer Approved Amount
             else if (cbl == 7)
             {
-                TableView grd = (TableView)control.Children[10];
+                Grid grd = (Grid)control.Children[10];
                 grd.IsVisible = true;
             }        
         }
@@ -86,26 +176,30 @@ namespace nwtf_mobile.app
           
             foreach (Grid item1 in control.Children)
             {
-                Switch forAdvancePanelValue = (Switch)item1.Children[11];
-                Label forAdvancePanel = (Label)item1.Children[12];
-                Label checkForAdvance = (Label)item1.Children[13];
+                Label claimTypeName = (Label)item1.Children[1];
+                Grid forAdvanceGrid = (Grid)item1.Children[11];
+                Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
+                Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
+                Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
                 setClaimBenefit(claimBenefit, item1);
                 claimBenefit++;
 
                 foreach (vwClaimTypes item in control.ItemsSource)
                 {
-                    
-                    if (item.forAdvance == false)
+                    if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
-                        if (checkForAdvance == null) return;
-                        if (item.forAdvance.ToString() == checkForAdvance.Text)
+                        if (item.forAdvance == false)
                         {
-                            if (forAdvancePanel == null) return;
-                            //  set for advance panel visible to false
-                            forAdvancePanelValue.IsVisible = false;
-                            forAdvancePanel.IsVisible = false;
+
+                            if (checkForAdvance == null) return;
+                            if (item.forAdvance.ToString() == checkForAdvance.Text)
+                            {
+                                if (forAdvancePanel == null) return;
+                                //  set for advance panel visible to false
+                                forAdvanceGrid.IsVisible = false;
+                            }
                         }
-                    }                  
+                    }
                 }
             }
         }
@@ -114,8 +208,9 @@ namespace nwtf_mobile.app
         {
             
             Switch forAdvancePanelValue = (Switch)sender;
-            Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-            TableView advancesList = (TableView)parentGrid.Children[14];
+            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
+            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
+            TableView advancesList = (TableView)parentGrid.Children[12];
             if (forAdvancePanelValue.IsToggled == true)
             {
                 advancesList.IsVisible = true;

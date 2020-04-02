@@ -6,55 +6,52 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.headerDetails">
   <ContentView.Content>
-        <TableView Intent="Data">
-            <TableRoot>
-                <TableSection Title="Claims Transaction">
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                            <Label Text="Customer ID:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtCustomerID" Text="12345678"
-                                 TextColor="#503026" WidthRequest="250" />
-                            <Label Text="Customer Name:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtCustomerName" Text="Dwight Kenn Caballero"
-                                 TextColor="#503026" WidthRequest="250" />
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                            <Label Text="Product ID:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtProductID" Text="4567"
-                                 TextColor="#503026" WidthRequest="250" />
-                            <Label Text="Product Name:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtProductName" Text="MAF05"
-                                 TextColor="#503026" WidthRequest="250" />
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                            <Label Text="Claimant Name:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtClaimantName" Text="Sweet Altamera"
-                                 TextColor="#503026" WidthRequest="250" />
-                            <Label Text="Claimant Relation:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtClaimantRelation" Text="Sister"
-                                 TextColor="#503026" WidthRequest="250" />
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="15,0,0,0" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                            <Label Text="Selected Claim Types:"
-                                 TextColor="#f35e20" WidthRequest="250" />
-                            <Label x:Name="txtClaimTypes" Text="Claim Type 1, Claim Type 2, Claim Type 3, Claim Type 4"
-                                 TextColor="#503026" WidthRequest="760" />
-                        </StackLayout>
-                    </ViewCell>
-                </TableSection>
-            </TableRoot>
-        </TableView>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="505" />
+                <ColumnDefinition Width="505" />
+            </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="Center">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Transaction" VerticalTextAlignment="Center" TextColor="Red"/>
+                </Grid>
+                
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" VerticalOptions="Start">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Customer ID:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtCustID" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Customer Name:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtCustName" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" VerticalOptions="Start">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Product ID:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtProdID" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Product Name:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtProdName" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.ColumnSpan="2" VerticalOptions="Start">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Claimant Name:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtClaimantName" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Claimant Relation:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtClaimantRel" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.ColumnSpan="2" VerticalOptions="Start">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Selected Claim Types:" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" x:Name="txtClaimTypesList" VerticalTextAlignment="Center"/>
+                </Grid>
+
+                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+        </Grid>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

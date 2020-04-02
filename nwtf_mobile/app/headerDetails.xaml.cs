@@ -15,6 +15,19 @@ namespace nwtf_mobile.app
         public headerDetails()
         {
             InitializeComponent();
+            PopulateHeader();
+        }
+
+        private void PopulateHeader()
+        {
+            // Temporary Data
+            txtCustID.Text = "1184990001";
+            txtCustName.Text = "Dwight Kenn Caballero";
+            txtProdID.Text = "12345";
+            txtProdName.Text = "3104";
+            txtClaimantName.Text = "Sweet Angel Altamera";
+            txtClaimantRel.Text = "Sister";
+            txtClaimTypesList.Text = "Claim Type A, Claim Type B, Claim Type C";
         }
     }
 }
