@@ -15,6 +15,7 @@ namespace nwtf_mobile.app
     {
         dto.claimDTO claimDTO { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
+        nwtf_mobile_bl.customBind.cbClaimSelectionHeader cbClaimSelectionHeader = new nwtf_mobile_bl.customBind.cbClaimSelectionHeader();
 
         public claimSelection()
         {
@@ -25,8 +26,11 @@ namespace nwtf_mobile.app
             pcon.getListCustomerForGrid();
         }
 
+        // hide all stacks in claim selection
         void hideStacks()
         {
+            stackHeader.IsVisible = false;
+
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = false;
@@ -41,6 +45,12 @@ namespace nwtf_mobile.app
             pcon.loadClaimantGrid += Pcon_loadClaimantGrid;
         }
 
+        // display messages
+        void displayMessage(string title, string message, string buttonName)
+        {
+            DisplayAlert(title, message, buttonName);
+        }
+
         private void Pcon_showMessage(object sender, (string, string, string) e)
         {
             displayMessage(e.Item1, e.Item2, e.Item3);
@@ -52,7 +62,7 @@ namespace nwtf_mobile.app
             stackCustomer.IsVisible = true;
 
             claimDTO.listCustomer = e;
-            listCustomer.ItemsSource = e;
+            lvCustomer.ItemsSource = e;
         }
 
         private void btnCustomer_Clicked(object sender, System.EventArgs e)
@@ -62,20 +72,26 @@ namespace nwtf_mobile.app
             pcon.getListMAFForGrid(customerID);
         }
 
-        void displayMessage(string title, string message, string buttonName)
-        {
-            DisplayAlert(title, message, buttonName);
-        }
-
         private void Pcon_loadMAFGrid(object sender, (List<views.vwMafEnrollmentClosure>, views.vwCustomer) e)
         {
+            var listMAF = e.Item1;
+            var customer = e.Item2;
+
             Title = "Selection of Customer's Enrolled Packages";
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = true;
 
-            claimDTO.listMAF = e.Item1;
-            listMAF.ItemsSource = e.Item1;
-            claimDTO.customer = e.Item2;
+            stackHeader.IsVisible = true;
+            cbClaimSelectionHeader.customerID = customer.customerID;
+            cbClaimSelectionHeader.customerName = customer.customerLastName + ", " +
+                                                  customer.customerFirstName + " " +
+                                                  customer.customerMiddleName + " " +
+                                                  customer.customerSuffix;
+            //gridClaimSelectionHeader.BindingContext = cbClaimSelectionHeader;
+
+            claimDTO.listMAF = listMAF;
+            lvMAF.ItemsSource = listMAF;
+            claimDTO.customer = customer;
         }
 
         private void btnMAF_Clicked(object sender, System.EventArgs e)
@@ -88,13 +104,19 @@ namespace nwtf_mobile.app
 
         private void Pcon_loadClaimantGrid(object sender, (List<views.vwClaimant>, views.vwMafEnrollmentClosure) e)
         {
+            var listClaimant = e.Item1;
+            var maf = e.Item2;
+
             Title = "Selection of Claimant";
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = true;
 
-            claimDTO.listClaimant = e.Item1;
-            listClaimant.ItemsSource = e.Item1;
-            claimDTO.maf = e.Item2;
+            cbClaimSelectionHeader.productname = maf.productName;
+            cbClaimSelectionHeader.productID = maf.productID;
+
+            claimDTO.listClaimant = listClaimant;
+            lvClaimant.ItemsSource = listClaimant;
+            claimDTO.maf = maf;
         }
 
         private void btnClaimant_Clicked(object sender, EventArgs e)
@@ -121,7 +143,7 @@ namespace nwtf_mobile.app
                                            orderby cust.customerLastName, cust.customerFirstName
                                            select cust).ToList();
 
-                listCustomer.ItemsSource = listFilteredCustomer;
+                lvCustomer.ItemsSource = listFilteredCustomer;
             }
         }
 
@@ -130,7 +152,7 @@ namespace nwtf_mobile.app
             SearchBar sbar = (SearchBar)sender;
             if (string.IsNullOrWhiteSpace(sbar.Text))
             {
-                listCustomer.ItemsSource = claimDTO.listCustomer;
+                lvCustomer.ItemsSource = claimDTO.listCustomer;
             }
         }
     }

@@ -4,14 +4,22 @@ using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace nwtf_mobile.converter
+namespace nwtf_mobile_bl.converters
 {
-    class cvtDatetimeToBoolean : IValueConverter
+    public class cvStringToBoolean : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (DateTime)value != DateTime.MinValue;
+            if (value != null)
+            {
+                return !string.IsNullOrEmpty(value.ToString());
+            }
+            else
+            {
+                return false;
+            }
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

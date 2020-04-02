@@ -16,7 +16,11 @@ namespace nwtf_mobile_bl
                 views.vwMafEnrollmentClosure maf = null;
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    string sql = "SELECT * FROM vwMafEnrollmentClosure WHERE id='" + id.ToString() + "';";
+                    string sql = "SELECT m.id, m.customerID, m.accountNo, m.productID, m.effectiveDate, " +
+                                        "m.closingDate, m.deceased, p.productName " +
+                                  "FROM vwMafEnrollmentClosure as m " +
+                                  "INNER JOIN vwProduct as p ON m.productID = p.productID " +
+                                  "WHERE m.id= '" + id.ToString() + "' ;";
                     maf = conn.Query<views.vwMafEnrollmentClosure>(sql).FirstOrDefault();
                 }
                 return maf;
@@ -33,7 +37,7 @@ namespace nwtf_mobile_bl
                     // update query
                     string sql = "SELECT m.id, m.productID, p.productName, m.effectiveDate, m.closingDate " +
                                  "FROM vwMafEnrollmentClosure as m " +
-                                 "JOIN vwProduct as p ON m.productID = p.productID " +
+                                 "INNER JOIN vwProduct as p ON m.productID = p.productID " +
                                  "WHERE m.customerID = '" + customerID + "' " + 
                                  "ORDER BY p.productName;";
                     listMAF = conn.Query<views.vwMafEnrollmentClosure>(sql);
