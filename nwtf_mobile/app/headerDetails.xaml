@@ -16,12 +16,12 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="510" />
-                <ColumnDefinition Width="510" />
+                <ColumnDefinition Width="505" />
+                <ColumnDefinition Width="505" />
             </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="Center">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Transaction" VerticalTextAlignment="Center" FontSize="Medium"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Transaction" VerticalTextAlignment="Center" TextColor="Red"/>
                 </Grid>
                 
                 <Grid Grid.Row="1" Grid.ColumnSpan="2" VerticalOptions="Start">

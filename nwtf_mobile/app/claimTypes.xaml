@@ -18,19 +18,21 @@
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="35"/>
+                                        <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="500" />
-                                        <ColumnDefinition Width="500" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="250" />
+                                </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center" TextColor="Red"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}" VerticalTextAlignment="Center" TextColor="Red"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}" VerticalTextAlignment="Center"/>
                                     
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="35" />
                                             <RowDefinition Height="35" />
@@ -41,7 +43,7 @@
                                         <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -67,7 +69,7 @@
                                     <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -82,25 +84,36 @@
                                     <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
+                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Amount per Claim:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                </Grid>
 
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
-
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="# of Weeks from Enrollment Date:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                </Grid>
                                     
-                                    <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Start" HeightRequest="35"/>
-                                    <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center" HeightRequest="35"/>
-                                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
-                                    <TableView Grid.Row="4" Grid.ColumnSpan="2" Intent="Data" IsVisible="false" MinimumHeightRequest="10" HeightRequest="140">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
+                                </Grid>
+                                <Grid Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="35" VerticalOptions="Start">
+                                    <Switch Grid.Row="0" Grid.Column="0" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Start"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
+                                </Grid>                               
+                                    <TableView Grid.Row="4" Grid.ColumnSpan="4" Intent="Data" IsVisible="false" MinimumHeightRequest="10" HeightRequest="140">
                                     <TableRoot>
                                         <TableSection Title="Advance Disbursements">
                                                 <ViewCell>
@@ -114,7 +127,6 @@
                                             </TableSection>
                                     </TableRoot>
                                 </TableView>
-                                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
