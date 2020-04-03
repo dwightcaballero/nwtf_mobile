@@ -99,7 +99,7 @@ namespace nwtf_mobile.app
                 // Maximum Basis - Days
                 else if (maxBasis == 2)
                 {
-                    maxLabel.Text = "Maximum Day:s";
+                    maxLabel.Text = "Maximum Days:";
                     maxValue.Text = "20 Days";
                     accumLabel.Text = "Accumulated Days:";
                     accumValue.Text = "3 Days";
@@ -110,6 +110,12 @@ namespace nwtf_mobile.app
             else if (cbl == 3)
             {
                 Grid grd = (Grid)control.Children[6];
+                // Change Maximum Amount
+                Label weeksFromMembershipDate = (Label)grd.Children[1];
+                weeksFromMembershipDate.Text = "6 Weeks"; 
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = "600.00"; 
                 grd.IsVisible = true;
             }
             // Number of Weeks
@@ -152,12 +158,24 @@ namespace nwtf_mobile.app
             else if (cbl == 5)
             {
                 Grid grd = (Grid)control.Children[8];
+                // Change Amount per Claim
+                Label amountPerClaim = (Label)grd.Children[1];
+                amountPerClaim.Text = "50.00";
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = "600.00"; 
                 grd.IsVisible = true;
             }
             // Membership Date
             else if (cbl == 6)
             {
                 Grid grd = (Grid)control.Children[9];
+                // Change Maximum Amount
+                Label weeksFromEnrollmentDate = (Label)grd.Children[1];
+                weeksFromEnrollmentDate.Text = "5 Weeks";
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = "600.00"; 
                 grd.IsVisible = true;
             }
             // Insurer Approved Amount
