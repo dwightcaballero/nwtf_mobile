@@ -16,7 +16,12 @@ namespace nwtf_mobile_bl
             [NotNull]
             public Guid claimTypeUID { get; set; }
             [NotNull]
-            public String claimantType { get; set; }
+            public string claimantType { get; set; }
+
+            public static List<Guid> getLisClaimTypeIDsForGrid(Guid productUID, int claimantType)
+            {
+                return dataservices.productClaimType.getListClaimTypeIDsForGrid(productUID, claimantType);
+            }
         }
     }
 }

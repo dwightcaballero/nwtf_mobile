@@ -13,7 +13,7 @@ namespace nwtf_mobile_bl
             LegalDependent = 3
         }
 
-        public string getClaimantDescription(int i)
+        public static string getClaimantDescription(int i)
         {
             switch (i)
             {
@@ -28,7 +28,7 @@ namespace nwtf_mobile_bl
             }
         }
 
-        public int getClaimantNumber(string s)
+        public static int getClaimantNumber(string s)
         {
             switch (s)
             {

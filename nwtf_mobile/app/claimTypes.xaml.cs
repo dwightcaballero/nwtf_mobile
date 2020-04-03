@@ -16,8 +16,8 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
       
-        public vwClaimTypes claimtypesample = new vwClaimTypes();
-        public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
+        public vwClaimType claimtypesample = new vwClaimType();
+        public List<vwClaimType> claimTypeList = new List<vwClaimType>();
         public void PopulateClaimTypes()
         {
             // Only Sample Data
@@ -25,32 +25,32 @@ namespace nwtf_mobile.app
             claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type A";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Number of Days";
             claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type B";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Number of Premiums Paid";
             claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type C";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Number of Weeks";
             claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type D";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Fixed Amount";
             claimtypesample.allowAdvances = false;
             claimtypesample.claimTypeName = "Claim Type E";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Membership Date";
             claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type F";
             claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
+            claimtypesample = new vwClaimType();
             claimtypesample.claimBenefit = "Insurer Approved Amount";
             claimtypesample.allowAdvances = true;
             claimtypesample.claimTypeName = "Claim Type G";
@@ -202,7 +202,7 @@ namespace nwtf_mobile.app
                 setClaimBenefit(claimBenefit, item1);
                 claimBenefit++;
 
-                foreach (vwClaimTypes item in control.ItemsSource)
+                foreach (vwClaimType item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {

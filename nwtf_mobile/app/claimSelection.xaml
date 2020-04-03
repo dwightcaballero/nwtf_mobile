@@ -22,9 +22,9 @@
             <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
                 <Grid x:Name="gridClaimSelectionHeader">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -273,7 +273,7 @@
                 </ListView>
             </StackLayout>
 
-            <!--<StackLayout x:Name="stackClaimType">
+            <StackLayout x:Name="stackClaimType">
                 <Label Text="List of Claim Type" FontSize="Large" TextColor="Black" />
                 <ListView x:Name="lvClaimtype" Margin="0">
                     <ListView.Header>
@@ -283,26 +283,21 @@
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
                             <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Claim Code" HorizontalOptions="Fill" Grid.Column="1"
                                    FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" Padding="10,10"/>
 
-                            <Label Text="Dungganon ID" HorizontalOptions="Fill" Grid.Column="1"
+                            <Label Text="Type Name" HorizontalOptions="Fill" Grid.Column="2"
                                    FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" Padding="10,10"/>
 
-                            <Label Text="Last name" HorizontalOptions="Fill" Grid.Column="2"
-                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
-                                   HorizontalTextAlignment="Center" Padding="10,10"/>
-
-                            <Label Text="First name" HorizontalOptions="Fill" Grid.Column="3"
-                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
-                                   HorizontalTextAlignment="Center" Padding="10,10"/>
-
-                            <Label Text="Middle name" HorizontalOptions="Fill" Grid.Column="4"
+                            <Label Text="Short name" HorizontalOptions="Fill" Grid.Column="3"
                                    FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" Padding="10,10"/>
 
@@ -315,26 +310,23 @@
                                 <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
-                                            Clicked="btnCustomer_Clicked"  CommandParameter="{Binding id}"/>
+                                    <CheckBox CheckedChanged="CheckBox_CheckedChanged"/>
 
-                                    <Label Grid.Column="1" Text ="{Binding dungganonID}" 
+                                    <Label Text="{Binding id}" IsVisible="False"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding claimTypeCode}" 
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="2" Text ="{Binding customerLastName}"
+                                    <Label Grid.Column="2" Text ="{Binding claimTypeName}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="3" Text ="{Binding customerFirstName}"
-                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-
-                                    <Label Grid.Column="4" Text ="{Binding customerMiddleName}"
+                                    <Label Grid.Column="3" Text ="{Binding claimTypeShortName}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                 </Grid>
@@ -342,7 +334,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>-->
+
+                <Button Text="Continue" Clicked="btnContinue_Clicked"/>
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

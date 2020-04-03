@@ -16,8 +16,6 @@ namespace nwtf_mobile_bl
             [NotNull] public DateTime effectiveDate { get; set; }
             public DateTime closingDate { get; set; }
             [NotNull] public Boolean deceased { get; set; }
-
-            // for package selection (listview property)
             public string productName { get; set; }
 
             public static vwMafEnrollmentClosure getMAFByID(Guid id)

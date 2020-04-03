@@ -35,6 +35,7 @@ namespace nwtf_mobile.app
             stackCustomer.IsVisible = false;
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = false;
+            stackClaimType.IsVisible = false;
         }
 
         // subscribe to all events in the controller
@@ -44,6 +45,7 @@ namespace nwtf_mobile.app
             pcon.loadCustomerGrid += Pcon_loadCustomerGrid;
             pcon.loadMAFGrid += Pcon_loadMAFGrid;
             pcon.loadClaimantGrid += Pcon_loadClaimantGrid;
+            pcon.loadClaimTypeGrid += Pcon_loadClaimTypeGrid;
         }
 
         // display messages
@@ -122,7 +124,7 @@ namespace nwtf_mobile.app
                 // should not proceed. for now, lets continue without selecting (delete after modification)
                 claimDTO.claimantID = "463120";
                 claimDTO.claimantType = 1;
-
+                pcon.getListClaimTypeForGrid(claimDTO.maf.productID, claimDTO.claimantType);
 
                 // uncomment this after modifications
                 //lblNoClaimant.IsVisible = true;
@@ -133,7 +135,7 @@ namespace nwtf_mobile.app
                 
                 claimDTO.claimantID = claimant.claimantID;
                 claimDTO.claimantType = claimant.claimantType;
-
+                pcon.getListClaimTypeForGrid(claimDTO.maf.productID, claimDTO.claimantType);
             }
             else
             {
@@ -146,7 +148,20 @@ namespace nwtf_mobile.app
             Button btnSelected = (Button)sender;
             Guid claimantID = (Guid)btnSelected.CommandParameter;
 
-            //to be continued
+            // get claimant data (not yet implemented)
+
+            pcon.getListClaimTypeForGrid(claimDTO.maf.productID, claimDTO.claimantType);
+        }
+
+        private void Pcon_loadClaimTypeGrid(object sender, List<views.vwClaimType> e)
+        {
+            claimDTO.listClaimType = e;
+
+            stackHeader.IsVisible = false;
+            stackClaimant.IsVisible = false;
+            stackClaimType.IsVisible = true;
+
+            lvClaimtype.ItemsSource = e;
         }
 
         private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
@@ -174,6 +189,17 @@ namespace nwtf_mobile.app
             {
                 lvCustomer.ItemsSource = claimDTO.listCustomer;
             }
+        }
+
+        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            // validation (count number of checked)
+        }
+
+        private void btnContinue_Clicked(object sender, EventArgs e)
+        {
+            // proceed to claim Creation (add validation)
+            Navigation.PushAsync(new claimCreation());
         }
     }
 }
