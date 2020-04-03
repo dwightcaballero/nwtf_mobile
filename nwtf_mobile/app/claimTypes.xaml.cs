@@ -1,4 +1,5 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,46 +21,38 @@ namespace nwtf_mobile.app
         public List<vwClaimType> claimTypeList = new List<vwClaimType>();
         public void PopulateClaimTypes()
         {
-            // Only Sample Data
-            claimtypesample.claimBenefit = "LO Provides Amount";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type A";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Number of Days";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type B";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Number of Premiums Paid";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type C";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Number of Weeks";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type D";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Fixed Amount";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type E";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Membership Date";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type F";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimType();
-            claimtypesample.claimBenefit = "Insurer Approved Amount";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type G";
-            claimTypeList.Add(claimtypesample);
+            // Sample Data (get CBL)
+            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
+
+            List<Guid> claimTypeUID = new List<Guid>();
+            claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
+            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
+            
+            claimTypeList = vwClaimTypes.getClaimTypeSelected(claimTypeUID);
+            foreach (vwClaimTypes claimType in claimTypeList){
+                vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, "Member", claimType.id);
+                claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                claimType.claimBenefitName = cblRec.claimBenefitsLimits.ToString();
+            }
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-        
-        // Add system constants and replace other values
-        public void setClaimBenefit(int cbl, Grid control)
+        public IList<vwDisbursementType> listDA { get; private set; }
+
+        public void setDisbursementAdvances()
+        {
+            listDA = new List<vwDisbursementType>();
+            listDA.Add(new vwDisbursementType
+            {
+                // assuming 1 is final payee
+                // assuming 2 is amount type percentage
+                disbursementType = 1,
+                DisbursementTypeName = "Africa & Asia",
+                AmountType = 2,
+                PayeeType=3 });
+
+    }
+    // Add system constants and replace other values
+    public void setClaimBenefit(int cbl, Grid control)
         {
             // LO Provides Amount
             if (cbl == 1)
@@ -68,6 +61,9 @@ namespace nwtf_mobile.app
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
                 maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Days
@@ -104,6 +100,9 @@ namespace nwtf_mobile.app
                     accumLabel.Text = "Accumulated Days:";
                     accumValue.Text = "3 Days";
                 }
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
@@ -115,7 +114,10 @@ namespace nwtf_mobile.app
                 weeksFromMembershipDate.Text = "6 Weeks"; 
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Weeks
@@ -152,6 +154,9 @@ namespace nwtf_mobile.app
                     accumLabel.Text = "Accumulated Weeks:";
                     accumValue.Text = "3 Weeks";
                 }
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Fixed Amount
@@ -163,7 +168,10 @@ namespace nwtf_mobile.app
                 amountPerClaim.Text = "50.00";
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Membership Date
@@ -175,7 +183,10 @@ namespace nwtf_mobile.app
                 weeksFromEnrollmentDate.Text = "5 Weeks";
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Insurer Approved Amount
@@ -189,12 +200,12 @@ namespace nwtf_mobile.app
         public void AccessControlsInRepeater()
         {
             var control = claimTypeRepeater as RepeaterView;
-            int claimBenefit = 1;
             if (control == null) return;
           
             foreach (Grid item1 in control.Children)
             {
                 Label claimTypeName = (Label)item1.Children[1];
+                Label claimBenefit = (Label)item1.Children[1];
                 Grid forAdvanceGrid = (Grid)item1.Children[11];
                 Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
@@ -202,10 +213,12 @@ namespace nwtf_mobile.app
                 setClaimBenefit(claimBenefit, item1);
                 claimBenefit++;
 
-                foreach (vwClaimType item in control.ItemsSource)
+                foreach (vwClaimTypes item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
+                        // Code to get Claim Benefit
+                        setClaimBenefit(item.claimBenefit, item1);
                         if (item.forAdvance == false)
                         {
 
@@ -215,6 +228,8 @@ namespace nwtf_mobile.app
                                 if (forAdvancePanel == null) return;
                                 //  set for advance panel visible to false
                                 forAdvanceGrid.IsVisible = false;
+                                // Code to get list of disbursement advances
+                             //   setDisbursementAdvances();
                             }
                         }
                     }
