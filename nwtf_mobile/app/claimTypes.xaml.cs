@@ -210,8 +210,6 @@ namespace nwtf_mobile.app
                 Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
-                setClaimBenefit(claimBenefit, item1);
-                claimBenefit++;
 
                 foreach (vwClaimType item in control.ItemsSource)
                 {
