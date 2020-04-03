@@ -25,8 +25,8 @@ namespace nwtf_mobile_bl
             public String comment { get; set; }
             public Guid claimTypeID { get; set; }
             public String finalPayee { get; set; }
-            public String claimBenefit { get; set; }
-
+            public int claimBenefit { get; set; }
+            public string claimBenefitName { get; set; }
             public static List<views.vwClaimTypes> getClaimTypeSelected(List<Guid> claimTypeUID)
             {
                 return dataservices.claimType.getClaimTypeSelected(claimTypeUID);

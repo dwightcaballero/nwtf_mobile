@@ -9,15 +9,16 @@ namespace nwtf_mobile_bl
     {
         public class claimType
         {
-            public static List<views.vwClaimTypes> getClaimTypeSelected(List<Guid> claimTypeUID)
+            public static List<views.vwClaimTypes> getClaimTypeSelected(List<Guid> claimTypeUIDList)
             {
                 List<views.vwClaimTypes> listClaimTypes = new List<views.vwClaimTypes>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
                     // use build or instead of foreach
-                    foreach (Guid ct in claimTypeUID)
+                    foreach (Guid claimTypeUID in claimTypeUIDList)
                     {
-                        string sql = "SELECT * FROM vwClaimTypes WHERE id='" + ct.ToString() + "';";
+                        // query to get claimtype data
+                        string sql = "SELECT * FROM vwClaimTypes WHERE id='" + claimTypeUID.ToString() + "';";
                         List<views.vwClaimTypes> item = conn.Query<views.vwClaimTypes>(sql);
                         listClaimTypes.AddRange(item);
                     }

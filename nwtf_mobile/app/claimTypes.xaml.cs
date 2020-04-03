@@ -21,46 +21,19 @@ namespace nwtf_mobile.app
         public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
         public void PopulateClaimTypes()
         {
-            // Only Sample Data
-            //claimtypesample.claimBenefit = "LO Provides Amount";
-            //claimtypesample.allowAdvances = false;
-            //claimtypesample.claimTypeName = "Claim Type A";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Number of Days";
-            //claimtypesample.allowAdvances = true;
-            //claimtypesample.claimTypeName = "Claim Type B";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Number of Premiums Paid";
-            //claimtypesample.allowAdvances = false;
-            //claimtypesample.claimTypeName = "Claim Type C";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Number of Weeks";
-            //claimtypesample.allowAdvances = false;
-            //claimtypesample.claimTypeName = "Claim Type D";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Fixed Amount";
-            //claimtypesample.allowAdvances = false;
-            //claimtypesample.claimTypeName = "Claim Type E";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Membership Date";
-            //claimtypesample.allowAdvances = true;
-            //claimtypesample.claimTypeName = "Claim Type F";
-            //claimTypeList.Add(claimtypesample);
-            //claimtypesample = new vwClaimTypes();
-            //claimtypesample.claimBenefit = "Insurer Approved Amount";
-            //claimtypesample.allowAdvances = true;
-            //claimtypesample.claimTypeName = "Claim Type G";
-            //claimTypeList.Add(claimtypesample);
+            // Sample Data (get CBL)
+            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
+
             List<Guid> claimTypeUID = new List<Guid>();
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
-            claimTypeUID.Add(Guid.Parse("5836f582-f77d-4348-89df-39f73fcb7636"));
-            claimTypeUID.Add(Guid.Parse("fe3f0c9b-56c6-45b8-96bc-5f8b850109b2"));
+            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
+            
             claimTypeList = vwClaimTypes.getClaimTypeSelected(claimTypeUID);
+            foreach (vwClaimTypes claimType in claimTypeList){
+                vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, "Member", claimType.id);
+                claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                claimType.claimBenefitName = cblRec.claimBenefitsLimits.ToString();
+            }
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
         public IList<vwDisbursementType> listDA { get; private set; }
@@ -76,7 +49,6 @@ namespace nwtf_mobile.app
                 DisbursementTypeName = "Africa & Asia",
                 AmountType = 2,
                 PayeeType=3 });
-        // query to get all disbursement advances
 
     }
     // Add system constants and replace other values
@@ -228,24 +200,23 @@ namespace nwtf_mobile.app
         public void AccessControlsInRepeater()
         {
             var control = claimTypeRepeater as RepeaterView;
-            int claimBenefit = 1;
             if (control == null) return;
           
             foreach (Grid item1 in control.Children)
             {
                 Label claimTypeName = (Label)item1.Children[1];
+                Label claimBenefit = (Label)item1.Children[1];
                 Grid forAdvanceGrid = (Grid)item1.Children[11];
                 Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
-                // Code to get Claim Benefit
-                setClaimBenefit(claimBenefit, item1);
-                claimBenefit++;
-
+               
                 foreach (vwClaimTypes item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
+                        // Code to get Claim Benefit
+                        setClaimBenefit(item.claimBenefit, item1);
                         if (item.forAdvance == false)
                         {
 
