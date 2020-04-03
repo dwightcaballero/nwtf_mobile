@@ -1,4 +1,5 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,45 +22,65 @@ namespace nwtf_mobile.app
         public void PopulateClaimTypes()
         {
             // Only Sample Data
-            claimtypesample.claimBenefit = "LO Provides Amount";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type A";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Days";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type B";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Premiums Paid";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type C";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Weeks";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type D";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Fixed Amount";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type E";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Membership Date";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type F";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Insurer Approved Amount";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type G";
-            claimTypeList.Add(claimtypesample);
+            //claimtypesample.claimBenefit = "LO Provides Amount";
+            //claimtypesample.allowAdvances = false;
+            //claimtypesample.claimTypeName = "Claim Type A";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Number of Days";
+            //claimtypesample.allowAdvances = true;
+            //claimtypesample.claimTypeName = "Claim Type B";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Number of Premiums Paid";
+            //claimtypesample.allowAdvances = false;
+            //claimtypesample.claimTypeName = "Claim Type C";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Number of Weeks";
+            //claimtypesample.allowAdvances = false;
+            //claimtypesample.claimTypeName = "Claim Type D";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Fixed Amount";
+            //claimtypesample.allowAdvances = false;
+            //claimtypesample.claimTypeName = "Claim Type E";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Membership Date";
+            //claimtypesample.allowAdvances = true;
+            //claimtypesample.claimTypeName = "Claim Type F";
+            //claimTypeList.Add(claimtypesample);
+            //claimtypesample = new vwClaimTypes();
+            //claimtypesample.claimBenefit = "Insurer Approved Amount";
+            //claimtypesample.allowAdvances = true;
+            //claimtypesample.claimTypeName = "Claim Type G";
+            //claimTypeList.Add(claimtypesample);
+            List<Guid> claimTypeUID = new List<Guid>();
+            claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
+            claimTypeUID.Add(Guid.Parse("5836f582-f77d-4348-89df-39f73fcb7636"));
+            claimTypeUID.Add(Guid.Parse("fe3f0c9b-56c6-45b8-96bc-5f8b850109b2"));
+            claimTypeList = vwClaimTypes.getClaimTypeSelected(claimTypeUID);
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-        
-        // Add system constants and replace other values
-        public void setClaimBenefit(int cbl, Grid control)
+        public IList<vwDisbursementType> listDA { get; private set; }
+
+        public void setDisbursementAdvances()
+        {
+            listDA = new List<vwDisbursementType>();
+            listDA.Add(new vwDisbursementType
+            {
+                // assuming 1 is final payee
+                // assuming 2 is amount type percentage
+                disbursementType = 1,
+                DisbursementTypeName = "Africa & Asia",
+                AmountType = 2,
+                PayeeType=3 });
+        // query to get all disbursement advances
+
+    }
+    // Add system constants and replace other values
+    public void setClaimBenefit(int cbl, Grid control)
         {
             // LO Provides Amount
             if (cbl == 1)
@@ -217,6 +238,7 @@ namespace nwtf_mobile.app
                 Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
+                // Code to get Claim Benefit
                 setClaimBenefit(claimBenefit, item1);
                 claimBenefit++;
 
@@ -233,6 +255,8 @@ namespace nwtf_mobile.app
                                 if (forAdvancePanel == null) return;
                                 //  set for advance panel visible to false
                                 forAdvanceGrid.IsVisible = false;
+                                // Code to get list of disbursement advances
+                             //   setDisbursementAdvances();
                             }
                         }
                     }
