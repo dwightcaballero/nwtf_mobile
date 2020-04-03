@@ -14,13 +14,14 @@ namespace nwtf_mobile.app
     public partial class claimSelection : ContentPage
     {
         dto.claimDTO claimDTO { get; set; }
+        custombinds.cbClaimSelectionHeader cbClaimSelectionHeader = new custombinds.cbClaimSelectionHeader();
         controllers.claimTransaction pcon = new controllers.claimTransaction();
-        nwtf_mobile_bl.customBind.cbClaimSelectionHeader cbClaimSelectionHeader = new nwtf_mobile_bl.customBind.cbClaimSelectionHeader();
-
+       
         public claimSelection()
         {
             InitializeComponent();
             claimDTO = new dto.claimDTO();
+
             hideStacks();
             subscribeToAllEvents();
             pcon.getListCustomerForGrid();
@@ -82,13 +83,12 @@ namespace nwtf_mobile.app
             stackMAF.IsVisible = true;
 
             stackHeader.IsVisible = true;
+            gridClaimSelectionHeader.BindingContext = cbClaimSelectionHeader;
             cbClaimSelectionHeader.customerID = customer.customerID;
             cbClaimSelectionHeader.customerName = customer.customerLastName + ", " +
                                                   customer.customerFirstName + " " +
                                                   customer.customerMiddleName + " " +
                                                   customer.customerSuffix;
-            //gridClaimSelectionHeader.BindingContext = cbClaimSelectionHeader;
-
             claimDTO.listMAF = listMAF;
             lvMAF.ItemsSource = listMAF;
             claimDTO.customer = customer;
@@ -111,12 +111,34 @@ namespace nwtf_mobile.app
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = true;
 
-            cbClaimSelectionHeader.productname = maf.productName;
+            cbClaimSelectionHeader.productName = maf.productName;
             cbClaimSelectionHeader.productID = maf.productID;
 
-            claimDTO.listClaimant = listClaimant;
-            lvClaimant.ItemsSource = listClaimant;
             claimDTO.maf = maf;
+            claimDTO.listClaimant = listClaimant;
+
+            if (listClaimant.Count == 0)
+            {
+                // should not proceed. for now, lets continue without selecting (delete after modification)
+                claimDTO.claimantID = "463120";
+                claimDTO.claimantType = 1;
+
+
+                // uncomment this after modifications
+                //lblNoClaimant.IsVisible = true;
+            }
+            else if (listClaimant.Count == 1)
+            {
+                var claimant = listClaimant.FirstOrDefault();
+                
+                claimDTO.claimantID = claimant.claimantID;
+                claimDTO.claimantType = claimant.claimantType;
+
+            }
+            else
+            {
+                lvClaimant.ItemsSource = listClaimant;
+            }
         }
 
         private void btnClaimant_Clicked(object sender, EventArgs e)
@@ -132,14 +154,12 @@ namespace nwtf_mobile.app
             SearchBar sbar = (SearchBar)sender;
             if (!string.IsNullOrWhiteSpace(sbar.Text))
             {
-                // capitalize search text (uncomment if database changed)
-                // string searchText = sbar.Text.ToUpper();
-
+                string searchText = sbar.Text.ToUpper();
                 var listFilteredCustomer = (from cust in claimDTO.listCustomer
-                                           where cust.dungganonID.Contains(sbar.Text) ||
-                                                 cust.customerLastName.Contains(sbar.Text) ||
-                                                 cust.customerFirstName.Contains(sbar.Text) ||
-                                                 cust.customerMiddleName.Contains(sbar.Text)
+                                           where cust.dungganonID.Contains(searchText) ||
+                                                 cust.customerLastName.Contains(searchText) ||
+                                                 cust.customerFirstName.Contains(searchText) ||
+                                                 cust.customerMiddleName.Contains(searchText)
                                            orderby cust.customerLastName, cust.customerFirstName
                                            select cust).ToList();
 

@@ -1,18 +1,19 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace nwtf_mobile_bl.converters
+namespace nwtf_mobile.converters
 {
-    public class cvStringToBoolean : IValueConverter
+    class cvListToBoolean : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null)
             {
-                return !string.IsNullOrEmpty(value.ToString());
+                return ((List<views.vwClaimant>)value).Count > 1;
             }
             else
             {

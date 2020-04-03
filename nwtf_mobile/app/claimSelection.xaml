@@ -6,8 +6,8 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimSelection"
              
-             xmlns:converters="clr-namespace:nwtf_mobile_bl.converters;assembly=nwtf_mobile_bl"
-             xmlns:customBind="clr-namespace:nwtf_mobile_bl.customBind;assembly=nwtf_mobile_bl">
+             xmlns:converters="clr-namespace:nwtf_mobile.converters"
+             xmlns:custombinds="clr-namespace:nwtf_mobile.custombinds">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,16 +19,12 @@
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
 
-            <StackLayout x:Name="stackHeader">
+            <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
                 <Grid x:Name="gridClaimSelectionHeader">
-                    <Grid.BindingContext>
-                        <customBind:cbClaimSelectionHeader />
-                    </Grid.BindingContext>
-                    
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -38,25 +34,18 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Claim Transaction Details" HorizontalOptions="FillAndExpand" TextColor="Black" FontSize="Large"
-                           BackgroundColor="#49AC8F"  IsVisible="{Binding customerID, Converter={StaticResource cvStringToBoolean}}"
                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
-                    <Label Text="Customer ID:" IsVisible="{Binding customerID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="{Binding customerID}" IsVisible="{Binding customerID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="Customer Name:" IsVisible="{Binding customerID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="{Binding customerName}" IsVisible="{Binding customerID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" TextColor="Black"/>
+                    <Label Text="Customer ID:" Grid.Row="1" Grid.Column="0" TextColor="Black"/>
+                    <Label Text="{Binding customerID}" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                    <Label Text="Customer Name:" Grid.Row="1" Grid.Column="2" TextColor="Black"/>
+                    <Label Text="{Binding customerName}" Grid.Row="1" Grid.Column="3" TextColor="Black"/>
 
-                    <Label Text="Product ID:" IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="{Binding productID}" IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="Product Name:" IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" TextColor="Black"/>
-                    <Label Text="{Binding productName}" IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"
-                           Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" TextColor="Black"/>
+                    <Label Text="Product ID:" Grid.Row="2" Grid.Column="0" TextColor="Black" 
+                           IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"/>
+                    <Label Text="{Binding productID}" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
+                    <Label Text="Product Name:" Grid.Row="2" Grid.Column="2" TextColor="Black"
+                           IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"/>
+                    <Label Text="{Binding productName}" Grid.Row="2" Grid.Column="3" TextColor="Black"/>
                 </Grid>
             </StackLayout>
 
@@ -212,6 +201,9 @@
             
             <StackLayout x:Name="stackClaimant">
                 <Label Text="List of Claimant" FontSize="Large" TextColor="Black" />
+                <Label x:Name="lblNoClaimant" Text="No claimant record found!" TextColor="Black" HorizontalOptions="CenterAndExpand"
+                       IsVisible="False"/>
+                
                 <ListView x:Name="lvClaimant" Margin="0">
                     <ListView.Header>
                         <Grid RowSpacing="0" ColumnSpacing="0">
@@ -280,6 +272,77 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
+
+            <!--<StackLayout x:Name="stackClaimType">
+                <Label Text="List of Claim Type" FontSize="Large" TextColor="Black" />
+                <ListView x:Name="lvClaimtype" Margin="0">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Dungganon ID" HorizontalOptions="Fill" Grid.Column="1"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Last name" HorizontalOptions="Fill" Grid.Column="2"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="First name" HorizontalOptions="Fill" Grid.Column="3"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Middle name" HorizontalOptions="Fill" Grid.Column="4"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
+                                            Clicked="btnCustomer_Clicked"  CommandParameter="{Binding id}"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding dungganonID}" 
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="2" Text ="{Binding customerLastName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="3" Text ="{Binding customerFirstName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text ="{Binding customerMiddleName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>-->
 
         </StackLayout>
     </ContentPage.Content>

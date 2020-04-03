@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
   </ItemGroup>
 
 </Project>
