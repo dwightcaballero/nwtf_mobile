@@ -14,7 +14,7 @@ namespace nwtf_mobile_bl
             public string claimantID { get; set; }
             public string claimantFullName { get; set; }
             public DateTime claiamantBirthdate { get; set; }
-            public string claimantType { get; set; }
+            public int claimantType { get; set; }
             public string claimantRelation { get; set; }
 
             public static List<vwClaimant> getListClaimantForGrid()
