@@ -68,6 +68,9 @@ namespace nwtf_mobile.app
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
                 maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Days
@@ -104,6 +107,9 @@ namespace nwtf_mobile.app
                     accumLabel.Text = "Accumulated Days:";
                     accumValue.Text = "3 Days";
                 }
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
@@ -115,7 +121,10 @@ namespace nwtf_mobile.app
                 weeksFromMembershipDate.Text = "6 Weeks"; 
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Weeks
@@ -152,6 +161,9 @@ namespace nwtf_mobile.app
                     accumLabel.Text = "Accumulated Weeks:";
                     accumValue.Text = "3 Weeks";
                 }
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Fixed Amount
@@ -163,7 +175,10 @@ namespace nwtf_mobile.app
                 amountPerClaim.Text = "50.00";
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Membership Date
@@ -175,7 +190,10 @@ namespace nwtf_mobile.app
                 weeksFromEnrollmentDate.Text = "5 Weeks";
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00"; 
+                maxAmount.Text = "600.00";
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Insurer Approved Amount
