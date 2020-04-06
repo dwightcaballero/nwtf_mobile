@@ -20,7 +20,7 @@ namespace nwtf_mobile_bl
                                  "AND claimantType='" + systemconst.getClaimantDescription(claimantType) + "';";
                     var listTemp = conn.Query<views.vwProductClaimType>(sql);
 
-                    listClaimTypeIDs = (from temp in listTemp select temp.id).ToList();
+                    listClaimTypeIDs = (from temp in listTemp select temp.claimTypeUID).ToList();
                 }
                 return listClaimTypeIDs;
             }

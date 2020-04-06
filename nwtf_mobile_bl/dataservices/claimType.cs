@@ -9,31 +9,31 @@ namespace nwtf_mobile_bl
     {
         public class claimType
         {
-            public static List<views.vwClaimType> getClaimTypeSelected(List<Guid> claimTypeUIDList)
+            public static List<views.vwClaimTypes> getClaimTypeSelected(List<Guid> claimTypeUIDList)
             {
-                List<views.vwClaimType> listClaimTypes = new List<views.vwClaimType>();
+                List<views.vwClaimTypes> listClaimTypes = new List<views.vwClaimTypes>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
                     // use build or instead of foreach
                     foreach (Guid claimTypeUID in claimTypeUIDList)
                     {
                         // query to get claimtype data
-                        string sql = "SELECT * FROM vwClaimType WHERE id='" + claimTypeUID.ToString() + "';";
-                        List<views.vwClaimType> item = conn.Query<views.vwClaimType>(sql);
+                        string sql = "SELECT * FROM vwClaimTypes WHERE id='" + claimTypeUID.ToString() + "';";
+                        List<views.vwClaimTypes> item = conn.Query<views.vwClaimTypes>(sql);
                         listClaimTypes.AddRange(item);
                     }
                 }
                 return listClaimTypes;
             }
 
-            public static List<views.vwClaimType> getListClaimTypeForGrid(List<Guid> listClaimTypeIDs)
+            public static List<views.vwClaimTypes> getListClaimTypeForGrid(List<Guid> listClaimTypeIDs)
             {
-                var listClaimType = new List<views.vwClaimType>();
+                var listClaimType = new List<views.vwClaimTypes>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    string sql = "SELECT id, claimTypeCode, claimTypeName, claimTypeShortName FROM vwClaimType " +
+                    string sql = "SELECT id, claimTypeCode, claimTypeName, claimTypeShortName FROM vwClaimTypes " +
                                  "WHERE (" + systool.buildOR(listClaimTypeIDs, "id") + ");";
-                    listClaimType = conn.Query<views.vwClaimType>(sql);
+                    listClaimType = conn.Query<views.vwClaimTypes>(sql);
                 }
                 return listClaimType;
             }
