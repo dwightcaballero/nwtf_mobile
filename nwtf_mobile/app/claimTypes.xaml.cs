@@ -24,7 +24,6 @@ namespace nwtf_mobile.app
             InitializeComponent();
             PopulateClaimTypes();
             AccessControlsInRepeater();
-
         }
 
         public void PopulateClaimTypes()
@@ -42,25 +41,27 @@ namespace nwtf_mobile.app
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
                 claimType.claimBenefitUID = cblRec.id;
                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
-                claimType.claimBenefitName = cblRec.claimBenefitsLimits.ToString();
+                claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
             }
 
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-        public IList<vwDisbursementType> listDA { get; private set; }
+        public ObservableCollection<vwDisbursementType> listDA { get; private set; }
 
-        public void setDisbursementAdvances()
+        public void setDisbursementAdvances(Grid control)
         {
-            listDA = new List<vwDisbursementType>();
+            listDA = new ObservableCollection<vwDisbursementType>();
             listDA.Add(new vwDisbursementType
             {
-                // assuming 1 is final payee
-                // assuming 2 is amount type percentage
                 disbursementType = 1,
                 DisbursementTypeName = "Africa & Asia",
                 AmountType = 2,
                 PayeeType=3 });
-
+            ListView advancesGrid = (ListView)control.Children[12];
+            // proof that i can access the advancesgrid but item source is not binding
+            advancesGrid.BackgroundColor = Color.Pink;
+            advancesGrid.ItemsSource = listDA;
+            
     }
         // Add system constants and replace other values
         public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
@@ -227,8 +228,11 @@ namespace nwtf_mobile.app
                         // Code to get Claim Benefit
                         vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
                         setClaimBenefit(cblRec, item1);
+                        setDisbursementAdvances(item1);
+
                         if (item.forAdvance == false)
                         {
+                               setDisbursementAdvances(item1);
 
                             if (checkForAdvance == null) return;
                             if (item.forAdvance.ToString() == checkForAdvance.Text)
@@ -237,7 +241,6 @@ namespace nwtf_mobile.app
                                 //  set for advance panel visible to false
                                 forAdvanceGrid.IsVisible = false;
                                 // Code to get list of disbursement advances
-                             //   setDisbursementAdvances();
                             }
                         }
                     }
@@ -251,7 +254,7 @@ namespace nwtf_mobile.app
             Switch forAdvancePanelValue = (Switch)sender;
             Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
             Grid parentGrid = (Grid)forAdvanceGrid.Parent;
-            TableView advancesList = (TableView)parentGrid.Children[12];
+            ListView advancesList = (ListView)parentGrid.Children[12];
             if (forAdvancePanelValue.IsToggled == true)
             {
                 advancesList.IsVisible = true;
