@@ -12,10 +12,10 @@ namespace nwtf_mobile_bl
             [PrimaryKey,NotNull]
             public Guid id { get; set; }
             public int disbursementType { get; set; }
-            public String DisbursementTypeName { get; set; }
-            public int PayeeType { get; set; }
-            public int AmountType { get; set; }
-            public Double AmountValue { get; set; }
+            public String disbursementTypeName { get; set; }
+            public int payeeType { get; set; }
+            public int amountType { get; set; }
+            public Double amountValue { get; set; }
             public Guid claimTypeID { get; set; }
             public Boolean isFinalPayee { get; set; }
             public Guid payeeGUID { get; set; }
