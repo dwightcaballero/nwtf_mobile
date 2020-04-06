@@ -24,6 +24,19 @@ namespace nwtf_mobile_bl
                 }
                 return listClaimTypeIDs;
             }
+
+            public static List<string> getListClaimantTypeSelected(Guid productUID)
+            {
+                var listClaimantType = new List<string>();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT claimantType FROM vwProductClaimType WHERE productUID='" + productUID.ToString() + "';";
+                    var listTemp = conn.Query<views.vwProductClaimType>(sql);
+
+                    listClaimantType = (from temp in listTemp select temp.claimantType).ToList();
+                }
+                return listClaimantType;
+            }
         }
     }
 
