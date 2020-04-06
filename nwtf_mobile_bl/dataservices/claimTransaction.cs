@@ -9,6 +9,13 @@ namespace nwtf_mobile_bl
     {
         public class claimTransaction
         {
+            public static void getAccumulatedAmount(Guid productUID, Guid claimTypeUID, int claimantType)
+            {
+                // Get all customer data
+                // Get all maf data per customer
+                // Get all claim type transactions per customer and maf data
+                
+            }
         }
     }
 }

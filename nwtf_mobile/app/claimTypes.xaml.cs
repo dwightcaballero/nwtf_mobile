@@ -101,6 +101,9 @@ namespace nwtf_mobile.app
 
         public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
         {
+            Guid productUID = Guid.Empty;
+            Guid claimTypeID = Guid.Empty;
+            int claimantType = 1;
             // LO Provides Amount
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
@@ -108,9 +111,10 @@ namespace nwtf_mobile.app
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
                 maxAmount.Text = cblRec.maximumAmount.ToString("N2");
-                // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[5];
-                computedAmount.Text = "120.00";
+                // Change Accumulated Amount
+                Label accumulatedAmount = (Label)grd.Children[5];
+                // dataservices.claimTransaction.getAccumulatedAmount(productUID,claimTypeID,claimantType);
+                accumulatedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
