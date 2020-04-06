@@ -32,7 +32,7 @@
                                 <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
                                 <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitName}" VerticalTextAlignment="Center"/>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="LOProvidesAmount" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -135,7 +135,37 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
                                 </Grid>
 
-                                <ListView ItemsSource="{Binding listDA}"  Grid.Row="4" Grid.ColumnSpan="4" HasUnevenRows="True" IsVisible="false" HeightRequest="140" WidthRequest="1010">
+                                <ListView Grid.Row="4" Grid.ColumnSpan="4" HeightRequest="140" WidthRequest="1010">
+                                    <ListView.Header>
+                                        <Grid RowSpacing="0" ColumnSpacing="0">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                                            <Label Text="Disbursement Type" HorizontalOptions="Fill" Grid.Column="1"
+                                   TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                                            <Label Text="Amount Type" HorizontalOptions="Fill" Grid.Column="2"
+                                   TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                                            <Label Text="Payee Name" HorizontalOptions="Fill" Grid.Column="3"
+                                   TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                                        </Grid>
+                                    </ListView.Header>
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
@@ -148,14 +178,10 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Label Grid.Row="0" Grid.Column="0" Text="Action" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="0" Grid.Column="1" Text="Disbursement Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="0" Grid.Column="2" Text="Amount Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="0" Grid.Column="3" Text="Payee Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="1" Grid.Column="0" Text="Action" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="1" Grid.Column="1" Text="Disbursement Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="1" Grid.Column="2" Text="Amount Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="1" Grid.Column="3" Text="Payee Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="{Binding disbursementTypeName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>

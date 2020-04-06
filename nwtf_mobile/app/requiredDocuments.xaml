@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="nwtf_mobile.app.requiredDocuments">
+    <ContentView.Content>
+        <StackLayout>
+            <StackLayout x:Name="stkRequiredDocuments">
+                <Label Text="REQUIRED DOCUMENTS"></Label>
+                <ListView x:Name="lstVwRequiredDocument">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding requiredDocumentName}"></Label>
+
+                                    <Label Grid.Column="1" Text="Number of uploaded JPG: "></Label>
+                                    <Label Grid.Column="1" x:Name="lblRecordCount"></Label>
+
+                                    <Button Grid.Column="2" Text="Upload/Capture Picture"></Button>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Text="Hello Xamarin.Forms!" />
+            </StackLayout>
+            
+            <StackLayout x:Name="stkUploadRequiredDocument">
+                <Label x:Name="lblRequiredDocumentTitle"></Label>
+                <Label x:Name="lblRequiredDocumentID" IsVisible="False"></Label>
+                
+                <Button Text="Upload" x:Name="btnUpload"></Button>
+                <Button Text="Capture" x:Name="btnCapture"></Button>
+
+                <StackLayout x:Name="stkAddFile">
+                    <Label x:Name="lblFileName"></Label>
+                    <Entry Text="Description" x:Name="entryDescription"></Entry>
+                    <Button Text="OK" x:Name="btnOK"></Button>
+                    <Button Text="Cancel" x:Name="btnCancel"></Button>
+                </StackLayout>
+
+                <Label Text="List of Uploaded Files:"></Label>
+                <ListView>
+                    <ListView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"></Label>
+                            
+                            <Label Grid.Column="1" Text="Description"></Label>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" Text="View" x:Name="btnView"></Button>
+
+                                    <Label Grid.Column="1" x:Name="lblDescription"></Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
