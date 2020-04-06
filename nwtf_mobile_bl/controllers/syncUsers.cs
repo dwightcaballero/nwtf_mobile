@@ -268,9 +268,9 @@ namespace nwtf_mobile_bl
                     //        sb.Append(NumbersArray[arrIndex]);
                     //    }
                     //}
-                    return sb.ToString();
-                }
-            }
+                    //return sb.ToString();
+              //  }
+          //  }
         }
     }
 }
