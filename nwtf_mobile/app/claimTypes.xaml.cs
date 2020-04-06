@@ -35,9 +35,9 @@ namespace nwtf_mobile.app
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
             List<Guid> claimTypeUID = new List<Guid>();
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
-            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));
-
-            claimTypeList = vwClaimTypes.getClaimTypeSelected(claimTypeUID);
+            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
+            
+            claimTypeList = vwClaimTypes.getListClaimTypeSelected(claimTypeUID);
 
             foreach (vwClaimTypes claimType in claimTypeList) {
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);

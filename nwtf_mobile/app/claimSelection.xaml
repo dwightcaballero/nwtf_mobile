@@ -20,11 +20,8 @@
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
 
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Label Text="Loading" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                <ActivityIndicator IsRunning="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
-            </StackLayout>
-            
+            <!--<ActivityIndicator x:Name="loading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>-->
+
             <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
                 <Grid x:Name="gridClaimSelectionHeader">
                     <Grid.RowDefinitions>

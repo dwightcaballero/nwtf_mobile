@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using nwtf_mobile_bl;
 
 namespace nwtf_mobile.app
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimCreation : ContentPage
     {
-        public claimCreation()
+        public claimCreation(dto.claimDTO claimDTO)
         {
             InitializeComponent();
         }
