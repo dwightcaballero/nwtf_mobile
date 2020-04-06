@@ -12,6 +12,7 @@
                 <app:headerDetails></app:headerDetails>
                 <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:claimTypes></app:claimTypes>
+                <app:requiredDocuments></app:requiredDocuments>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
