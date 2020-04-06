@@ -12,6 +12,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:cvDatetimeToBoolean x:Key="cvDatetimeToBoolean" />
+            <converters:cvDatetimeToBoolean2 x:Key="cvDatetimeToBoolean2" />
             <converters:cvStringToBoolean x:Key="cvStringToBoolean"/>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -19,6 +20,11 @@
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
 
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Text="Loading" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <ActivityIndicator IsRunning="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+            
             <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
                 <Grid x:Name="gridClaimSelectionHeader">
                     <Grid.RowDefinitions>
@@ -175,8 +181,9 @@
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
-                                            Clicked="btnMAF_Clicked"  CommandParameter="{Binding id}"/>
+                                    <Button Grid.Column="0" Text="Select" HorizontalOptions="Center" Clicked="btnMAF_Clicked"
+                                            IsEnabled="{Binding closingDate, Converter={StaticResource cvDatetimeToBoolean2}}"
+                                            CommandParameter="{Binding id}"/>
 
                                     <Label Grid.Column="1" Text ="{Binding productID}" 
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
@@ -185,7 +192,7 @@
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="3" Text ="{Binding effectiveDate, StringFormat='{0:d}'}"
-                                           IsVisible="{Binding closingDate, Converter={StaticResource cvDatetimeToBoolean}}"
+                                           IsVisible="{Binding effectiveDate, Converter={StaticResource cvDatetimeToBoolean}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}"
@@ -281,8 +288,9 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
                             <Label HorizontalOptions="Fill" Grid.Column="0"
@@ -312,14 +320,13 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <CheckBox CheckedChanged="CheckBox_CheckedChanged"/>
-
-                                    <Label Text="{Binding id}" IsVisible="False"/>
-
+                                    <CheckBox CheckedChanged="CheckBox_CheckedChanged" HorizontalOptions="Center"/>
+                                    
                                     <Label Grid.Column="1" Text ="{Binding claimTypeCode}" 
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
@@ -328,6 +335,8 @@
 
                                     <Label Grid.Column="3" Text ="{Binding claimTypeShortName}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text="{Binding id}" IsVisible="False"/>
 
                                 </Grid>
                             </ViewCell>

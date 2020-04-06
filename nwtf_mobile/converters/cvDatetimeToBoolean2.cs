@@ -6,18 +6,18 @@ using Xamarin.Forms;
 
 namespace nwtf_mobile.converters
 {
-    class cvDatetimeToBoolean : IValueConverter
+    class cvDatetimeToBoolean2 : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null)
             {
-                return (DateTime)value != DateTime.MinValue;
+                return (DateTime)value == DateTime.MinValue;
             }
             else
             {
                 return false;
-            }   
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
