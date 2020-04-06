@@ -29,9 +29,9 @@ namespace nwtf_mobile_bl
             public int claimantType { get; set; }
             public string amountTypeText { get; set; }
 
-            public static List<vwDisbursementType> getAdvancesByClaimTypeID(Guid claimTypeUID)
+            public static List<vwDisbursementType> getAdvancesByClaimTypeID(Guid claimTypeUID, int claimantType)
             {
-                return dataservices.disbursementType.getAdvancesByClaimTypeID(claimTypeUID);
+                return dataservices.disbursementType.getAdvancesByClaimTypeID(claimTypeUID, claimantType);
             }
 
         }
