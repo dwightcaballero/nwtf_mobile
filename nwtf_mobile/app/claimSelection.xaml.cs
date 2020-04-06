@@ -46,6 +46,7 @@ namespace nwtf_mobile.app
             pcon.loadMAFGrid += Pcon_loadMAFGrid;
             pcon.loadClaimantGrid += Pcon_loadClaimantGrid;
             pcon.loadClaimTypeGrid += Pcon_loadClaimTypeGrid;
+            pcon.saveClaimTypeSelected += Pcon_saveClaimTypeSelected;
         }
 
         // display messages
@@ -221,14 +222,20 @@ namespace nwtf_mobile.app
             if (claimDTO.listSelectedClaimType.Count > 0)
             {
                 hideStacks();
-                loading.IsRunning = true;
+                ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
 
-                await Navigation.PushAsync(new claimCreation());
+                var listClaimTypeIDs = claimDTO.listClaimType.Select(ct => ct.id).ToList();
+                await Navigation.PushAsync(new claimCreation(claimDTO));
             }
             else
             {
                 displayMessage("Error", "Please select atleast one claim type!", "Close");
             } 
+        }
+
+        private void Pcon_saveClaimTypeSelected(object sender, List<views.vwClaimTypes> e)
+        {
+            claimDTO.listClaimType = e;
         }
     }
 }
