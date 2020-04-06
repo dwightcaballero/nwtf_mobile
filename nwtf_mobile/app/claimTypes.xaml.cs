@@ -17,7 +17,7 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
       
-        public List<vwClaimType> claimTypeList = new List<vwClaimType>();
+        public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
 
         public claimTypes()
         {
@@ -35,9 +35,9 @@ namespace nwtf_mobile.app
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
             claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
             
-            claimTypeList = vwClaimType.getClaimTypeSelected(claimTypeUID);
+            claimTypeList = vwClaimTypes.getClaimTypeSelected(claimTypeUID);
 
-            foreach (vwClaimType claimType in claimTypeList) {
+            foreach (vwClaimTypes claimType in claimTypeList) {
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
                 claimType.claimBenefitUID = cblRec.id;
                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
@@ -221,7 +221,7 @@ namespace nwtf_mobile.app
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
 
-                foreach (vwClaimType item in control.ItemsSource)
+                foreach (vwClaimTypes item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {

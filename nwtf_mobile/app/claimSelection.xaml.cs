@@ -153,7 +153,7 @@ namespace nwtf_mobile.app
             pcon.getListClaimTypeForGrid(claimDTO.maf.productID, claimDTO.claimantType);
         }
 
-        private void Pcon_loadClaimTypeGrid(object sender, List<views.vwClaimType> e)
+        private void Pcon_loadClaimTypeGrid(object sender, List<views.vwClaimTypes> e)
         {
             claimDTO.listClaimType = e;
 
@@ -196,10 +196,10 @@ namespace nwtf_mobile.app
             // validation (count number of checked)
         }
 
-        private void btnContinue_Clicked(object sender, EventArgs e)
+        private async void btnContinue_Clicked(object sender, EventArgs e)
         {
             // proceed to claim Creation (add validation)
-            Navigation.PushAsync(new claimCreation());
+            await Navigation.PushAsync(new claimCreation());
         }
     }
 }

@@ -7,7 +7,7 @@ namespace nwtf_mobile_bl
 {
     public partial class views
     {
-        public class vwClaimType
+        public class vwClaimTypes
         {
             [PrimaryKey,NotNull]
             public Guid id {get; set;}
@@ -29,12 +29,12 @@ namespace nwtf_mobile_bl
             public int claimBenefit { get; set; }
             public string claimBenefitName { get; set; }
 
-            public static List<vwClaimType> getClaimTypeSelected(List<Guid> claimTypeUID)
+            public static List<vwClaimTypes> getClaimTypeSelected(List<Guid> claimTypeUID)
             {
                 return dataservices.claimType.getClaimTypeSelected(claimTypeUID);
             }
 
-            public static List<vwClaimType> getListClaimTypeForGrid(List<Guid> listClaimTypeIDs)
+            public static List<vwClaimTypes> getListClaimTypeForGrid(List<Guid> listClaimTypeIDs)
             {
                 return dataservices.claimType.getListClaimTypeForGrid(listClaimTypeIDs);
             }

@@ -11,7 +11,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwCustomer>> loadCustomerGrid;
             public event EventHandler<(List<views.vwMafEnrollmentClosure>, views.vwCustomer)> loadMAFGrid;
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
-            public event EventHandler<List<views.vwClaimType>> loadClaimTypeGrid;
+            public event EventHandler<List<views.vwClaimTypes>> loadClaimTypeGrid;
 
             public event EventHandler<(string, string, string)> showMessage;
 
@@ -56,7 +56,7 @@ namespace nwtf_mobile_bl
                     var listClaimtypeIDs = views.vwProductClaimType.getLisClaimTypeIDsForGrid(productUID, claimantType);
                     if (listClaimtypeIDs.Count > 0)
                     {
-                        var listClaimType = views.vwClaimType.getListClaimTypeForGrid(listClaimtypeIDs);
+                        var listClaimType = views.vwClaimTypes.getListClaimTypeForGrid(listClaimtypeIDs);
                         loadClaimTypeGrid?.Invoke(this, listClaimType);
                     }
                     else
