@@ -13,12 +13,12 @@ namespace nwtf_mobile
             InitializeComponent();
 
             //one time initialization
-            dataservices.Database.initializeDB();
+            //dataservices.Database.initializeDB();
 
             //comment this after using
             //dataservices.Database.modifyInitialization();
 
-            MainPage = new NavigationPage(new claimCreation());
+            MainPage = new NavigationPage(new claimSelection());
         }
 
         protected override void OnStart()
