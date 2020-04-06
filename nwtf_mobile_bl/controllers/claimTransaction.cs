@@ -11,6 +11,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwCustomer>> loadCustomerGrid;
             public event EventHandler<(List<views.vwMafEnrollmentClosure>, views.vwCustomer)> loadMAFGrid;
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
+            public event EventHandler<List<views.vwClaimType>> loadClaimTypeGrid;
 
             public event EventHandler<(string, string, string)> showMessage;
 
@@ -43,7 +44,29 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this, ("Error", "Customer Record Not Found!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "MAF Record Not Found!", "Close"));
+                }
+            }
+
+            public void getListClaimTypeForGrid(string productID, int claimantType)
+            {
+                Guid productUID = views.vwProduct.getUIDByProductID(productID);
+                if (productUID != Guid.Empty)
+                {
+                    var listClaimtypeIDs = views.vwProductClaimType.getLisClaimTypeIDsForGrid(productUID, claimantType);
+                    if (listClaimtypeIDs.Count > 0)
+                    {
+                        var listClaimType = views.vwClaimType.getListClaimTypeForGrid(listClaimtypeIDs);
+                        loadClaimTypeGrid?.Invoke(this, listClaimType);
+                    }
+                    else
+                    {
+                        showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
+                    }
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "Product or Claimant Record Not Found!", "Close"));
                 }
             }
         }

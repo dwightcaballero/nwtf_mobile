@@ -29,7 +29,14 @@ namespace nwtf_mobile_bl
             //decimal accumulatedValue { get; set; }
             //string claimTypeName { get; set; }
             //Guid claimTypeClaimTransactionUID { get; set; }
-
+            public static views.vwClaimBenefits getClaimBenefitByProductClaimantClaimType(Guid productUID, string claimantType, Guid claimTypeUID)
+            {
+                return dataservices.claimBenefit.getClaimBenefitByProductClaimantClaimType(productUID, claimantType, claimTypeUID);
+            }
+            public static views.vwClaimBenefits getClaimBenefitByUID(Guid cblUID)
+            {
+                return dataservices.claimBenefit.getClaimBenefitByUID(cblUID);
+            }
         }
     }
 }

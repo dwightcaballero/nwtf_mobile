@@ -1,4 +1,5 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,154 +17,230 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
       
-        public vwClaimTypes claimtypesample = new vwClaimTypes();
-        public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
+        public List<vwClaimType> claimTypeList = new List<vwClaimType>();
+
+        public claimTypes()
+        {
+            InitializeComponent();
+            PopulateClaimTypes();
+            AccessControlsInRepeater();
+
+        }
+
         public void PopulateClaimTypes()
         {
-            // Only Sample Data
-            claimtypesample.claimBenefit = "LO Provides Amount";
-            claimtypesample.allowAdvances = false;
-            claimtypesample.claimTypeName = "Claim Type A";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Days";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type B";
-            claimTypeList.Add(claimtypesample);
-            claimtypesample = new vwClaimTypes();
-            claimtypesample.claimBenefit = "Number of Premiums Paid";
-            claimtypesample.allowAdvances = true;
-            claimtypesample.claimTypeName = "Claim Type C";
-            claimTypeList.Add(claimtypesample);
+            // Sample Data 
+            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
+            string claimantTypeDescription = systemconst.getClaimantDescription(1);
+            List<Guid> claimTypeUID = new List<Guid>();
+            claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
+            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
+            
+            claimTypeList = vwClaimType.getClaimTypeSelected(claimTypeUID);
+
+            foreach (vwClaimType claimType in claimTypeList) {
+                vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
+                claimType.claimBenefitUID = cblRec.id;
+                claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                claimType.claimBenefitName = cblRec.claimBenefitsLimits.ToString();
+            }
+
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-        
+        public IList<vwDisbursementType> listDA { get; private set; }
+
+        public void setDisbursementAdvances()
+        {
+            listDA = new List<vwDisbursementType>();
+            listDA.Add(new vwDisbursementType
+            {
+                // assuming 1 is final payee
+                // assuming 2 is amount type percentage
+                disbursementType = 1,
+                DisbursementTypeName = "Africa & Asia",
+                AmountType = 2,
+                PayeeType=3 });
+
+    }
         // Add system constants and replace other values
-        public void setClaimBenefit(int cbl, Grid control)
+        public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
         {
             // LO Provides Amount
-            if (cbl == 1)
+            if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
                 Grid grd = (Grid)control.Children[4];
                 // Change Maximum Amount
                 Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = "600.00";
+                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
+                grd.IsVisible = true;
+            }
+            // Number of Premiums Paid
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
+            {
+                Grid grd = (Grid)control.Children[5];
+                // Change Maximum Amount
+                Label weeksFromMembershipDate = (Label)grd.Children[1];
+                weeksFromMembershipDate.Text = "6 Weeks";
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Days
-            else if (cbl == 2)
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays))
             {
-                int maxBasis = 1;
-                Grid grd = (Grid)control.Children[5];
-                // Change Date Labels
+                // controls
+                Grid grd = (Grid)control.Children[6];
                 Label dateFrom = (Label)grd.Children[0];
-                dateFrom.Text = "New Date From";
                 Label dateTo = (Label)grd.Children[2];
-                dateTo.Text = "New Date To";
-                // Change Date Values
                 DatePicker dateFromVal = (DatePicker)grd.Children[1];
                 DatePicker dateToVal = (DatePicker)grd.Children[3];
-                // Change Other Labels (Depending on Basis)
-                Label maxLabel = (Label)grd.Children[4];
-                Label maxValue = (Label)grd.Children[5];                
+                Label accumLabel = (Label)grd.Children[4];
+                Label accumValue = (Label)grd.Children[5];
+                Label maxLabel = (Label)grd.Children[6];
+                Label maxValue = (Label)grd.Children[7];
+                int maxBasis = cblRec.maximumBasis;
+                string maxBasisText = cblRec.maximumBasis.ToString();
+
+                dateFrom.Text = cblRec.dateFrom;
+                dateTo.Text = cblRec.dateTo;
+                maxLabel.Text = "Remaining " + maxBasisText + ":";
+                accumLabel.Text = "Accumulated " + maxBasisText + ":";
+
                 // Maximum Basis - Amount
                 if (maxBasis == 1)
                 {                 
-                    maxLabel.Text = "Maximum Amount";
-                    maxValue.Text = "100.00";
+                    maxValue.Text = cblRec.maximumValue.ToString();
+                    accumValue.Text = "15.00";
                 }
                 // Maximum Basis - Days
                 else if (maxBasis == 2)
                 {
-                    maxLabel.Text = "Maximum Days";
-                    maxValue.Text = "20 Days";
+                    maxValue.Text = cblRec.maximumValue +" "+ maxBasisText;
+                    accumValue.Text = "3" +" "+ maxBasisText;
                 }
-                grd.IsVisible = true;
-            }
-            // Number of Premiums Paid
-            else if (cbl == 3)
-            {
-                Grid grd = (Grid)control.Children[6];
-                grd.IsVisible = true;
-            }
-            // Number of Weeks
-            else if (cbl == 4)
-            {
-                int maxBasis = 1;
-                Grid grd = (Grid)control.Children[5];
-                // Change Date Labels
-                Label dateFrom = (Label)grd.Children[0];
-                dateFrom.Text = "Weeks From";
-                Label dateTo = (Label)grd.Children[2];
-                dateTo.Text = "Weeks To";
-                // Change Date Values
-                DatePicker dateFromVal = (DatePicker)grd.Children[1];
-                DatePicker dateToVal = (DatePicker)grd.Children[3];
-                // Change Other Labels (Depending on Basis)
-                Label maxLabel = (Label)grd.Children[4];
-                Label maxValue = (Label)grd.Children[5];
-                // Maximum Basis - Amount
-                if (maxBasis == 1)
-                {
-                    maxLabel.Text = "Maximum Amount";
-                    maxValue.Text = "100.00";
-                }
-                // Maximum Basis - Weeks
-                else if (maxBasis == 3)
-                {
-                    maxLabel.Text = "Maximum Weeks";
-                    maxValue.Text = "20 Weeks";
-                }
-                grd.IsVisible = true;
-            }
-            // Fixed Amount
-            else if (cbl == 5)
-            {
-                Grid grd = (Grid)control.Children[8];
-                grd.IsVisible = true;
-            }
-            // Membership Date
-            else if (cbl == 6)
-            {
-                Grid grd = (Grid)control.Children[9];
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Insurer Approved Amount
-            else if (cbl == 7)
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.InsurerApprovedAmount))
+            {
+                Grid grd = (Grid)control.Children[7];
+                grd.IsVisible = true;
+            }
+            // Fixed Amount
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
+            {
+                Grid grd = (Grid)control.Children[8];
+                // Change Amount per Claim
+                Label amountPerClaim = (Label)grd.Children[1];
+                amountPerClaim.Text = "50.00";
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
+                grd.IsVisible = true;
+            }
+            // Number of Weeks
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+            {
+                // controls
+                Grid grd = (Grid)control.Children[6];
+                Label dateFrom = (Label)grd.Children[0];
+                Label dateTo = (Label)grd.Children[2];
+                DatePicker dateFromVal = (DatePicker)grd.Children[1];
+                DatePicker dateToVal = (DatePicker)grd.Children[3];
+                Label accumLabel = (Label)grd.Children[4];
+                Label accumValue = (Label)grd.Children[5];
+                Label maxLabel = (Label)grd.Children[6];
+                Label maxValue = (Label)grd.Children[7];
+                int maxBasis = cblRec.maximumBasis;
+                string maxBasisText = cblRec.maximumBasis.ToString();
+
+                dateFrom.Text = cblRec.dateFrom;
+                dateTo.Text = cblRec.dateTo;
+                maxLabel.Text = "Remaining " + maxBasisText + ":";
+                accumLabel.Text = "Accumulated " + maxBasisText + ":";
+
+                // Maximum Basis - Amount
+                if (maxBasis == 1)
+                {
+                    maxValue.Text = cblRec.maximumValue.ToString();
+                    accumValue.Text = "15.00";
+                }
+                // Maximum Basis - Weeks
+                else if (maxBasis == 2)
+                {
+                    maxValue.Text = cblRec.maximumValue + " " + maxBasisText;
+                    accumValue.Text = "3" + " " + maxBasisText;
+                }
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[9];
+                computedAmount.Text = "120.00";
+                grd.IsVisible = true;
+            }
+            // Membership Date
+            else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 Grid grd = (Grid)control.Children[10];
+                // Change Enrollment Date
+                Label weeksFromEnrollmentDate = (Label)grd.Children[1];
+                weeksFromEnrollmentDate.Text = "5 Weeks";
+                // Change Maximum Amount
+                Label maxAmount = (Label)grd.Children[3];
+                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
+                // Change Computed Amount
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = "120.00";
                 grd.IsVisible = true;
-            }        
+            }      
         }
 
         public void AccessControlsInRepeater()
         {
             var control = claimTypeRepeater as RepeaterView;
-            int claimBenefit = 1;
             if (control == null) return;
           
             foreach (Grid item1 in control.Children)
             {
-                Switch forAdvancePanelValue = (Switch)item1.Children[11];
-                Label forAdvancePanel = (Label)item1.Children[12];
-                Label checkForAdvance = (Label)item1.Children[13];
-                setClaimBenefit(claimBenefit, item1);
-                claimBenefit++;
+                Label claimTypeName = (Label)item1.Children[1];
+                Label claimBenefit = (Label)item1.Children[1];
+                Grid forAdvanceGrid = (Grid)item1.Children[11];
+                Switch forAdvancePanelValue = (Switch)forAdvanceGrid.Children[0];
+                Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
+                Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
 
-                foreach (vwClaimTypes item in control.ItemsSource)
+                foreach (vwClaimType item in control.ItemsSource)
                 {
-                    
-                    if (item.forAdvance == false)
+                    if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
-                        if (checkForAdvance == null) return;
-                        if (item.forAdvance.ToString() == checkForAdvance.Text)
+                        // Code to get Claim Benefit
+                        vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
+                        setClaimBenefit(cblRec, item1);
+                        if (item.forAdvance == false)
                         {
-                            if (forAdvancePanel == null) return;
-                            //  set for advance panel visible to false
-                            forAdvancePanelValue.IsVisible = false;
-                            forAdvancePanel.IsVisible = false;
+
+                            if (checkForAdvance == null) return;
+                            if (item.forAdvance.ToString() == checkForAdvance.Text)
+                            {
+                                if (forAdvancePanel == null) return;
+                                //  set for advance panel visible to false
+                                forAdvanceGrid.IsVisible = false;
+                                // Code to get list of disbursement advances
+                             //   setDisbursementAdvances();
+                            }
                         }
-                    }                  
+                    }
                 }
             }
         }
@@ -172,8 +249,9 @@ namespace nwtf_mobile.app
         {
             
             Switch forAdvancePanelValue = (Switch)sender;
-            Grid parentGrid = (Grid)forAdvancePanelValue.Parent;
-            TableView advancesList = (TableView)parentGrid.Children[14];
+            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
+            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
+            TableView advancesList = (TableView)parentGrid.Children[12];
             if (forAdvancePanelValue.IsToggled == true)
             {
                 advancesList.IsVisible = true;
@@ -182,14 +260,6 @@ namespace nwtf_mobile.app
             {
                 advancesList.IsVisible = false;
             }
-        }
-
-        public claimTypes()
-        {
-            InitializeComponent();
-            PopulateClaimTypes();
-            AccessControlsInRepeater();
-
         }
     }
 }

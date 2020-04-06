@@ -6,25 +6,57 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimSelection"
              
-             xmlns:convert="clr-namespace:nwtf_mobile.converter">
+             xmlns:converters="clr-namespace:nwtf_mobile.converters"
+             xmlns:custombinds="clr-namespace:nwtf_mobile.custombinds">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <convert:cvtDatetimeToBoolean x:Key="cvtDatetimeToBoolean" />
+            <converters:cvDatetimeToBoolean x:Key="cvDatetimeToBoolean" />
+            <converters:cvStringToBoolean x:Key="cvStringToBoolean"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
-            <StackLayout x:Name="stackCustomer">
 
+            <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
+                <Grid x:Name="gridClaimSelectionHeader">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Claim Transaction Details" HorizontalOptions="FillAndExpand" TextColor="Black" FontSize="Large"
+                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
+                    <Label Text="Customer ID:" Grid.Row="1" Grid.Column="0" TextColor="Black"/>
+                    <Label Text="{Binding customerID}" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                    <Label Text="Customer Name:" Grid.Row="1" Grid.Column="2" TextColor="Black"/>
+                    <Label Text="{Binding customerName}" Grid.Row="1" Grid.Column="3" TextColor="Black"/>
+
+                    <Label Text="Product ID:" Grid.Row="2" Grid.Column="0" TextColor="Black" 
+                           IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"/>
+                    <Label Text="{Binding productID}" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
+                    <Label Text="Product Name:" Grid.Row="2" Grid.Column="2" TextColor="Black"
+                           IsVisible="{Binding productID, Converter={StaticResource cvStringToBoolean}}"/>
+                    <Label Text="{Binding productName}" Grid.Row="2" Grid.Column="3" TextColor="Black"/>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout x:Name="stackCustomer">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label Text="List of Customers" FontSize="Large" TextColor="Black" HorizontalOptions="StartAndExpand" />
                     <SearchBar Placeholder="Dunganon ID or Name" SearchButtonPressed="SearchBar_SearchButtonPressed"
                                VerticalTextAlignment="Center" TextChanged="SearchBar_TextChanged" HorizontalOptions="EndAndExpand"></SearchBar>
                 </StackLayout>
                 
-                <ListView x:Name="listCustomer" Margin="0">
+                <ListView x:Name="lvCustomer" Margin="0">
                     <ListView.Header>
                         <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
@@ -96,7 +128,7 @@
             <StackLayout x:Name="stackMAF">
                 <Label Text="List of Packages Enrolled" FontSize="Large" TextColor="Black"/>
 
-                <ListView x:Name="listMAF">
+                <ListView x:Name="lvMAF">
                     <ListView.Header>
                         <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
@@ -153,11 +185,11 @@
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="3" Text ="{Binding effectiveDate, StringFormat='{0:d}'}"
-                                           IsVisible="{Binding closingDate, Converter={StaticResource cvtDatetimeToBoolean}}"
+                                           IsVisible="{Binding closingDate, Converter={StaticResource cvDatetimeToBoolean}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="4" Text ="{Binding closingDate, StringFormat='{0:d}'}"
-                                           IsVisible="{Binding closingDate, Converter={StaticResource cvtDatetimeToBoolean}}"
+                                           IsVisible="{Binding closingDate, Converter={StaticResource cvDatetimeToBoolean}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                 </Grid> 
@@ -169,7 +201,10 @@
             
             <StackLayout x:Name="stackClaimant">
                 <Label Text="List of Claimant" FontSize="Large" TextColor="Black" />
-                <ListView x:Name="listClaimant" Margin="0">
+                <Label x:Name="lblNoClaimant" Text="No claimant record found!" TextColor="Black" HorizontalOptions="CenterAndExpand"
+                       IsVisible="False"/>
+                
+                <ListView x:Name="lvClaimant" Margin="0">
                     <ListView.Header>
                         <Grid RowSpacing="0" ColumnSpacing="0">
                             <Grid.ColumnDefinitions>
@@ -236,6 +271,71 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </StackLayout>
+
+            <StackLayout x:Name="stackClaimType">
+                <Label Text="List of Claim Type" FontSize="Large" TextColor="Black" />
+                <ListView x:Name="lvClaimtype" Margin="0">
+                    <ListView.Header>
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="Fill" Grid.Column="0"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F"
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Claim Code" HorizontalOptions="Fill" Grid.Column="1"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Type Name" HorizontalOptions="Fill" Grid.Column="2"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                            <Label Text="Short name" HorizontalOptions="Fill" Grid.Column="3"
+                                   FontSize="Medium" TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" Padding="10,10"/>
+
+                        </Grid>
+                    </ListView.Header>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="Fill" Margin="0" Padding="0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox CheckedChanged="CheckBox_CheckedChanged"/>
+
+                                    <Label Text="{Binding id}" IsVisible="False"/>
+
+                                    <Label Grid.Column="1" Text ="{Binding claimTypeCode}" 
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="2" Text ="{Binding claimTypeName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="3" Text ="{Binding claimTypeShortName}"
+                                           TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button Text="Continue" Clicked="btnContinue_Clicked"/>
             </StackLayout>
 
         </StackLayout>

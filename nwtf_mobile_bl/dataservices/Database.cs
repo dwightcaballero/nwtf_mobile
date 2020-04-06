@@ -39,7 +39,7 @@ namespace nwtf_mobile_bl
                     conn.CreateTable<views.vwCivilStatus>();
                     conn.CreateTable<views.vwClaimBenefits>();
                     conn.CreateTable<views.vwClaimTypeRequiredDocuments>();
-                    conn.CreateTable<views.vwClaimTypes>();
+                    conn.CreateTable<views.vwClaimType>();
                     conn.CreateTable<views.vwClaimTypeSubgroup>();
                     conn.CreateTable<views.vwCustomer>();
                     conn.CreateTable<views.vwDependent>();
@@ -58,9 +58,9 @@ namespace nwtf_mobile_bl
                     conn.CreateTable<views.vwSids>();
 
                     // populate tables
-                    var lstClaimTypes = new List<views.vwClaimTypes>
+                    var lstClaimTypes = new List<views.vwClaimType>
                     {
-                        new views.vwClaimTypes
+                        new views.vwClaimType
                         {
                             id=Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"),
                             claimTypeName = "Hospital Cash Assistance-M",
@@ -70,7 +70,7 @@ namespace nwtf_mobile_bl
                             disburseInhouseTransID = "0",
                             disburseMICTransID = "2070"
                         },
-                        new views.vwClaimTypes
+                        new views.vwClaimType
                         {
                             id=Guid.Parse("5836f582-f77d-4348-89df-39f73fcb7636"),
                             claimTypeName = "Burial Assistance-SA",
@@ -80,7 +80,7 @@ namespace nwtf_mobile_bl
                             disburseInhouseTransID = "2043",
                             disburseMICTransID = "2071"
                         },
-                        new views.vwClaimTypes
+                        new views.vwClaimType
                         {
                             id=Guid.Parse("fe3f0c9b-56c6-45b8-96bc-5f8b850109b2"),
                             claimTypeName = "Financial Assistance on Natural Cause of Death-SA",
@@ -90,7 +90,7 @@ namespace nwtf_mobile_bl
                             disburseInhouseTransID = "2043",
                             disburseMICTransID = "2071"
                         },
-                        new views.vwClaimTypes
+                        new views.vwClaimType
                         {
                             id=Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"),
                             claimTypeName = "Financial Assistance on Natural Cause of Death - M",

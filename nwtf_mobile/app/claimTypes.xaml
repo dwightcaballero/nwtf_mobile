@@ -13,51 +13,43 @@
                 <customcontrols:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="35"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="500" />
-                                        <ColumnDefinition Width="500" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding claimTypeName}" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding claimBenefit}" VerticalTextAlignment="Center"/>
-                                    
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="35" />
-                                            <RowDefinition Height="35" />
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
-                                </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="250" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center" TextColor="Red"/>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeName}" VerticalTextAlignment="Center" TextColor="Red"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitName}" VerticalTextAlignment="Center"/>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Accumulated Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
+                                    <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -65,10 +57,13 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
-
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
+                                
+                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -80,46 +75,118 @@
                                     <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="2" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
+                                </Grid>
 
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Amount per Claim:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                </Grid>
+                                
+                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Accumulated Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                </Grid>
 
-                                    <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="35" VerticalOptions="Start">
-                                        <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
-                                        <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    </Grid>
-                                    
-                                    <Switch Grid.Row="3" Grid.Column="0" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Start" HeightRequest="35"/>
-                                    <Label Grid.Row="3" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center" HeightRequest="35"/>
-                                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
-                                    <TableView Grid.Row="4" Grid.ColumnSpan="2" Intent="Data" IsVisible="false" MinimumHeightRequest="10" HeightRequest="140">
-                                    <TableRoot>
-                                        <TableSection Title="Advance Disbursements">
-                                                <ViewCell>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="Action"/>
-                                                        <Label Text="Disbursement Type"/>
-                                                        <Label Text="Amount Type"/>
-                                                        <Label Text="Payee Type"/>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </TableSection>
-                                    </TableRoot>
-                                </TableView>
-                                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="# of Weeks from Enrollment Date:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+
+                                <Grid Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="35" VerticalOptions="Center">
+                                    <Switch Grid.Row="0" Grid.Column="0" IsToggled="false" Toggled="OnToggled" HorizontalOptions="Start"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
+                                </Grid>
+
+                                <ListView ItemsSource="{Binding listDA}"  Grid.Row="4" Grid.ColumnSpan="4" HasUnevenRows="True" IsVisible="false" HeightRequest="140" WidthRequest="1010">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Grid Padding="10">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Grid.Row="0" Grid.Column="0" Text="Action" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="1" Text="Disbursement Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="Amount Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="3" Text="Payee Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1" Grid.Column="0" Text="Action" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1" Grid.Column="1" Text="Disbursement Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1" Grid.Column="2" Text="Amount Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="1" Grid.Column="3" Text="Payee Type" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
-            </StackLayout>
+            
+            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+
+            <Grid HeightRequest="80">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="333"></ColumnDefinition>
+                    <ColumnDefinition Width="333"></ColumnDefinition>
+                    <ColumnDefinition Width="333"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center">Default Payee</Label>
+                <Picker Grid.Row="0" Grid.Column="1" WidthRequest="280" FontSize="Small" Title="Select a Default Payee" x:Name="defaultPayee" VerticalOptions="Center">
+                    <Picker.Items>
+                        <x:String>Member</x:String>
+                        <x:String>Dependent</x:String>
+                        <x:String>Freetext</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center">Insert Name Here</Label>
+            </Grid>
+            
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

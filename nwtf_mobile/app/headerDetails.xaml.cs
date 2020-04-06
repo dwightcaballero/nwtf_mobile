@@ -21,15 +21,13 @@ namespace nwtf_mobile.app
         private void PopulateHeader()
         {
             // Temporary Data
-            Label custID = this.FindByName<Label>("txtCustID");
-            Label custName = this.FindByName<Label>("txtCustName");
-            Label prodID = this.FindByName<Label>("txtProdID");
-            Label prodName = this.FindByName<Label>("txtProdName");
-
-            custID.Text = "1184990001";
-            custName.Text = "Dwight Kenn Caballero";
-            prodID.Text = "12345";
-            prodName.Text = "3104";
+            txtCustID.Text = "1184990001";
+            txtCustName.Text = "Dwight Kenn Caballero";
+            txtProdID.Text = "12345";
+            txtProdName.Text = "3104";
+            txtClaimantName.Text = "Sweet Angel Altamera";
+            txtClaimantRel.Text = "Sister";
+            txtClaimTypesList.Text = "Claim Type A, Claim Type B, Claim Type C";
         }
     }
 }

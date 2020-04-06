@@ -18,6 +18,11 @@ namespace nwtf_mobile_bl
             [NotNull] public Boolean usableForTransactions { get; set; }
             public string status { get; set; }
             public DateTime endDate { get; set; }
+
+            public static Guid getUIDByProductID(string productID)
+            {
+                return dataservices.product.getUIDByProductID(productID);
+            }
         }
     }
 }
