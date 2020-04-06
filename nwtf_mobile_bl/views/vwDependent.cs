@@ -15,6 +15,11 @@ namespace nwtf_mobile_bl
             [NotNull] public string dependentFullName { get; set; }
             [NotNull] public string dependentBirthdate { get; set; }
             [NotNull] public string dependentRelationship { get; set; }
+
+            public static List<vwDependent> getListDependentByCustomerUID(Guid customerUID)
+            {
+                return dataservices.dependent.getListDependentByCustomerUID(customerUID);
+            }
         }
     }
 }

@@ -17,9 +17,9 @@ namespace nwtf_mobile_bl
             public int claimantType { get; set; }
             public string claimantRelation { get; set; }
 
-            public static List<vwClaimant> getListClaimantForGrid()
+            public static List<vwClaimant> getListClaimantForGrid(List<string> listProductClaimantSelected, vwCustomer customer, List<vwDependent> listDependent)
             {
-                return dataservices.claimant.getListClaimantForGrid();
+                return dataservices.claimant.getListClaimantForGrid(listProductClaimantSelected, customer, listDependent);
             }
         }
     }

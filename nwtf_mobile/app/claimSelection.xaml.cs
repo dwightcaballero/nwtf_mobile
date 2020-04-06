@@ -102,7 +102,7 @@ namespace nwtf_mobile.app
             Button btnSelected = (Button)sender;
             Guid mafID = (Guid)btnSelected.CommandParameter;
 
-            pcon.getListClaimantForGrid(mafID);
+            pcon.getListClaimantForGrid(mafID, claimDTO.customer);
         }
 
         private void Pcon_loadClaimantGrid(object sender, (List<views.vwClaimant>, views.vwMafEnrollmentClosure) e)
