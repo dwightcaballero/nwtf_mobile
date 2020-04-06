@@ -14,7 +14,7 @@ namespace nwtf_mobile_bl
                 var listDependents = new List<views.vwDependent>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                    string sql = "SELECT * FROM vwDependent WHERE customerUID='" + customerUID.ToString() + "';";
+                    string sql = "SELECT * FROM vwDependent WHERE customerID='" + customerUID.ToString() + "';";
                     listDependents = conn.Query<views.vwDependent>(sql);
                 }
                 return listDependents;

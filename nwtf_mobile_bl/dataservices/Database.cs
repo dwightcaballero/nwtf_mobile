@@ -150,7 +150,7 @@ namespace nwtf_mobile_bl
                         new views.vwProductClaimType
                         {
                             id= Guid.Parse("b5dd7cca-e92e-4100-8817-861fef9984d3"),
-                            productUID= Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191"),
+                            productUID= Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d"),
                             claimTypeUID= Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"),
                             claimantType="Member"
                         },
@@ -164,7 +164,7 @@ namespace nwtf_mobile_bl
                         new views.vwProductClaimType
                         {
                             id= Guid.Parse("fcb90646-1463-426b-b0a2-448fe5c96857"),
-                            productUID= Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191"),
+                            productUID= Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d"),
                             claimTypeUID= Guid.Parse("5836f582-f77d-4348-89df-39f73fcb7636"),
                             claimantType="Secondary Assured"
                         },
@@ -435,8 +435,8 @@ namespace nwtf_mobile_bl
 
                     var listDependent = new List<views.vwDependent>
                     {
-                        new views.vwDependent{id=Guid.NewGuid(), customerUID=Guid.Parse("10d9a217-1e28-4b24-a364-03e212cf2dcd"), dependentBirthdate="2002/02/20", dependentFullName="Emmanuel Gapuz", dependentID="963258741", dependentRelationship="CHILD"},
-                        new views.vwDependent{id=Guid.NewGuid(), customerUID=Guid.Parse("b1a15115-75f0-4dc3-9aee-ce84cdf09515"), dependentBirthdate="1968/02/20", dependentFullName="Maria Amarillo", dependentID="369852147", dependentRelationship="MOTHER"}
+                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("10d9a217-1e28-4b24-a364-03e212cf2dcd"), dependentBirthdate="2002/02/20", dependentFullName="Emmanuel Gapuz", dependentID="963258741", dependentRelationship="CHILD"},
+                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("b1a15115-75f0-4dc3-9aee-ce84cdf09515"), dependentBirthdate="1968/02/20", dependentFullName="Maria Amarillo", dependentID="369852147", dependentRelationship="MOTHER"}
                     };
                     conn.InsertAll(listDependent);
 
@@ -498,7 +498,42 @@ namespace nwtf_mobile_bl
             {
                 using (SQLiteConnection conn = new SQLiteConnection(DatabasePath))
                 {
+                    conn.DropTable<views.vwProductClaimType>();
 
+                    conn.CreateTable<views.vwProductClaimType>();
+
+                    var lstProductClaimTypes = new List<views.vwProductClaimType>
+                    {
+                        new views.vwProductClaimType
+                        {
+                            id= Guid.Parse("8b3fc6cf-159c-409e-8a28-58cb21f90265"),
+                            productUID= Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191"),
+                            claimTypeUID= Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"),
+                            claimantType="Member"
+                        },
+                        new views.vwProductClaimType
+                        {
+                            id= Guid.Parse("b5dd7cca-e92e-4100-8817-861fef9984d3"),
+                            productUID= Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d"),
+                            claimTypeUID= Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"),
+                            claimantType="Member"
+                        },
+                        new views.vwProductClaimType
+                        {
+                            id= Guid.Parse("ed0e2959-2d96-4d35-a389-c55e5003415c"),
+                            productUID= Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191"),
+                            claimTypeUID= Guid.Parse("7fd88a31-2429-4b06-8c9f-93500f687387"),
+                            claimantType="Secondary Assured"
+                        },
+                        new views.vwProductClaimType
+                        {
+                            id= Guid.Parse("fcb90646-1463-426b-b0a2-448fe5c96857"),
+                            productUID= Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d"),
+                            claimTypeUID= Guid.Parse("5836f582-f77d-4348-89df-39f73fcb7636"),
+                            claimantType="Secondary Assured"
+                        },
+                    };
+                    conn.InsertAll(lstProductClaimTypes);
                 }
             }
         }

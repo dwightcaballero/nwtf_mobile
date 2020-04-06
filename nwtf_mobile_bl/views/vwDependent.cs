@@ -11,7 +11,7 @@ namespace nwtf_mobile_bl
         {
             [PrimaryKey, NotNull] public Guid id { get; set; }
             [NotNull] public string dependentID { get; set; }
-            [NotNull] public Guid customerUID { get; set; }
+            [NotNull] public Guid customerID { get; set; }
             [NotNull] public string dependentFullName { get; set; }
             [NotNull] public string dependentBirthdate { get; set; }
             [NotNull] public string dependentRelationship { get; set; }
