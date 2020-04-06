@@ -13,6 +13,12 @@ namespace nwtf_mobile_bl
             LegalDependent = 3
         }
 
+        public enum amountType
+        {
+            FixedAmount=1,
+            PercentOfBenefit=2
+        }
+
         public enum cblList
         {
             LOProvidesAmount = 1,
@@ -49,6 +55,32 @@ namespace nwtf_mobile_bl
                     return 2;
                 case "Legal Dependent":
                     return 3;
+                default:
+                    return 0;
+            }
+        }
+
+        public static string getAmountTypeDescription(int i)
+        {
+            switch(i)
+            {
+                case 1:
+                    return "Fixed Amount";
+                case 2:
+                    return "Percent of Benefit";
+                default:
+                    return "";
+            }
+        }
+
+        public static int getAmountTypeNumber(string s)
+        {
+            switch(s)
+            {
+                case "Fixed Amount":
+                    return 1;
+                case "Percent of Benefit":
+                    return 2;
                 default:
                     return 0;
             }

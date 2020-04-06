@@ -27,6 +27,13 @@ namespace nwtf_mobile_bl
             public Boolean include { get; set; }
             public String claimTypeClaimTransactionId { get; set; }
             public int claimantType { get; set; }
+            public string amountTypeText { get; set; }
+
+            public static List<vwDisbursementType> getAdvancesByClaimTypeID(Guid claimTypeUID)
+            {
+                return dataservices.disbursementType.getAdvancesByClaimTypeID(claimTypeUID);
+            }
+
         }
     }
 }

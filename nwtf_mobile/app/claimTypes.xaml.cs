@@ -46,21 +46,15 @@ namespace nwtf_mobile.app
 
             claimTypeRepeater.ItemsSource = claimTypeList;
         }
-        public ObservableCollection<vwDisbursementType> listDA { get; private set; }
 
-        public void setDisbursementAdvances(Grid control)
+        public void setDisbursementAdvances(List<vwDisbursementType> daList,Grid control)
         {
-            listDA = new ObservableCollection<vwDisbursementType>();
-            listDA.Add(new vwDisbursementType
+            foreach (vwDisbursementType daRec in daList)
             {
-                disbursementType = 1,
-                DisbursementTypeName = "Africa & Asia",
-                AmountType = 2,
-                PayeeType=3 });
+                daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
+            }
             ListView advancesGrid = (ListView)control.Children[12];
-            // proof that i can access the advancesgrid but item source is not binding
-            advancesGrid.BackgroundColor = Color.Pink;
-            advancesGrid.ItemsSource = listDA;
+            advancesGrid.ItemsSource = daList;
             
     }
         // Add system constants and replace other values
@@ -228,11 +222,12 @@ namespace nwtf_mobile.app
                         // Code to get Claim Benefit
                         vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
                         setClaimBenefit(cblRec, item1);
-                        setDisbursementAdvances(item1);
 
                         if (item.forAdvance == false)
                         {
-                               setDisbursementAdvances(item1);
+                            // Code to get Advances
+                            List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id);
+                            setDisbursementAdvances(daRec,item1);
 
                             if (checkForAdvance == null) return;
                             if (item.forAdvance.ToString() == checkForAdvance.Text)

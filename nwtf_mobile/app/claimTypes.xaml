@@ -135,7 +135,7 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
                                 </Grid>
 
-                                <ListView Grid.Row="4" Grid.ColumnSpan="4" HeightRequest="140" WidthRequest="1010">
+                                <ListView Grid.Row="4" Grid.ColumnSpan="4" HeightRequest="140" WidthRequest="1010" IsVisible="false">
                                     <ListView.Header>
                                         <Grid RowSpacing="0" ColumnSpacing="0">
 
@@ -178,10 +178,10 @@
                                                         <ColumnDefinition Width="Auto" />
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <CheckBox Grid.Row="0" Grid.Column="0"/>
                                                     <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="{Binding disbursementTypeName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                                    <Label Grid.Row="0" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding payeeType}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>
