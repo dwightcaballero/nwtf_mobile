@@ -33,6 +33,10 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.claimBenefit.getClaimBenefitByProductClaimantClaimType(productUID, claimantType, claimTypeUID);
             }
+            public static views.vwClaimBenefits getClaimBenefitByUID(Guid cblUID)
+            {
+                return dataservices.claimBenefit.getClaimBenefitByUID(cblUID);
+            }
         }
     }
 }

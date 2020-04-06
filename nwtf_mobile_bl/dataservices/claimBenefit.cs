@@ -25,6 +25,17 @@ namespace nwtf_mobile_bl
                 }
                 return cblRec;
             }
+            public static views.vwClaimBenefits getClaimBenefitByUID(Guid cblUID)
+            {
+                views.vwClaimBenefits cblRec = new views.vwClaimBenefits();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string getCBLrec = "SELECT * FROM vwClaimBenefits WHERE id='" + cblUID.ToString() + "';";
+                    cblRec = conn.Query<views.vwClaimBenefits>(getCBLrec).FirstOrDefault();
+
+                }
+                return cblRec;
+            }
         }
     }
 }

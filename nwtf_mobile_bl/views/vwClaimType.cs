@@ -25,6 +25,7 @@ namespace nwtf_mobile_bl
             public string comment { get; set; }
             public Guid claimTypeID { get; set; }
             public string finalPayee { get; set; }
+            public Guid claimBenefitUID { get; set; }
             public int claimBenefit { get; set; }
             public string claimBenefitName { get; set; }
 
