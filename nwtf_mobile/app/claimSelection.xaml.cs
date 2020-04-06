@@ -225,7 +225,7 @@ namespace nwtf_mobile.app
                 ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
 
                 var listClaimTypeIDs = claimDTO.listClaimType.Select(ct => ct.id).ToList();
-                await Navigation.PushAsync(new claimCreation(claimDTO));
+              //  await Navigation.PushAsync(new claimCreation(claimDTO));
             }
             else
             {

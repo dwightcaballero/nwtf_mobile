@@ -13,7 +13,7 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimCreation : ContentPage
     {
-        public claimCreation(dto.claimDTO claimDTO)
+        public claimCreation()
         {
             InitializeComponent();
         }

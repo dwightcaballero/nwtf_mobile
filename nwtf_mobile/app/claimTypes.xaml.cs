@@ -17,23 +17,31 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
 
-        public List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
 
         public claimTypes()
         {
-            // Sample Data
-            int claimantType = 1;
+            dto.claimDTO claimdto = new dto.claimDTO();
+            claimdto.claimantType = 1;
             InitializeComponent();
-            PopulateClaimTypes(claimantType);
-            AccessControlsInRepeater(claimantType);
+            PopulateClaimTypes(claimdto);
+            AccessControlsInRepeater(claimdto);
         }
 
-        public void PopulateClaimTypes(int claimantType)
+        public void PopulateClaimTypes(dto.claimDTO claimdto)
         {
-            // Sample Data 
+            List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
+            List<Guid> claimTypeUID = new List<Guid>();
+
+            // Uncomment once complete
+            // Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);
+            // int claimantType = claimdto.claimantType;
+            // claimTypeList = claimdto.listClaimType;
+
+            claimTypeList = claimdto.listClaimType;
+
+            int claimantType = 1;
             Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
-            List<Guid> claimTypeUID = new List<Guid>();
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
             claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
             
@@ -80,21 +88,26 @@ namespace nwtf_mobile.app
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
-            if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
-            {
+            if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
+           {
                 daGrid = (Grid)parentGrid.Children[4];
                 Label payeeName = (Label)daGrid.Children[3];
                 payeeName.Text = "Rona Melissa Plana";
                 return daGrid;
             }
-            else if (payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
+            if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
             {
                 daGrid = (Grid)parentGrid.Children[5];
                 return daGrid;
             }
-            else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
+            else if (payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
             {
                 daGrid = (Grid)parentGrid.Children[6];
+                return daGrid;
+            }
+            else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
+            {
+                daGrid = (Grid)parentGrid.Children[7];
                 return daGrid;
             }
             else
@@ -247,7 +260,7 @@ namespace nwtf_mobile.app
             }      
         }
 
-        public void AccessControlsInRepeater(int claimantType)
+        public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
             var control = claimTypeRepeater as RepeaterView;
             if (control == null) return;
@@ -272,7 +285,7 @@ namespace nwtf_mobile.app
                         if (item.forAdvance == false)
                         {
                             // Code to get Advances
-                            List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimantType);
+                            List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
                             setDisbursementAdvances(daRec,item1);
 
                             if (checkForAdvance == null) return;
