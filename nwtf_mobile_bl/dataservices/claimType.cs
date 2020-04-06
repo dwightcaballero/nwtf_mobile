@@ -32,7 +32,7 @@ namespace nwtf_mobile_bl
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
                     string sql = "SELECT id, claimTypeCode, claimTypeName, claimTypeShortName FROM vwClaimTypes " +
-                                 "WHERE (" + systool.buildOR(listClaimTypeIDs, "id") + ");";
+                                 "WHERE (" + systool.buildOR(listClaimTypeIDs, "id") + ") ORDER BY claimTypeName;";
                     listClaimType = conn.Query<views.vwClaimTypes>(sql);
                 }
                 return listClaimType;

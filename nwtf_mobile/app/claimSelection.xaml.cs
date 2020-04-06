@@ -22,7 +22,7 @@ namespace nwtf_mobile.app
             InitializeComponent();
             claimDTO = new dto.claimDTO();
 
-            hideStacks();
+            loadingPage(1);
             subscribeToAllEvents();
             pcon.getListCustomerForGrid();
         }
@@ -59,10 +59,24 @@ namespace nwtf_mobile.app
             displayMessage(e.Item1, e.Item2, e.Item3);
         }
 
+        void loadingPage(int i)
+        {
+            if (i == 0)
+            {
+                hideStacks();
+            }
+            else
+            {
+                hideStacks();
+            }
+            
+        }
+
         private void Pcon_loadCustomerGrid(object sender, List<views.vwCustomer> e)
         {
             Title = "Selection of Customer";
-            stackCustomer.IsVisible = true;
+            loadingPage(0);
+            //stackCustomer.IsVisible = true;
 
             claimDTO.listCustomer = e;
             lvCustomer.ItemsSource = e;
@@ -70,6 +84,8 @@ namespace nwtf_mobile.app
 
         private void btnCustomer_Clicked(object sender, System.EventArgs e)
         {
+            loadingPage(1);
+
             Button btnSelected = (Button)sender;
             Guid customerID = (Guid)btnSelected.CommandParameter;
             pcon.getListMAFForGrid(customerID);
@@ -81,7 +97,7 @@ namespace nwtf_mobile.app
             var customer = e.Item2;
 
             Title = "Selection of Customer's Enrolled Packages";
-            stackCustomer.IsVisible = false;
+            loadingPage(0);
             stackMAF.IsVisible = true;
 
             stackHeader.IsVisible = true;
@@ -98,6 +114,8 @@ namespace nwtf_mobile.app
 
         private void btnMAF_Clicked(object sender, System.EventArgs e)
         {
+            loadingPage(1);
+
             Button btnSelected = (Button)sender;
             Guid mafID = (Guid)btnSelected.CommandParameter;
 
@@ -108,11 +126,7 @@ namespace nwtf_mobile.app
         {
             var listClaimant = e.Item1;
             var maf = e.Item2;
-
-            Title = "Selection of Claimant";
-            stackMAF.IsVisible = false;
-            stackClaimant.IsVisible = true;
-
+            
             cbClaimSelectionHeader.productName = maf.productName;
             cbClaimSelectionHeader.productID = maf.productID;
 
@@ -121,7 +135,7 @@ namespace nwtf_mobile.app
 
             if (listClaimant.Count == 0)
             {
-                // should not proceed. for now, lets continue without selecting (delete after modification)
+                // should not proceed! for now, lets continue without selecting (delete after modification)
                 claimDTO.claimantID = "463120";
                 claimDTO.claimantType = 1;
                 pcon.getListClaimTypeForGrid(claimDTO.maf.productID, claimDTO.claimantType);
@@ -139,12 +153,18 @@ namespace nwtf_mobile.app
             }
             else
             {
+                Title = "Selection of Claimant";
+                loadingPage(0);
+                stackClaimant.IsVisible = true;
+                stackHeader.IsVisible = true;
                 lvClaimant.ItemsSource = listClaimant;
             }
         }
 
         private void btnClaimant_Clicked(object sender, EventArgs e)
         {
+            loadingPage(1);
+
             Button btnSelected = (Button)sender;
             Guid claimantID = (Guid)btnSelected.CommandParameter;
 
@@ -155,12 +175,11 @@ namespace nwtf_mobile.app
 
         private void Pcon_loadClaimTypeGrid(object sender, List<views.vwClaimTypes> e)
         {
-            claimDTO.listClaimType = e;
-
-            stackHeader.IsVisible = false;
-            stackClaimant.IsVisible = false;
+            Title = "Selection of Claim Type";
+            loadingPage(0);
             stackClaimType.IsVisible = true;
 
+            claimDTO.listClaimType = e;
             lvClaimtype.ItemsSource = e;
         }
 
@@ -193,13 +212,41 @@ namespace nwtf_mobile.app
 
         private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            // validation (count number of checked)
+            // get row data
+            var chk = (CheckBox)sender;
+            var row = Grid.GetRow(chk);
+            var grid = chk.Parent as Grid;
+            var tempLbl = grid.Children.Where(child => Grid.GetRow(child) == row && Grid.GetColumn(child) == 4).FirstOrDefault();
+
+            // get claim type id
+            Label lblID = (Label)tempLbl;
+            Guid id = Guid.Parse(lblID.Text);
+
+            if (chk.IsChecked) // add claim type
+            {
+                var claimType = new views.vwClaimTypes();
+                claimType.id = id;
+                claimDTO.listSelectedClaimType.Add(claimType);
+            }
+            else // remove claim type
+            {
+                var selected = claimDTO.listSelectedClaimType.Where(ct => ct.id == id).FirstOrDefault();
+                claimDTO.listSelectedClaimType.Remove(selected);
+            }
         }
 
         private async void btnContinue_Clicked(object sender, EventArgs e)
         {
-            // proceed to claim Creation (add validation)
-            await Navigation.PushAsync(new claimCreation());
+            // validation (count number of selected claim type)
+            if (claimDTO.listSelectedClaimType.Count > 0)
+            {
+                loadingPage(1);
+                await Navigation.PushAsync(new claimCreation());
+            }
+            else
+            {
+                displayMessage("Error", "Please select atleast one claim type!", "Close");
+            } 
         }
     }
 }
