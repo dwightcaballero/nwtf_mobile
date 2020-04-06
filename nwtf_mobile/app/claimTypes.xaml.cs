@@ -21,7 +21,6 @@ namespace nwtf_mobile.app
 
         public claimTypes()
         {
-            dataservices.Database.initializeDB();
             InitializeComponent();
             PopulateClaimTypes();
             AccessControlsInRepeater();
