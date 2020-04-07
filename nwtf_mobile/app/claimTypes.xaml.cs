@@ -71,7 +71,6 @@ namespace nwtf_mobile.app
         {
             var control = claimTypeRepeater as RepeaterView;
             if (control == null) return;
-
             foreach (Grid item1 in control.Children)
             {
                 Grid claimTypeGrid = (Grid)item1.Children[0];
@@ -112,7 +111,7 @@ namespace nwtf_mobile.app
         {
             // Sample data only
             cblRec.claimBenefitsLimits = 3;
-
+            int weeksValue = 20;
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
             grd.IsVisible = true;
 
@@ -120,7 +119,7 @@ namespace nwtf_mobile.app
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 // Get Weeks from Membership Date of Customer to Date
-                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
+               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = weeksValue.ToString() + " weeks";
@@ -145,7 +144,7 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 // Get Weeks from Effective Date to Date
-                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
+               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
                 // Change Effective Amount
                 Label weeksFromEffectiveDate = (Label)grd.Children[1];
                 weeksFromEffectiveDate.Text = weeksValue.ToString() + " weeks";
