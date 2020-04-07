@@ -26,7 +26,6 @@ namespace nwtf_mobile.app
 
         public claimTypes()
         {
-            claimdto.claimantType = 1;
             InitializeComponent();
             PopulateClaimTypes(claimdto);
             AccessControlsInRepeater(claimdto);
@@ -35,36 +34,20 @@ namespace nwtf_mobile.app
 
         public void PopulateClaimTypes(dto.claimDTO claimdto)
         {
-            List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
-            List<Guid> claimTypeUID = new List<Guid>();
 
-            // Uncomment once complete
-            // Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);
-            // int claimantType = claimdto.claimantType;
-            // claimTypeList = claimdto.listClaimType;
-
-            // Sample data only
-            int claimantType = 1;
-            Guid productUID = Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d");
-            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));
-            claimTypeList = vwClaimTypes.getListClaimTypeSelected(claimTypeUID);
-
+            Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);       
+            int claimantType = claimdto.claimant.claimantType;
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
 
             // Bind claim benefit to claim type
-            foreach (vwClaimTypes claimType in claimTypeList)
+            foreach (vwClaimTypes claimType in claimdto.listSelectedClaimType)
             {
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
                 claimType.claimBenefitUID = cblRec.id;
-                // Sample data only
-                claimType.claimBenefit = 3;
-                claimType.claimBenefitName = systemconst.getCBLDescription(3);
-                // Uncomment once complete
-                // claimType.claimBenefit = cblRec.claimBenefitsLimits;
-                // claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
+                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
             }
-
-            claimTypeRepeater.ItemsSource = claimTypeList;
+            claimTypeRepeater.ItemsSource = claimdto.listSelectedClaimType;
         }
 
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
@@ -88,15 +71,15 @@ namespace nwtf_mobile.app
                         setClaimBenefit(cblRec, item1);
 
                         // Code to get list of disbursement advances
-                        List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
+                        List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimant.claimantType);
                         if (daRec == null) return;
                         setDisbursementAdvances(daRec, item1);
 
                         // Set for advance grid visible to false
-                        if (item.forAdvance == false)
+                        if (item.allowAdvances == false)
                         {
                             if (checkForAdvance == null) return;
-                            if (item.forAdvance.ToString() == checkForAdvance.Text)
+                            if (item.allowAdvances.ToString() == checkForAdvance.Text)
                             {
                                 if (forAdvanceGrid == null) return;
                                 forAdvanceGrid.IsVisible = false;
@@ -110,8 +93,6 @@ namespace nwtf_mobile.app
         public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
         {
             // Sample data only
-            cblRec.claimBenefitsLimits = 3;
-            int weeksValue = 20;
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
             grd.IsVisible = true;
 
@@ -119,7 +100,7 @@ namespace nwtf_mobile.app
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 // Get Weeks from Membership Date of Customer to Date
-               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = weeksValue.ToString() + " weeks";
@@ -144,7 +125,7 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 // Get Weeks from Effective Date to Date
-               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
                 // Change Effective Amount
                 Label weeksFromEffectiveDate = (Label)grd.Children[1];
                 weeksFromEffectiveDate.Text = weeksValue.ToString() + " weeks";

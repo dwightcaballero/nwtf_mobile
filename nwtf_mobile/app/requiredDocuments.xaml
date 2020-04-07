@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.requiredDocuments">
     <ContentView.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" MinimumWidthRequest="1000">
             <StackLayout x:Name="stkRequiredDocuments">
                 <Label Text="Required Documents" TextColor="Red"></Label>
                 <ListView x:Name="lstVwRequiredDocument">
@@ -20,25 +20,28 @@
                                         <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Text="{Binding requiredDocumentName}"></Label>
+                                    <Label Grid.Column="0" Text="{Binding requiredDocumentName}" Padding="0,10,0,0"></Label>
 
-                                    <Label Grid.Column="1" Text="Number of uploaded JPG: "></Label>
-                                    <Label Grid.Column="1" x:Name="lblRecordCount"></Label>
+                                    <Label Grid.Column="1" Text="Number of uploaded JPG: " Padding="0,10,0,0"></Label>
+                                    <Label Grid.Column="1" x:Name="lblRecordCount" Padding="0,10,0,0"></Label>
 
-                                    <Button Grid.Column="2" Text="Upload/Capture Picture"></Button>
+                                    <Button Grid.Column="2" Text="Upload/Capture Picture" CommandParameter="{Binding ID }" x:Name="btnFileUpload" Clicked="btnFileUpload_Clicked"></Button>
+
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            
+
             <StackLayout x:Name="stkUploadRequiredDocument">
-                <Label x:Name="lblRequiredDocumentTitle" Text="Required Document Name"></Label>
-                <Label x:Name="lblRequiredDocumentID" IsVisible="False"></Label>
-                
-                <Button Text="Upload" x:Name="btnUpload"></Button>
-                <Button Text="Capture" x:Name="btnCapture"></Button>
+                <Label x:Name="lblRequiredDocumentTitle" Text="Required Document Name" TextColor="Red"></Label>
+                <Label x:Name="lblRequiredDocumentID"></Label>
+
+                <!--<Grid>-->
+                <Button Grid.Row="0" Grid.Column="0" Text="Upload" x:Name="btnUpload"></Button>
+                <Button Grid.Row="0" Grid.Column="1" Text="Capture" x:Name="btnCapture" Clicked="btnCapture_Clicked"></Button>
+                <!--</Grid>-->
 
                 <StackLayout x:Name="stkAddFile">
                     <Label x:Name="lblFileName" Text="try.jpg"></Label>
@@ -48,7 +51,8 @@
                 </StackLayout>
 
                 <Label Text="List of Uploaded Files:"></Label>
-                <ListView x:Name="lstVwUploadedFiles">
+
+                <ListView x:Name="lstVwUploadedFiles" RowHeight="20">
                     <ListView.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -57,7 +61,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0"></Label>
-                            
+
                             <Label Grid.Column="1" Text="Description"></Label>
                         </Grid>
                     </ListView.Header>
@@ -78,6 +82,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <Button Text="Back to Claim Transaction" x:Name="btnBack"></Button>
+                <Button Text="Save the Uploaded Files" x:Name="btnSave"></Button>
+
             </StackLayout>
         </StackLayout>
     </ContentView.Content>

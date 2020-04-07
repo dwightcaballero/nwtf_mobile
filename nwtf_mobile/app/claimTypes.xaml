@@ -17,8 +17,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="80" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -82,15 +82,12 @@
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
                                 </Grid>
 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="50" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Amount per Claim:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="80" VerticalOptions="Start">

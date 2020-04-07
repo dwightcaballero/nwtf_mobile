@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace nwtf_mobile_bl
@@ -11,11 +12,11 @@ namespace nwtf_mobile_bl
         {
             public static List<views.vwRequiredDocuments> GetRequiredDocuments()
             {
-                List<views.vwRequiredDocuments> listRequiredDocuments = new List< views.vwRequiredDocuments>();
+                List<views.vwRequiredDocuments> listRequiredDocuments = new List<views.vwRequiredDocuments>();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
                     string sql = "SELECT ID, requiredDocumentCode, requiredDocumentName FROM vwRequiredDocuments";
-                    listRequiredDocuments = conn.Query<views.vwRequiredDocuments>(sql);
+                    listRequiredDocuments = conn.Query<views.vwRequiredDocuments>(sql).ToList<views.vwRequiredDocuments>();
 
                     if (listRequiredDocuments.Count == 0)
                     {
@@ -24,6 +25,25 @@ namespace nwtf_mobile_bl
                     else
                     {
                         return listRequiredDocuments;
+                    }
+                }
+            }
+
+            public static views.vwRequiredDocuments GetRequiredDocumentRecord(Guid id)
+            {
+                views.vwRequiredDocuments record = new views.vwRequiredDocuments();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT ID, requiredDocumentCode, requiredDocumentName FROM vwRequiredDocuments where id=?;";
+                    record = conn.Query<views.vwRequiredDocuments>(sql, id).FirstOrDefault();
+
+                    if (record == null)
+                    {
+                        return record = null;
+                    }
+                    else
+                    {
+                        return record;
                     }
                 }
             }
