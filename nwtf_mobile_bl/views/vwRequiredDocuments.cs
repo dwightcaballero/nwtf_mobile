@@ -22,6 +22,11 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.requiredDocuments.GetRequiredDocuments();
             }
+
+            public static views.vwRequiredDocuments getRequiredDocumentRecord(Guid id)
+            {
+                return dataservices.requiredDocuments.GetRequiredDocumentRecord(id);
+            }
         }
     }
 }

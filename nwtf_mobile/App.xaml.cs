@@ -18,7 +18,8 @@ namespace nwtf_mobile
             //comment this after using
             dataservices.Database.modifyInitialization();
 
-            MainPage = new NavigationPage(new claimSelection());
+            dto.claimDTO claimDTO = new dto.claimDTO();
+            MainPage = new NavigationPage(new claimCreation(claimDTO));
         }
 
         protected override void OnStart()
