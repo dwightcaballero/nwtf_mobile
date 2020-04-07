@@ -17,6 +17,7 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
         public static dto.claimDTO claimdto { get; set; }
+        controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
         {
@@ -44,8 +45,9 @@ namespace nwtf_mobile.app
             claimTypeList = claimdto.listClaimType;
 
             int claimantType = 1;
-            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
+
+            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
             claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
             
@@ -85,10 +87,6 @@ namespace nwtf_mobile.app
 
                         if (item.forAdvance == false)
                         {
-                            // Code to get Advances
-                            List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
-                            setDisbursementAdvances(daRec, item1);
-
                             if (checkForAdvance == null) return;
                             if (item.forAdvance.ToString() == checkForAdvance.Text)
                             {
@@ -96,6 +94,8 @@ namespace nwtf_mobile.app
                                 //  set for advance panel visible to false
                                 forAdvanceGrid.IsVisible = false;
                                 // Code to get list of disbursement advances
+                                List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
+                                setDisbursementAdvances(daRec, item1);
                             }
                         }
                     }
