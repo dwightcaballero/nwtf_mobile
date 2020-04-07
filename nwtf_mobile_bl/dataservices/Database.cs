@@ -480,6 +480,26 @@ namespace nwtf_mobile_bl
                     };
                     conn.InsertAll(listTempUser);
 
+                    conn.CreateTable<views.vwRegistry>();
+                    var listRegistry = new List<views.vwRegistry>
+                    {
+                        // age limits
+                        new views.vwRegistry{id = Guid.Parse("f748ebbb-c13e-4d00-a3e0-13346e84f305"), registry = "ageLimitSpouse", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("7340f716-a7f5-4a73-a35d-7dfee56be9b1"), registry = "ageLimitFather", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("bc48aff8-f8dc-4cb7-b398-2152d7c6f8b4"), registry = "ageLimitMother", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("c3259853-1de9-4de0-ad9a-ad1c785a7c9a"), registry = "ageLimitChild", entry = "21"},
+
+                        // relationship codes
+                        new views.vwRegistry{id = Guid.Parse("43c3ae0d-0d21-4c30-ab00-c2e279e183c6"), registry = "relationFatherCode", entry = "107015"},
+                        new views.vwRegistry{id = Guid.Parse("49f07bdb-4240-4c75-bf27-17f098f3ee6a"), registry = "relationMotherCode", entry = "107014"},
+                        new views.vwRegistry{id = Guid.Parse("d3a6563c-0f53-4226-bb65-f00d8290ce7f"), registry = "relationChildCode", entry = "107007"},
+
+                        // aggregate labels
+                        new views.vwRegistry{id = Guid.Parse("46e5bd09-cc2f-4e2f-946f-a0c4e6dddbbf"), registry = "aggregateDateFrom", entry = "DATE FROM"},
+                        new views.vwRegistry{id = Guid.Parse("a4ff6159-ca74-44e7-a467-e73d07ad261d"), registry = "aggregateDateTo", entry = "DATE TO"},
+                    };
+                    conn.InsertAll(listRegistry);
+
                     var lstSids = new List<views.vwSids>
                     {
                         new views.vwSids()
@@ -493,15 +513,29 @@ namespace nwtf_mobile_bl
                 }
             }
 
-            // modify database (one time use only) - comment the active codes after using
+            // modify database (one time use only) - remove the codes after using
             public static void modifyInitialization()
             {
                 using (SQLiteConnection conn = new SQLiteConnection(DatabasePath))
                 {
+                    // INSTRUCTION
+                    // adding a table
+                        // create table
+                        // insert data
+                        // ADD "create and insert script" to initialization
+
+                    // updating the table field or table name
+                        // drop table
+                        // create table
+                        // insert data (COPY from the initialization)
+
+                    // adding or editing the DATA in a table
+                        // drop table
+                        // create table
+                        // insert data (must CHANGE the data in the initialization)
+
                     conn.DropTable<views.vwProductClaimType>();
-
                     conn.CreateTable<views.vwProductClaimType>();
-
                     var lstProductClaimTypes = new List<views.vwProductClaimType>
                     {
                         new views.vwProductClaimType
@@ -534,6 +568,27 @@ namespace nwtf_mobile_bl
                         },
                     };
                     conn.InsertAll(lstProductClaimTypes);
+
+                    conn.CreateTable<views.vwRegistry>();
+                    var listRegistry = new List<views.vwRegistry>
+                    {
+                        // age limits
+                        new views.vwRegistry{id = Guid.Parse("f748ebbb-c13e-4d00-a3e0-13346e84f305"), registry = "ageLimitSpouse", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("7340f716-a7f5-4a73-a35d-7dfee56be9b1"), registry = "ageLimitFather", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("bc48aff8-f8dc-4cb7-b398-2152d7c6f8b4"), registry = "ageLimitMother", entry = "70"},
+                        new views.vwRegistry{id = Guid.Parse("c3259853-1de9-4de0-ad9a-ad1c785a7c9a"), registry = "ageLimitChild", entry = "21"},
+
+                        // relationship codes
+                        new views.vwRegistry{id = Guid.Parse("43c3ae0d-0d21-4c30-ab00-c2e279e183c6"), registry = "relationFatherCode", entry = "107015"},
+                        new views.vwRegistry{id = Guid.Parse("49f07bdb-4240-4c75-bf27-17f098f3ee6a"), registry = "relationMotherCode", entry = "107014"},
+                        new views.vwRegistry{id = Guid.Parse("d3a6563c-0f53-4226-bb65-f00d8290ce7f"), registry = "relationChildCode", entry = "107007"},
+
+                        // aggregate labels
+                        new views.vwRegistry{id = Guid.Parse("46e5bd09-cc2f-4e2f-946f-a0c4e6dddbbf"), registry = "aggregateDateFrom", entry = "DATE FROM"},
+                        new views.vwRegistry{id = Guid.Parse("a4ff6159-ca74-44e7-a467-e73d07ad261d"), registry = "aggregateDateTo", entry = "DATE TO"},
+                    };
+                    conn.InsertAll(listRegistry);
+
                 }
             }
         }
