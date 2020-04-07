@@ -9,6 +9,7 @@ namespace nwtf_mobile_bl
     {
         public class claimTransaction
         {
+           
         }
     }
 }

@@ -22,6 +22,11 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.productClaimType.getListClaimTypeIDsForGrid(productUID, claimantType);
             }
+
+            public static List<string> getListClaimantTypeSelected(Guid productUID)
+            {
+                return dataservices.productClaimType.getListClaimantTypeSelected(productUID);
+            }
         }
     }
 }

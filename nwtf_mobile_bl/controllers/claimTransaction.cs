@@ -12,6 +12,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<(List<views.vwMafEnrollmentClosure>, views.vwCustomer)> loadMAFGrid;
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
             public event EventHandler<List<views.vwClaimTypes>> loadClaimTypeGrid;
+            public event EventHandler<List<views.vwClaimTypes>> saveClaimTypeSelected;
 
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
 
@@ -36,13 +37,36 @@ namespace nwtf_mobile_bl
                 }
             }
 
-            public void getListClaimantForGrid(Guid mafID)
+            public void getListClaimantForGrid(Guid mafID, views.vwCustomer customer)
             {
                 var maf = views.vwMafEnrollmentClosure.getMAFByID(mafID);
                 if (maf != null)
                 {
-                    var listClaimant = views.vwClaimant.getListClaimantForGrid();
-                    loadClaimantGrid?.Invoke(this, (listClaimant, maf));
+                    Guid productUID = views.vwProduct.getUIDByProductID(maf.productID);
+                    if (productUID != Guid.Empty)
+                    {
+                        // UNCOMMENT AFTER MODIFICATION
+                        //var listProductClaimantSelected = views.vwProductClaimType.getListClaimantTypeSelected(productUID);
+                        //if (listProductClaimantSelected.Count > 0)
+                        //{
+                        //    var listDependent = views.vwDependent.getListDependentByCustomerUID(customer.id);
+                        //    var listClaimant = views.vwClaimant.getListClaimantForGrid(listProductClaimantSelected, customer, listDependent);
+                        //    loadClaimantGrid?.Invoke(this, (listClaimant, maf));
+                        //}
+                        //else
+                        //{
+                        //    showMessage?.Invoke(this, ("Error", "No Claimant Selected in Product Configuration!", "Close"));
+                        //}
+
+
+
+                        //temporary code
+                        loadClaimantGrid?.Invoke(this, (new List<views.vwClaimant>(), maf));
+                    }
+                    else
+                    {
+                        showMessage?.Invoke(this, ("Error", "MAF Record Not Found!", "Close"));
+                    }
                 }
                 else
                 {
@@ -84,6 +108,19 @@ namespace nwtf_mobile_bl
                     showMessage?.Invoke(this, ("Error", "No requied Documents retrieved!", "Close"));
                 }
 
+            }
+
+            public void getListClaimTypeSelected(List<Guid> listClaimTypeIDs)
+            {
+                var listClaimtype = views.vwClaimTypes.getListClaimTypeSelected(listClaimTypeIDs);
+                if (listClaimtype.Count > 0)
+                {
+                    saveClaimTypeSelected?.Invoke(this, listClaimtype);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
+                }
             }
         }
     }

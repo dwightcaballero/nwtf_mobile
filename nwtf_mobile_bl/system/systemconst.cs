@@ -13,6 +13,15 @@ namespace nwtf_mobile_bl
             LegalDependent = 3
         }
 
+        public enum payeeType
+        {
+            MemberAsPayee = 1,
+            FromDisbursementPayee = 2,
+            FromBranchPersonnel = 3,
+            FreeText = 4,
+            AnyDependents = 5
+        }
+
         public enum amountType
         {
             FixedAmount=1,
@@ -55,6 +64,44 @@ namespace nwtf_mobile_bl
                     return 2;
                 case "Legal Dependent":
                     return 3;
+                default:
+                    return 0;
+            }
+        }
+
+        public static string getPayeeTypeDescription(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    return "Member As Payee";
+                case 2:
+                    return "From Disbursement Payee";
+                case 3:
+                    return "From Branch Personnel";
+                case 4:
+                    return "Free Text";
+                case 5:
+                    return "Any Dependents";
+                default:
+                    return "";
+            }
+        }
+
+        public static int getPayeeTypeInteger(string s)
+        {
+            switch (s)
+            {
+                case "Member As Payee":
+                    return 1;
+                case "From Disbursement Payee":
+                    return 2;
+                case "From Branch Personnel":
+                    return 3;
+                case "Free Text":
+                    return 4;
+                case "Any Dependents":
+                    return 5;
                 default:
                     return 0;
             }

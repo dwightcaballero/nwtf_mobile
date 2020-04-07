@@ -22,7 +22,7 @@ namespace nwtf_mobile.app
             InitializeComponent();
             claimDTO = new dto.claimDTO();
 
-            loadingPage(1);
+            hideStacks();
             subscribeToAllEvents();
             pcon.getListCustomerForGrid();
         }
@@ -36,7 +36,7 @@ namespace nwtf_mobile.app
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = false;
             stackClaimType.IsVisible = false;
-        }
+        }   
 
         // subscribe to all events in the controller
         void subscribeToAllEvents()
@@ -46,6 +46,7 @@ namespace nwtf_mobile.app
             pcon.loadMAFGrid += Pcon_loadMAFGrid;
             pcon.loadClaimantGrid += Pcon_loadClaimantGrid;
             pcon.loadClaimTypeGrid += Pcon_loadClaimTypeGrid;
+            pcon.saveClaimTypeSelected += Pcon_saveClaimTypeSelected;
         }
 
         // display messages
@@ -59,24 +60,10 @@ namespace nwtf_mobile.app
             displayMessage(e.Item1, e.Item2, e.Item3);
         }
 
-        void loadingPage(int i)
-        {
-            if (i == 0)
-            {
-                hideStacks();
-            }
-            else
-            {
-                hideStacks();
-            }
-            
-        }
-
         private void Pcon_loadCustomerGrid(object sender, List<views.vwCustomer> e)
         {
             Title = "Selection of Customer";
-            loadingPage(0);
-            //stackCustomer.IsVisible = true;
+            stackCustomer.IsVisible = true;
 
             claimDTO.listCustomer = e;
             lvCustomer.ItemsSource = e;
@@ -84,8 +71,6 @@ namespace nwtf_mobile.app
 
         private void btnCustomer_Clicked(object sender, System.EventArgs e)
         {
-            loadingPage(1);
-
             Button btnSelected = (Button)sender;
             Guid customerID = (Guid)btnSelected.CommandParameter;
             pcon.getListMAFForGrid(customerID);
@@ -97,7 +82,7 @@ namespace nwtf_mobile.app
             var customer = e.Item2;
 
             Title = "Selection of Customer's Enrolled Packages";
-            loadingPage(0);
+            stackCustomer.IsVisible = false;
             stackMAF.IsVisible = true;
 
             stackHeader.IsVisible = true;
@@ -114,12 +99,10 @@ namespace nwtf_mobile.app
 
         private void btnMAF_Clicked(object sender, System.EventArgs e)
         {
-            loadingPage(1);
-
             Button btnSelected = (Button)sender;
             Guid mafID = (Guid)btnSelected.CommandParameter;
 
-            pcon.getListClaimantForGrid(mafID);
+            pcon.getListClaimantForGrid(mafID, claimDTO.customer);
         }
 
         private void Pcon_loadClaimantGrid(object sender, (List<views.vwClaimant>, views.vwMafEnrollmentClosure) e)
@@ -130,6 +113,7 @@ namespace nwtf_mobile.app
             cbClaimSelectionHeader.productName = maf.productName;
             cbClaimSelectionHeader.productID = maf.productID;
 
+            stackMAF.IsVisible = false;
             claimDTO.maf = maf;
             claimDTO.listClaimant = listClaimant;
 
@@ -154,17 +138,13 @@ namespace nwtf_mobile.app
             else
             {
                 Title = "Selection of Claimant";
-                loadingPage(0);
                 stackClaimant.IsVisible = true;
-                stackHeader.IsVisible = true;
                 lvClaimant.ItemsSource = listClaimant;
             }
         }
 
         private void btnClaimant_Clicked(object sender, EventArgs e)
         {
-            loadingPage(1);
-
             Button btnSelected = (Button)sender;
             Guid claimantID = (Guid)btnSelected.CommandParameter;
 
@@ -176,7 +156,8 @@ namespace nwtf_mobile.app
         private void Pcon_loadClaimTypeGrid(object sender, List<views.vwClaimTypes> e)
         {
             Title = "Selection of Claim Type";
-            loadingPage(0);
+            stackClaimant.IsVisible = false;
+            stackHeader.IsVisible = false;
             stackClaimType.IsVisible = true;
 
             claimDTO.listClaimType = e;
@@ -240,13 +221,21 @@ namespace nwtf_mobile.app
             // validation (count number of selected claim type)
             if (claimDTO.listSelectedClaimType.Count > 0)
             {
-                loadingPage(1);
-                await Navigation.PushAsync(new claimCreation());
+                hideStacks();
+                ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
+
+                var listClaimTypeIDs = claimDTO.listClaimType.Select(ct => ct.id).ToList();
+              //  await Navigation.PushAsync(new claimCreation(claimDTO));
             }
             else
             {
                 displayMessage("Error", "Please select atleast one claim type!", "Close");
             } 
+        }
+
+        private void Pcon_saveClaimTypeSelected(object sender, List<views.vwClaimTypes> e)
+        {
+            claimDTO.listClaimType = e;
         }
     }
 }
