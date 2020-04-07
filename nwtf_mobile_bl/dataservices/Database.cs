@@ -475,7 +475,7 @@ namespace nwtf_mobile_bl
 
                     var listTempUser = new List<views.vwTempUsers>
                     {
-                        new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="kenn"},
+                        new views.vwTempUsers{id=Guid.Parse("cb15d757-d06c-4693-ba08-0fe693cee0c1"), blockCode="012", branchCode="192", username="kenn"},
                         new views.vwTempUsers{id=Guid.NewGuid(), blockCode="012", branchCode="192", username="rona"},
                         new views.vwTempUsers{id=Guid.Parse("66b47ee0-b4a1-4a55-86b8-c3e801740205"), blockCode="012", branchCode="192", username="sweet"},
                     };
@@ -508,8 +508,16 @@ namespace nwtf_mobile_bl
                             sid = Guid.Parse("66b47ee0-b4a1-4a55-86b8-c3e801740205"),
                             authobj= "AF80F4B7DA9079ACF5167BF55AEB6CC854B331",
                             authref="Z86CXSZ288"
+                        },
+                        new views.vwSids()
+                        {
+                            id=Guid.NewGuid(),
+                            sid = Guid.Parse("cb15d757-d06c-4693-ba08-0fe693cee0c1"),
+                            authobj= "24EAB6C811F16FAA91CDAF4380423434FCAF7E",
+                            authref="2EX3EYG4D1"
                         }
                     };
+                    conn.InsertAll(lstSids);
                 }
             }
 
@@ -544,14 +552,6 @@ namespace nwtf_mobile_bl
 
 
                     // START CODING HERE
-                    conn.DropTable<views.vwDependent>();
-                    conn.CreateTable<views.vwDependent>();
-                    var listDependent = new List<views.vwDependent>
-                    {
-                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("10d9a217-1e28-4b24-a364-03e212cf2dcd"), dependentBirthdate="2002/02/20", dependentFullName="Emmanuel Gapuz", dependentID="963258741", dependentRelationship="FATHER"},
-                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("b1a15115-75f0-4dc3-9aee-ce84cdf09515"), dependentBirthdate="1968/02/20", dependentFullName="Maria Amarillo", dependentID="369852147", dependentRelationship="MOTHER"}
-                    };
-                    conn.InsertAll(listDependent);
                 }
             }
         }
