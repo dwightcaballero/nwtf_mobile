@@ -13,9 +13,23 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimCreation : ContentPage
     {
-        public claimCreation()
+        public claimCreation(dto.claimDTO claimdto)
         {
+
+            // Temporary Data
+            claimdto.customer.customerID = "1184990001";
+            claimdto.customer.customerFirstName = "Dwight";
+            claimdto.customer.customerMiddleName = "Kenn";
+            claimdto.customer.customerLastName = "Caballero";
+            claimdto.maf.productID = "12345";
+            claimdto.maf.productName = "3104";
+            claimdto.claimantID = "Sweet Angel Altamera";
+            claimdto.claimantType = 1;
+            //   claimdto.listClaimType = "Claim Type A, Claim Type B, Claim Type C";
+            claimTypes.setClaimDTO(claimdto);
+            headerDetails.setClaimDTO(claimdto);
             InitializeComponent();
+            
         }
     }
 }

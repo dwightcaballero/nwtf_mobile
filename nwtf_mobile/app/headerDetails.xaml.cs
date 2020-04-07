@@ -1,4 +1,5 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,21 +13,34 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class headerDetails : ContentView
     {
+        public static dto.claimDTO claimdto { get; set; }
+
+        public static void setClaimDTO(dto.claimDTO value)
+        {
+            claimdto = value;
+        }
+
         public headerDetails()
         {
             InitializeComponent();
-            PopulateHeader();
+            PopulateHeader(claimdto);
         }
 
-        private void PopulateHeader()
+        private void PopulateHeader(dto.claimDTO claimdto)
         {
-            // Temporary Data
-            txtCustID.Text = "1184990001";
-            txtCustName.Text = "Dwight Kenn Caballero";
-            txtProdID.Text = "12345";
-            txtProdName.Text = "3104";
-            txtClaimantName.Text = "Sweet Angel Altamera";
-            txtClaimantRel.Text = "Sister";
+            txtCustID.Text = claimdto.customer.customerID;
+            if (claimdto.customer.customerSuffix == null)
+            {
+                txtCustName.Text = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
+            }
+            else
+            {
+                txtCustName.Text = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName + " " + claimdto.customer.customerSuffix;
+            }
+            txtProdID.Text = claimdto.maf.productID;
+            txtProdName.Text = claimdto.maf.productName;
+            txtClaimantName.Text = claimdto.claimantID;
+            txtClaimantRel.Text = systemconst.getClaimantDescription(claimdto.claimantType);
             txtClaimTypesList.Text = "Claim Type A, Claim Type B, Claim Type C";
         }
     }

@@ -16,11 +16,15 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimTypes : ContentView
     {
+        public static dto.claimDTO claimdto { get; set; }
 
+        public static void setClaimDTO(dto.claimDTO value)
+        {
+            claimdto = value;
+        }
 
         public claimTypes()
         {
-            dto.claimDTO claimdto = new dto.claimDTO();
             claimdto.claimantType = 1;
             InitializeComponent();
             PopulateClaimTypes(claimdto);
@@ -103,7 +107,7 @@ namespace nwtf_mobile.app
         {
             Guid productUID = Guid.Empty;
             Guid claimTypeID = Guid.Empty;
-            int claimantType = 1;
+           // int claimantType = 1;
             // LO Provides Amount
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
