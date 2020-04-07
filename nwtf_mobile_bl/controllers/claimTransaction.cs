@@ -13,6 +13,8 @@ namespace nwtf_mobile_bl
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
             public event EventHandler<List<views.vwClaimTypes>> loadClaimTypeGrid;
 
+            public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
+
             public event EventHandler<(string, string, string)> showMessage;
 
             public void getListCustomerForGrid()
@@ -68,6 +70,20 @@ namespace nwtf_mobile_bl
                 {
                     showMessage?.Invoke(this, ("Error", "Product or Claimant Record Not Found!", "Close"));
                 }
+            }
+
+            public void getRequiredDocuments()
+            {
+                List<views.vwRequiredDocuments> lstRequiredDocuments = views.vwRequiredDocuments.GetRequiredDocuments();
+                if (lstRequiredDocuments.Count != 0)
+                {
+                    loadrequiredDocuments?.Invoke(this, lstRequiredDocuments);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "No requied Documents retrieved!", "Close"));
+                }
+
             }
         }
     }

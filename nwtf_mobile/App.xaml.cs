@@ -13,7 +13,7 @@ namespace nwtf_mobile
             InitializeComponent();
 
             //one time initialization
-            dataservices.Database.initializeDB();
+           // dataservices.Database.initializeDB();
 
             //comment this after using
             //dataservices.Database.modifyInitialization();

@@ -6,9 +6,9 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.requiredDocuments">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
             <StackLayout x:Name="stkRequiredDocuments">
-                <Label Text="REQUIRED DOCUMENTS"></Label>
+                <Label Text="Required Documents" TextColor="Red"></Label>
                 <ListView x:Name="lstVwRequiredDocument">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -31,25 +31,24 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Label Text="Hello Xamarin.Forms!" />
             </StackLayout>
             
             <StackLayout x:Name="stkUploadRequiredDocument">
-                <Label x:Name="lblRequiredDocumentTitle"></Label>
+                <Label x:Name="lblRequiredDocumentTitle" Text="Required Document Name"></Label>
                 <Label x:Name="lblRequiredDocumentID" IsVisible="False"></Label>
                 
                 <Button Text="Upload" x:Name="btnUpload"></Button>
                 <Button Text="Capture" x:Name="btnCapture"></Button>
 
                 <StackLayout x:Name="stkAddFile">
-                    <Label x:Name="lblFileName"></Label>
-                    <Entry Text="Description" x:Name="entryDescription"></Entry>
+                    <Label x:Name="lblFileName" Text="try.jpg"></Label>
+                    <Entry x:Name="entryDescription" Keyboard="Text" Placeholder="Description"></Entry>
                     <Button Text="OK" x:Name="btnOK"></Button>
                     <Button Text="Cancel" x:Name="btnCancel"></Button>
                 </StackLayout>
 
                 <Label Text="List of Uploaded Files:"></Label>
-                <ListView>
+                <ListView x:Name="lstVwUploadedFiles">
                     <ListView.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
