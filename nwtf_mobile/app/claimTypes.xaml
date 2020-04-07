@@ -35,15 +35,9 @@
                                 <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="LOProvidesAmount" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Enter Amount:" VerticalTextAlignment="Center"/>
                                     <Entry Grid.Row="0" Grid.Column="1" Placeholder="0.00" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Accumulated Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
 
@@ -51,19 +45,15 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="# of Weeks from Membership Date:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
                                 
                                 <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -71,12 +61,8 @@
                                     <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
                                     <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
                                     <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Accumulated Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
@@ -86,19 +72,15 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Amount per Claim:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
                                 
                                 <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -106,24 +88,17 @@
                                     <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
                                     <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
                                     <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Accumulated Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="500.00" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="# of Weeks from Enrollment Date:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Maximum Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="500.00" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>

@@ -49,7 +49,6 @@ namespace nwtf_mobile.app
 
             Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
             claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
-            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));   
             
             claimTypeList = vwClaimTypes.getListClaimTypeSelected(claimTypeUID);
 
@@ -112,26 +111,17 @@ namespace nwtf_mobile.app
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
                 Grid grd = (Grid)control.Children[4];
-                // Change Maximum Amount
-                Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
-                // Change Accumulated Amount
-                Label accumulatedAmount = (Label)grd.Children[5];
-                accumulatedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 Grid grd = (Grid)control.Children[5];
-                // Change Maximum Amount
+                // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = "6 Weeks";
-                // Change Maximum Amount
-                Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
                 // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[5];
+                Label computedAmount = (Label)grd.Children[3];
                 computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
@@ -144,32 +134,22 @@ namespace nwtf_mobile.app
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromVal = (DatePicker)grd.Children[1];
                 DatePicker dateToVal = (DatePicker)grd.Children[3];
-                Label accumLabel = (Label)grd.Children[4];
-                Label accumValue = (Label)grd.Children[5];
-                Label maxLabel = (Label)grd.Children[6];
-                Label maxValue = (Label)grd.Children[7];
                 int maxBasis = cblRec.maximumBasis;
                 string maxBasisText = cblRec.maximumBasis.ToString();
 
                 dateFrom.Text = cblRec.dateFrom;
                 dateTo.Text = cblRec.dateTo;
-                maxLabel.Text = "Remaining " + maxBasisText + ":";
-                accumLabel.Text = "Accumulated " + maxBasisText + ":";
 
                 // Maximum Basis - Amount
                 if (maxBasis == 1)
                 {
-                    maxValue.Text = cblRec.maximumValue.ToString();
-                    accumValue.Text = "15.00";
                 }
                 // Maximum Basis - Days
                 else if (maxBasis == 2)
                 {
-                    maxValue.Text = cblRec.maximumValue + " " + maxBasisText;
-                    accumValue.Text = "3" + " " + maxBasisText;
                 }
                 // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[9];
+                Label computedAmount = (Label)grd.Children[5];
                 computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
@@ -186,11 +166,8 @@ namespace nwtf_mobile.app
                 // Change Amount per Claim
                 Label amountPerClaim = (Label)grd.Children[1];
                 amountPerClaim.Text = "50.00";
-                // Change Maximum Amount
-                Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
                 // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[5];
+                Label computedAmount = (Label)grd.Children[3];
                 computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
@@ -203,32 +180,22 @@ namespace nwtf_mobile.app
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromVal = (DatePicker)grd.Children[1];
                 DatePicker dateToVal = (DatePicker)grd.Children[3];
-                Label accumLabel = (Label)grd.Children[4];
-                Label accumValue = (Label)grd.Children[5];
-                Label maxLabel = (Label)grd.Children[6];
-                Label maxValue = (Label)grd.Children[7];
                 int maxBasis = cblRec.maximumBasis;
                 string maxBasisText = cblRec.maximumBasis.ToString();
 
                 dateFrom.Text = cblRec.dateFrom;
                 dateTo.Text = cblRec.dateTo;
-                maxLabel.Text = "Remaining " + maxBasisText + ":";
-                accumLabel.Text = "Accumulated " + maxBasisText + ":";
 
                 // Maximum Basis - Amount
                 if (maxBasis == 1)
                 {
-                    maxValue.Text = cblRec.maximumValue.ToString();
-                    accumValue.Text = "15.00";
                 }
                 // Maximum Basis - Weeks
                 else if (maxBasis == 2)
                 {
-                    maxValue.Text = cblRec.maximumValue + " " + maxBasisText;
-                    accumValue.Text = "3" + " " + maxBasisText;
                 }
                 // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[9];
+                Label computedAmount = (Label)grd.Children[5];
                 computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
@@ -239,11 +206,8 @@ namespace nwtf_mobile.app
                 // Change Enrollment Date
                 Label weeksFromEnrollmentDate = (Label)grd.Children[1];
                 weeksFromEnrollmentDate.Text = "5 Weeks";
-                // Change Maximum Amount
-                Label maxAmount = (Label)grd.Children[3];
-                maxAmount.Text = cblRec.maximumAmount.ToString("N2");
                 // Change Computed Amount
-                Label computedAmount = (Label)grd.Children[5];
+                Label computedAmount = (Label)grd.Children[3];
                 computedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
