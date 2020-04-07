@@ -108,6 +108,7 @@ namespace nwtf_mobile.app
         {
             Guid productUID = Guid.Empty;
             Guid claimTypeID = Guid.Empty;
+            cblRec.claimBenefitsLimits = 3;
             // int claimantType = 1;
             // LO Provides Amount
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
@@ -306,7 +307,6 @@ namespace nwtf_mobile.app
 
             if (defaultPayeeValue == 0)
             {
-
                 payeeName.IsVisible = true;
                 payeeName.Text = claimdto.customer.customerLastName +", "+ claimdto.customer.customerFirstName +" "+ claimdto.customer.customerMiddleName;
             }
@@ -321,5 +321,55 @@ namespace nwtf_mobile.app
             }
 
         }
+
+        void DateFromPicker(object sender, DateChangedEventArgs args)
+        {
+            DatePicker dateFrom = (DatePicker)sender;
+            Grid parentGrid = (Grid)dateFrom.Parent;
+            DatePicker dateTo = (DatePicker)parentGrid.Children[3];
+
+            if (dateFrom.Date != null && dateTo.Date != null)
+            {
+                decimal totalAmount = calculateDays(dateFrom.Date,dateTo.Date);
+                Grid fullGrid = (Grid)parentGrid.Parent;
+                Grid grd = (Grid)fullGrid.Children[6];
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = totalAmount.ToString();
+
+            }
+        }
+
+        void DateToPicker(object sender, DateChangedEventArgs args)
+        {
+            DatePicker dateTo = (DatePicker)sender;
+            Grid parentGrid = (Grid)dateTo.Parent;
+            DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
+
+            if (dateFrom.Date != null && dateTo.Date != null)
+            {
+                decimal totalAmount = calculateDays(dateFrom.Date, dateTo.Date);
+                Grid fullGrid = (Grid)parentGrid.Parent;
+                Grid grd = (Grid)fullGrid.Children[6];
+                Label computedAmount = (Label)grd.Children[5];
+                computedAmount.Text = totalAmount.ToString();
+            }
+        }
+
+        public decimal calculateDays(DateTime dateFrom, DateTime dateTo)
+        {
+            double days = (dateTo - dateFrom).TotalDays;
+            // sample data
+            decimal amount = Convert.ToDecimal(days * 200);
+            return amount;
+        }
+
+        public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo)
+        {
+            double days = (dateTo - dateFrom).TotalDays;
+            // sample data
+            decimal amount = Convert.ToDecimal(days * 200);
+            return amount;
+        }
+
     }
 }
