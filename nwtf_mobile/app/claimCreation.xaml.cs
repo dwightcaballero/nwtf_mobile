@@ -21,6 +21,7 @@ namespace nwtf_mobile.app
             claimdto.customer.customerFirstName = "Dwight";
             claimdto.customer.customerMiddleName = "Kenn";
             claimdto.customer.customerLastName = "Caballero";
+            claimdto.customer.customerMembershipDate = DateTime.Now;
             claimdto.maf.productID = "12345";
             claimdto.maf.productName = "3104";
             claimdto.claimantID = "Sweet Angel Altamera";
