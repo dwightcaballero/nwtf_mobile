@@ -41,6 +41,9 @@
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeName}" VerticalTextAlignment="Center" TextColor="Red"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitName}" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeUID}" IsVisible="false"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitUID}" IsVisible="false"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefit}" IsVisible="false"/>
                                 </Grid>
                                
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" x:Name="LOProvidesAmount" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
