@@ -12,9 +12,14 @@ namespace nwtf_mobile_bl
             [PrimaryKey, NotNull] public Guid id { get; set; }
             public string civilStatusCode { get; set; }
             public string description { get; set; }
-            public Boolean isMarried { get; set; }
+            public bool isMarried { get; set; }
             public string status { get; set; }
             public DateTime endDate { get; set; }
+
+            public static bool checkIfCustomerIsMarried(string civilStatusCode)
+            {
+                return dataservices.civilStatus.checkIfCustomerIsMarried(civilStatusCode);
+            }
         }
     }
 }

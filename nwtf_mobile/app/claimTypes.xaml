@@ -15,8 +15,8 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="35" />
-                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="80" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -27,12 +27,26 @@
                                     <ColumnDefinition Width="250" />
                                     <ColumnDefinition Width="250" />
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center" TextColor="Red"/>
-                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeName}" VerticalTextAlignment="Center" TextColor="Red"/>
-                                <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
-                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitName}" VerticalTextAlignment="Center"/>
-
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="LOProvidesAmount" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                
+                                <Grid Grid.Row="0" Grid.ColumnSpan="4" HeightRequest="80" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35" />
+                                        <RowDefinition Height="35" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="250" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Type Name:" VerticalTextAlignment="Center" TextColor="Red"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeName}" VerticalTextAlignment="Center" TextColor="Red"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Claim Benefit:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitName}" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimTypeUID}" IsVisible="false"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefitUID}" IsVisible="false"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding claimBenefit}" IsVisible="false"/>
+                                </Grid>
+                               
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" x:Name="LOProvidesAmount" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -41,7 +55,7 @@
                                 </Grid>
 
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -52,23 +66,23 @@
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
                                 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center" DateSelected="DateFromPicker"/>
                                     <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" DateSelected="DateToPicker"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -78,21 +92,21 @@
                                     <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
-                                
-                                <Grid Grid.Row="2" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="4" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center" DateSelected="DateFromPicker"/>
                                     <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" DateSelected="DateToPicker"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="120" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
@@ -104,13 +118,13 @@
                                 </Grid>
 
 
-                                <Grid Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="35" VerticalOptions="Center">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="35" VerticalOptions="Center">
                                     <CheckBox Grid.Row="0" Grid.Column="0" CheckedChanged="ForAdvanceCheckboxEvent"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
                                 </Grid>
 
-                                <ListView Grid.Row="4" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="140" WidthRequest="1010" IsVisible="false">
+                                <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="140" WidthRequest="1010" IsVisible="false">
                                     <ListView.Header>
 
                                         <Grid ColumnSpacing="0">
@@ -155,6 +169,10 @@
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
                                                     <Grid Grid.Row="0" Grid.Column="3" IsVisible="false">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="35" />
+                                                            <RowDefinition Height="35" />
+                                                        </Grid.RowDefinitions>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100" />
                                                             <ColumnDefinition Width="300" />
@@ -163,7 +181,11 @@
                                                         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="0" Grid.Column="3" IsVisible="false">
+                                                    <Grid Grid.Row="0" Grid.Column="3" HeightRequest="80" IsVisible="false">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="35" />
+                                                            <RowDefinition Height="35" />
+                                                        </Grid.RowDefinitions>     
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100" />
                                                             <ColumnDefinition Width="300" />
@@ -217,20 +239,30 @@
 
             <Grid HeightRequest="80">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="333"></ColumnDefinition>
-                    <ColumnDefinition Width="333"></ColumnDefinition>
-                    <ColumnDefinition Width="333"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
+                    <ColumnDefinition Width="350"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 
-                <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center">Default Payee</Label>
-                <Picker Grid.Row="0" Grid.Column="1" WidthRequest="280" FontSize="Small" Title="Select a Default Payee" x:Name="defaultPayee" VerticalOptions="Center">
+                <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center">Choose a Default Payee:</Label>
+                <Picker Grid.Row="0" Grid.Column="1" WidthRequest="220" FontSize="Small" Title="Select a Default Payee" x:Name="defaultPayee" VerticalOptions="Center" HorizontalOptions="Start" SelectedIndexChanged="DefaultPayeePickerEvent">
                     <Picker.Items>
                         <x:String>Member</x:String>
                         <x:String>Dependent</x:String>
                         <x:String>Freetext</x:String>
                     </Picker.Items>
                 </Picker>
-                <Label Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center">Insert Name Here</Label>
+                <Label Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Payee Name:"/>
+                <Label Grid.Row="0" Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" IsVisible="False"/>
+                <Picker Grid.Row="0" Grid.Column="3" WidthRequest="200" FontSize="Small" Title="Select a Dependent" x:Name="dependentPayee" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" IsVisible="False">
+                    <Picker.Items>
+                        <x:String>Dep 1</x:String>
+                        <x:String>Dep 2</x:String>
+                        <x:String>Dep 3</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Grid.Row="0" Grid.Column="3" WidthRequest="200" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center" IsVisible="False"/>
             </Grid>
             
         </StackLayout>

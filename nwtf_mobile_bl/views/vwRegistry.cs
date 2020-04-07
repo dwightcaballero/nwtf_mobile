@@ -12,6 +12,11 @@ namespace nwtf_mobile_bl
             [PrimaryKey, NotNull] public Guid id { get; set; }
             public string registry { get; set; }
             public string entry { get; set; }
+
+            public static string getEntry(string key)
+            {
+                return dataservices.registry.GetEntry(key);
+            }
         }
     }
     

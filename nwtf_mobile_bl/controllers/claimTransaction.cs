@@ -45,23 +45,16 @@ namespace nwtf_mobile_bl
                     Guid productUID = views.vwProduct.getUIDByProductID(maf.productID);
                     if (productUID != Guid.Empty)
                     {
-                        // UNCOMMENT AFTER MODIFICATION
-                        //var listProductClaimantSelected = views.vwProductClaimType.getListClaimantTypeSelected(productUID);
-                        //if (listProductClaimantSelected.Count > 0)
-                        //{
-                        //    var listDependent = views.vwDependent.getListDependentByCustomerUID(customer.id);
-                        //    var listClaimant = views.vwClaimant.getListClaimantForGrid(listProductClaimantSelected, customer, listDependent);
-                        //    loadClaimantGrid?.Invoke(this, (listClaimant, maf));
-                        //}
-                        //else
-                        //{
-                        //    showMessage?.Invoke(this, ("Error", "No Claimant Selected in Product Configuration!", "Close"));
-                        //}
-
-
-
-                        //temporary code
-                        loadClaimantGrid?.Invoke(this, (new List<views.vwClaimant>(), maf));
+                        var listProductClaimantSelected = views.vwProductClaimType.getListClaimantTypeSelected(productUID);
+                        if (listProductClaimantSelected.Count > 0)
+                        {
+                            var listClaimant = views.vwClaimant.getListClaimantForGrid(listProductClaimantSelected, customer);
+                            loadClaimantGrid?.Invoke(this, (listClaimant, maf));
+                        }
+                        else
+                        {
+                            showMessage?.Invoke(this, ("Error", "No Claimant Selected in Product Configuration!", "Close"));
+                        }
                     }
                     else
                     {
@@ -122,6 +115,30 @@ namespace nwtf_mobile_bl
                     showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
                 }
             }
+
+            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo)
+            {
+                double weeks = (dateTo - dateFrom).TotalDays /7;
+                decimal totalAmount = Convert.ToDecimal(weeks) * 200;
+                return totalAmount;
+            }
+
+            public decimal calculateDays(DateTime dateFrom, DateTime dateTo)
+            {
+                double days = (dateTo - dateFrom).TotalDays;
+                // sample data
+                decimal amount = Convert.ToDecimal(days * 200);
+                return amount;
+            }
+
+            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo)
+            {
+                double weeks = (dateTo - dateFrom).TotalDays / 7;
+                // sample data
+                decimal amount = Convert.ToDecimal(weeks * 200);
+                return amount;
+            }         
+
         }
     }
 }

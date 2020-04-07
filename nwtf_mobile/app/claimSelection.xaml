@@ -14,13 +14,12 @@
             <converters:cvDatetimeToBoolean x:Key="cvDatetimeToBoolean" />
             <converters:cvDatetimeToBoolean2 x:Key="cvDatetimeToBoolean2" />
             <converters:cvStringToBoolean x:Key="cvStringToBoolean"/>
+            <converters:cvEnumIntToDescription x:Key="cvEnumIntToDescription"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout Margin="40, 20">
-
-            <!--<ActivityIndicator x:Name="loading" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>-->
 
             <StackLayout x:Name="stackHeader" Margin="0, 0, 10, 0">
                 <Grid x:Name="gridClaimSelectionHeader">
@@ -256,15 +255,15 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Button Grid.Column="0" Text="Select" HorizontalOptions="Center"
-                                            Clicked="btnClaimant_Clicked"  CommandParameter="{Binding id}"/>
+                                            Clicked="btnClaimant_Clicked"  CommandParameter="{Binding claimantID}"/>
 
                                     <Label Grid.Column="1" Text ="{Binding claimantFullName}" 
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="2" Text ="{Binding claiamantBirthdate}"
+                                    <Label Grid.Column="2" Text ="{Binding claimantBirthdate, StringFormat='{0:d}'}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="3" Text ="{Binding claimantType}"
+                                    <Label Grid.Column="3" Text ="{Binding claimantType, Converter={StaticResource cvEnumIntToDescription}}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="4" Text ="{Binding claimantRelation}"
