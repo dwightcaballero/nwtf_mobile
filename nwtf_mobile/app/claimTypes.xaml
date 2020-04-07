@@ -99,8 +99,8 @@
                                     </Grid.RowDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="# of Weeks from Enrollment Date:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="2" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
                                 </Grid>
 
 
