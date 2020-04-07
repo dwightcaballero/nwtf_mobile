@@ -45,23 +45,16 @@ namespace nwtf_mobile_bl
                     Guid productUID = views.vwProduct.getUIDByProductID(maf.productID);
                     if (productUID != Guid.Empty)
                     {
-                        // UNCOMMENT AFTER MODIFICATION
-                        //var listProductClaimantSelected = views.vwProductClaimType.getListClaimantTypeSelected(productUID);
-                        //if (listProductClaimantSelected.Count > 0)
-                        //{
-                        //    var listDependent = views.vwDependent.getListDependentByCustomerUID(customer.id);
-                        //    var listClaimant = views.vwClaimant.getListClaimantForGrid(listProductClaimantSelected, customer, listDependent);
-                        //    loadClaimantGrid?.Invoke(this, (listClaimant, maf));
-                        //}
-                        //else
-                        //{
-                        //    showMessage?.Invoke(this, ("Error", "No Claimant Selected in Product Configuration!", "Close"));
-                        //}
-
-
-
-                        //temporary code
-                        loadClaimantGrid?.Invoke(this, (new List<views.vwClaimant>(), maf));
+                        var listProductClaimantSelected = views.vwProductClaimType.getListClaimantTypeSelected(productUID);
+                        if (listProductClaimantSelected.Count > 0)
+                        {
+                            var listClaimant = views.vwClaimant.getListClaimantForGrid(listProductClaimantSelected, customer);
+                            loadClaimantGrid?.Invoke(this, (listClaimant, maf));
+                        }
+                        else
+                        {
+                            showMessage?.Invoke(this, ("Error", "No Claimant Selected in Product Configuration!", "Close"));
+                        }
                     }
                     else
                     {

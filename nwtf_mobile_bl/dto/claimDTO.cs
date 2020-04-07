@@ -14,6 +14,7 @@ namespace nwtf_mobile_bl
 
             public views.vwCustomer customer { get; set; }
             public views.vwMafEnrollmentClosure maf { get; set; }
+            public views.vwClaimant claimant { get; set; }
 
             public string claimantID { get; set; }
             public int claimantType { get; set; }
@@ -34,6 +35,7 @@ namespace nwtf_mobile_bl
             {
                 customer = new views.vwCustomer();
                 maf = new views.vwMafEnrollmentClosure();
+                claimant = new views.vwClaimant();
 
                 listCustomer = new List<views.vwCustomer>();
                 listMAF = new List<views.vwMafEnrollmentClosure>();

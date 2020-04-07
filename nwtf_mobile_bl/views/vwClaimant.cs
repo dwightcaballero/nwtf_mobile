@@ -13,13 +13,13 @@ namespace nwtf_mobile_bl
             public Guid customerID { get; set; }
             public string claimantID { get; set; }
             public string claimantFullName { get; set; }
-            public DateTime claiamantBirthdate { get; set; }
+            public DateTime claimantBirthdate { get; set; }
             public int claimantType { get; set; }
             public string claimantRelation { get; set; }
 
-            public static List<vwClaimant> getListClaimantForGrid(List<string> listProductClaimantSelected, vwCustomer customer, List<vwDependent> listDependent)
+            public static List<vwClaimant> getListClaimantForGrid(List<string> listProductClaimantSelected, vwCustomer customer)
             {
-                return dataservices.claimant.getListClaimantForGrid(listProductClaimantSelected, customer, listDependent);
+                return dataservices.claimant.getListClaimantForGrid(listProductClaimantSelected, customer);
             }
         }
     }

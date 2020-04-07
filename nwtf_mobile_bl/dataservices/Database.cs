@@ -55,6 +55,7 @@ namespace nwtf_mobile_bl
                     conn.CreateTable<views.vwSubgroupRequiredFields>();
                     conn.CreateTable<views.vwSubgroups>();
                     conn.CreateTable<views.vwTempUsers>();
+                    conn.CreateTable<views.vwRegistry>();
                     conn.CreateTable<views.vwSids>();
 
                     // populate tables
@@ -480,23 +481,22 @@ namespace nwtf_mobile_bl
                     };
                     conn.InsertAll(listTempUser);
 
-                    conn.CreateTable<views.vwRegistry>();
                     var listRegistry = new List<views.vwRegistry>
                     {
                         // age limits
-                        new views.vwRegistry{id = Guid.Parse("f748ebbb-c13e-4d00-a3e0-13346e84f305"), registry = "ageLimitSpouse", entry = "70"},
-                        new views.vwRegistry{id = Guid.Parse("7340f716-a7f5-4a73-a35d-7dfee56be9b1"), registry = "ageLimitFather", entry = "70"},
-                        new views.vwRegistry{id = Guid.Parse("bc48aff8-f8dc-4cb7-b398-2152d7c6f8b4"), registry = "ageLimitMother", entry = "70"},
-                        new views.vwRegistry{id = Guid.Parse("c3259853-1de9-4de0-ad9a-ad1c785a7c9a"), registry = "ageLimitChild", entry = "21"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="ageLimitSpouse", entry="70"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="ageLimitFather", entry="70"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="ageLimitMother", entry="70"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="ageLimitChild", entry="21"},
 
                         // relationship codes
-                        new views.vwRegistry{id = Guid.Parse("43c3ae0d-0d21-4c30-ab00-c2e279e183c6"), registry = "relationFatherCode", entry = "107015"},
-                        new views.vwRegistry{id = Guid.Parse("49f07bdb-4240-4c75-bf27-17f098f3ee6a"), registry = "relationMotherCode", entry = "107014"},
-                        new views.vwRegistry{id = Guid.Parse("d3a6563c-0f53-4226-bb65-f00d8290ce7f"), registry = "relationChildCode", entry = "107007"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="relationFatherCode", entry="107015"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="relationMotherCode", entry="107014"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="relationChildCode", entry="107007"},
 
                         // aggregate labels
-                        new views.vwRegistry{id = Guid.Parse("46e5bd09-cc2f-4e2f-946f-a0c4e6dddbbf"), registry = "aggregateDateFrom", entry = "DATE FROM"},
-                        new views.vwRegistry{id = Guid.Parse("a4ff6159-ca74-44e7-a467-e73d07ad261d"), registry = "aggregateDateTo", entry = "DATE TO"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="aggregateDateFrom", entry="DATE FROM"},
+                        new views.vwRegistry{id=Guid.NewGuid(), registry="aggregateDateTo", entry="DATE TO"},
                     };
                     conn.InsertAll(listRegistry);
 
@@ -534,12 +534,24 @@ namespace nwtf_mobile_bl
                     // ADDING OR EDITING TABLE "DATA"
                     // 1. drop table
                     // 2. create table
-                    // 3. insert data (must CHANGE the data in the initialization)
+                    // 3. insert data (must also UPDATE the data in the initialization)
+
+                    // REUSABLE CODES
+                    // 1. drop table - conn.DropTable<table>();
+                    // 2. create table - conn.CreateTable<table>();
+                    // 3. add data - conn.InsertAll(data);
                     // ----------------------------------------------------------
 
 
                     // START CODING HERE
-
+                    conn.DropTable<views.vwDependent>();
+                    conn.CreateTable<views.vwDependent>();
+                    var listDependent = new List<views.vwDependent>
+                    {
+                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("10d9a217-1e28-4b24-a364-03e212cf2dcd"), dependentBirthdate="2002/02/20", dependentFullName="Emmanuel Gapuz", dependentID="963258741", dependentRelationship="FATHER"},
+                        new views.vwDependent{id=Guid.NewGuid(), customerID=Guid.Parse("b1a15115-75f0-4dc3-9aee-ce84cdf09515"), dependentBirthdate="1968/02/20", dependentFullName="Maria Amarillo", dependentID="369852147", dependentRelationship="MOTHER"}
+                    };
+                    conn.InsertAll(listDependent);
                 }
             }
         }

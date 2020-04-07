@@ -6,6 +6,11 @@ namespace nwtf_mobile_bl
 {
     public class systemconst
     {
+
+        public static string Relation_Father = "FATHER";
+        public static string Relation_Mother = "MOTHER";
+        public static string Relation_Child = "CHILD";
+
         public enum claimant
         {
             Member = 1,

@@ -28,5 +28,14 @@ namespace nwtf_mobile_bl
 
             return sql.ToString();
         }
+
+        public static int calculateAge(DateTime birthdate)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - birthdate.Year;
+            if (DateTime.Now.DayOfYear < birthdate.DayOfYear) age -= 1;
+
+            return age;
+        }
     }
 }
