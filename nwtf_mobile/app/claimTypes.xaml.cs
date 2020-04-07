@@ -117,7 +117,6 @@ namespace nwtf_mobile.app
                 maxAmount.Text = cblRec.maximumAmount.ToString("N2");
                 // Change Accumulated Amount
                 Label accumulatedAmount = (Label)grd.Children[5];
-                // dataservices.claimTransaction.getAccumulatedAmount(productUID,claimTypeID,claimantType);
                 accumulatedAmount.Text = "120.00";
                 grd.IsVisible = true;
             }
