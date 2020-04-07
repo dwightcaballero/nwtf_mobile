@@ -47,12 +47,13 @@ namespace nwtf_mobile.app
             int claimantType = 1;
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
 
-            Guid productUID = Guid.Parse("b7121a30-04ab-41d4-bb86-c978ee051191");
-            claimTypeUID.Add(Guid.Parse("3e00abb5-f0cf-458a-8423-84165452bd78"));
-            
+            Guid productUID = Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d");
+            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));
+
             claimTypeList = vwClaimTypes.getListClaimTypeSelected(claimTypeUID);
 
-            foreach (vwClaimTypes claimType in claimTypeList) {
+            foreach (vwClaimTypes claimType in claimTypeList)
+            {
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
                 claimType.claimBenefitUID = cblRec.id;
                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
@@ -84,6 +85,10 @@ namespace nwtf_mobile.app
                         vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
                         setClaimBenefit(cblRec, item1);
 
+                        // Code to get list of disbursement advances
+                        List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
+                        setDisbursementAdvances(daRec, item1);
+
                         if (item.forAdvance == false)
                         {
                             if (checkForAdvance == null) return;
@@ -92,9 +97,6 @@ namespace nwtf_mobile.app
                                 if (forAdvancePanel == null) return;
                                 //  set for advance panel visible to false
                                 forAdvanceGrid.IsVisible = false;
-                                // Code to get list of disbursement advances
-                                List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
-                                setDisbursementAdvances(daRec, item1);
                             }
                         }
                     }
@@ -106,7 +108,7 @@ namespace nwtf_mobile.app
         {
             Guid productUID = Guid.Empty;
             Guid claimTypeID = Guid.Empty;
-           // int claimantType = 1;
+            // int claimantType = 1;
             // LO Provides Amount
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
@@ -224,12 +226,12 @@ namespace nwtf_mobile.app
             advancesGrid.ItemsSource = daList;
 
         }
-        
+
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
-           {
+            {
                 daGrid = (Grid)parentGrid.Children[4];
                 Label payeeName = (Label)daGrid.Children[3];
                 payeeName.Text = "Rona Melissa Plana";
@@ -256,10 +258,10 @@ namespace nwtf_mobile.app
                 return daGrid;
             }
         }
-       
+
         private void ForAdvanceCheckboxEvent(object sender, ToggledEventArgs e)
         {
-            
+
             CheckBox forAdvancePanelValue = (CheckBox)sender;
             Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
             Grid parentGrid = (Grid)forAdvanceGrid.Parent;
@@ -288,6 +290,36 @@ namespace nwtf_mobile.app
             {
                 daGrid.IsVisible = false;
             }
+        }
+        private void DefaultPayeePickerEvent(object sender, EventArgs e)
+        {
+            Picker defaultPayee = (Picker)sender;
+            Grid parentGrid = (Grid)defaultPayee.Parent;
+            int defaultPayeeValue = defaultPayee.SelectedIndex;
+
+            Label payeeName = (Label)parentGrid.Children[3];
+            Picker dependentPicker = (Picker)parentGrid.Children[4];
+            Entry freeTextName = (Entry)parentGrid.Children[5];
+            payeeName.IsVisible = false;
+            dependentPicker.IsVisible = false;
+            freeTextName.IsVisible = false;
+
+            if (defaultPayeeValue == 0)
+            {
+
+                payeeName.IsVisible = true;
+                payeeName.Text = claimdto.customer.customerLastName +", "+ claimdto.customer.customerFirstName +" "+ claimdto.customer.customerMiddleName;
+            }
+            else if (defaultPayeeValue == 1)
+            {
+
+                dependentPicker.IsVisible = true;
+            }
+            else if (defaultPayeeValue == 2)
+            {
+                freeTextName.IsVisible = true;
+            }
+
         }
     }
 }
