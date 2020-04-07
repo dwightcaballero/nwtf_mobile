@@ -120,7 +120,7 @@ namespace nwtf_mobile.app
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 // Get Weeks from Membership Date of Customer to Date
-                double weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = weeksValue.ToString() + " weeks";
@@ -145,7 +145,7 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 // Get Weeks from Effective Date to Date
-                double weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
                 // Change Effective Amount
                 Label weeksFromEffectiveDate = (Label)grd.Children[1];
                 weeksFromEffectiveDate.Text = weeksValue.ToString() + " weeks";
