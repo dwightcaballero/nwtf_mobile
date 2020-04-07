@@ -70,9 +70,10 @@ namespace nwtf_mobile.app
 
             foreach (Grid item1 in control.Children)
             {
-                Label claimTypeName = (Label)item1.Children[1];
-                Label claimBenefit = (Label)item1.Children[1];
-                Grid forAdvanceGrid = (Grid)item1.Children[11];
+                Grid claimTypeGrid = (Grid)item1.Children[0];
+                Label claimTypeName = (Label)claimTypeGrid.Children[1];
+                Label claimBenefit = (Label)claimTypeGrid.Children[3];
+                Grid forAdvanceGrid = (Grid)item1.Children[8];
                 CheckBox forAdvancePanelValue = (CheckBox)forAdvanceGrid.Children[0];
                 Label forAdvancePanel = (Label)forAdvanceGrid.Children[1];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
@@ -109,17 +110,17 @@ namespace nwtf_mobile.app
             Guid productUID = Guid.Empty;
             Guid claimTypeID = Guid.Empty;
             cblRec.claimBenefitsLimits = 3;
+            Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
+
             // int claimantType = 1;
             // LO Provides Amount
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.LOProvidesAmount))
             {
-                Grid grd = (Grid)control.Children[4];
                 grd.IsVisible = true;
             }
             // Number of Premiums Paid
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
-                Grid grd = (Grid)control.Children[5];
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = "6 Weeks";
@@ -132,7 +133,6 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays))
             {
                 // controls
-                Grid grd = (Grid)control.Children[6];
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromVal = (DatePicker)grd.Children[1];
@@ -159,13 +159,11 @@ namespace nwtf_mobile.app
             // Insurer Approved Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.InsurerApprovedAmount))
             {
-                Grid grd = (Grid)control.Children[7];
                 grd.IsVisible = true;
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
             {
-                Grid grd = (Grid)control.Children[8];
                 // Change Amount per Claim
                 Label amountPerClaim = (Label)grd.Children[1];
                 amountPerClaim.Text = "50.00";
@@ -178,7 +176,6 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
             {
                 // controls
-                Grid grd = (Grid)control.Children[6];
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromVal = (DatePicker)grd.Children[1];
@@ -205,7 +202,6 @@ namespace nwtf_mobile.app
             // Membership Date
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
-                Grid grd = (Grid)control.Children[10];
                 // Change Enrollment Date
                 Label weeksFromEnrollmentDate = (Label)grd.Children[1];
                 weeksFromEnrollmentDate.Text = "5 Weeks";
@@ -223,7 +219,7 @@ namespace nwtf_mobile.app
             {
                 daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
             }
-            ListView advancesGrid = (ListView)control.Children[12];
+            ListView advancesGrid = (ListView)control.Children[9];
             advancesGrid.ItemsSource = daList;
 
         }
@@ -266,7 +262,7 @@ namespace nwtf_mobile.app
             CheckBox forAdvancePanelValue = (CheckBox)sender;
             Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
             Grid parentGrid = (Grid)forAdvanceGrid.Parent;
-            ListView advancesList = (ListView)parentGrid.Children[12];
+            ListView advancesList = (ListView)parentGrid.Children[9];
             if (forAdvancePanelValue.IsChecked == true)
             {
                 advancesList.IsVisible = true;
@@ -327,13 +323,14 @@ namespace nwtf_mobile.app
             DatePicker dateFrom = (DatePicker)sender;
             Grid parentGrid = (Grid)dateFrom.Parent;
             DatePicker dateTo = (DatePicker)parentGrid.Children[3];
+            Grid fullGrid = (Grid)parentGrid.Parent;
+            int claimBenefitsLimits = 3;
+            Grid grd = (Grid)fullGrid.Children[claimBenefitsLimits];
+            Label computedAmount = (Label)grd.Children[5];
 
             if (dateFrom.Date != null && dateTo.Date != null)
             {
                 decimal totalAmount = calculateDays(dateFrom.Date,dateTo.Date);
-                Grid fullGrid = (Grid)parentGrid.Parent;
-                Grid grd = (Grid)fullGrid.Children[6];
-                Label computedAmount = (Label)grd.Children[5];
                 computedAmount.Text = totalAmount.ToString();
 
             }
@@ -344,14 +341,16 @@ namespace nwtf_mobile.app
             DatePicker dateTo = (DatePicker)sender;
             Grid parentGrid = (Grid)dateTo.Parent;
             DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
+            Grid fullGrid = (Grid)parentGrid.Parent;
+            int claimBenefitsLimits = 3;
+            Grid grd = (Grid)fullGrid.Children[claimBenefitsLimits];
+            Label computedAmount = (Label)grd.Children[5];
 
             if (dateFrom.Date != null && dateTo.Date != null)
             {
                 decimal totalAmount = calculateDays(dateFrom.Date, dateTo.Date);
-                Grid fullGrid = (Grid)parentGrid.Parent;
-                Grid grd = (Grid)fullGrid.Children[6];
-                Label computedAmount = (Label)grd.Children[5];
                 computedAmount.Text = totalAmount.ToString();
+
             }
         }
 
