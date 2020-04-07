@@ -17,6 +17,11 @@ namespace nwtf_mobile_bl
             public String requiredDocumentName { get; set; }
             [NotNull]
             public Byte RequiresHardCopy { get; set; }
+
+            public static List<views.vwRequiredDocuments> GetRequiredDocuments()
+            {
+                return dataservices.requiredDocuments.GetRequiredDocuments();
+            }
         }
     }
 }
