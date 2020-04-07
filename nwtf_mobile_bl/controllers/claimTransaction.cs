@@ -115,6 +115,30 @@ namespace nwtf_mobile_bl
                     showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
                 }
             }
+
+            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo)
+            {
+                double weeks = (dateTo - dateFrom).TotalDays /7;
+                decimal totalAmount = Convert.ToDecimal(weeks) * 200;
+                return totalAmount;
+            }
+
+            public decimal calculateDays(DateTime dateFrom, DateTime dateTo)
+            {
+                double days = (dateTo - dateFrom).TotalDays;
+                // sample data
+                decimal amount = Convert.ToDecimal(days * 200);
+                return amount;
+            }
+
+            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo)
+            {
+                double weeks = (dateTo - dateFrom).TotalDays / 7;
+                // sample data
+                decimal amount = Convert.ToDecimal(weeks * 200);
+                return amount;
+            }         
+
         }
     }
 }

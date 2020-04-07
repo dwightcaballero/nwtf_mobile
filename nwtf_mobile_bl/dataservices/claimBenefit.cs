@@ -19,8 +19,9 @@ namespace nwtf_mobile_bl
                         // query to get productclaimtype  
                         string getPCT = "SELECT * FROM vwProductClaimType WHERE productUID='" + productUID.ToString() + "' and claimantType='" + claimantType + "' and claimTypeUID='" + claimTypeUID.ToString() + "';";
                         pctRec = conn.Query<views.vwProductClaimType>(getPCT).FirstOrDefault();
+                        if (pctRec == null) return cblRec;
                         string getCBLrec = "SELECT * FROM vwClaimBenefits WHERE productClaimTypeUID='" + pctRec.id.ToString() + "';";
-;                        cblRec = conn.Query<views.vwClaimBenefits>(getCBLrec).FirstOrDefault();
+                        cblRec = conn.Query<views.vwClaimBenefits>(getCBLrec).FirstOrDefault();
 
                 }
                 return cblRec;
