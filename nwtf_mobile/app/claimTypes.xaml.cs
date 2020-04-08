@@ -1,13 +1,14 @@
 ﻿using nwtf_mobile_bl;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.CustomControls;
 
 namespace nwtf_mobile.app
 {
@@ -40,8 +41,9 @@ namespace nwtf_mobile.app
         // display messages
         void displayMessage(string title, string message, string buttonName)
         {
-           // DisplayAlert(title, message, buttonName);
+            App.Current.MainPage.DisplayAlert(title, message, buttonName);
         }
+
 
         private void Pcon_showMessage(object sender, (string, string, string) e)
         {
@@ -49,8 +51,15 @@ namespace nwtf_mobile.app
         }
 
         private void PopulateRepeater(dto.claimDTO claimDTO)
-        {
-            pcon.getListRepeater(claimdto);
+        { 
+            try
+            {
+                pcon.getListRepeater(claimdto);
+            }
+            catch 
+            {
+                displayMessage("Error", "Claim Benefit Record Was Not Found", "Close");
+            }
         }
 
         private void Pcon_loadRepeater(object sender, List<views.vwClaimTypes> e)
@@ -58,6 +67,23 @@ namespace nwtf_mobile.app
             claimTypeRepeater.ItemsSource = e;
         }
 
+        // User Controls
+        public ListView getListViewDA(Grid control)
+        {
+            ListView advancesGrid = (ListView)control.Children[9];
+            return advancesGrid;
+        }
+        private Grid getGridClaimType(Grid control)
+        {
+            Grid claimTypeGrid = (Grid)control.Children[0];
+            return claimTypeGrid;
+        }
+
+        private string getCustomerFullname()
+        {
+            string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
+            return customerFullname;
+        }
 
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
@@ -65,7 +91,7 @@ namespace nwtf_mobile.app
             if (control == null) return;
             foreach (Grid item1 in control.Children)
             {
-                Grid claimTypeGrid = (Grid)item1.Children[0];
+                Grid claimTypeGrid = getGridClaimType(item1);
                 Label claimTypeName = (Label)claimTypeGrid.Children[1];
                 Grid forAdvanceGrid = (Grid)item1.Children[8];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
@@ -141,16 +167,44 @@ namespace nwtf_mobile.app
             }
         }
 
-
-        public void setDisbursementAdvances(List<views.vwDisbursementType> daList, Grid control)
+        public void setDisbursementAdvances(List<views.vwDisbursementType> tempDAList, Grid control)
         {
-            foreach (views.vwDisbursementType daRec in daList)
-            {
-                daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
-            }
-            ListView advancesGrid = (ListView)control.Children[9];
-            advancesGrid.ItemsSource = daList;
+            List<views.vwDisbursementType> DAList = pcon.getListAdvances(tempDAList);
+            ListView advancesGrid = getListViewDA(control);
+            advancesGrid.ItemsSource = DAList;
+        }
 
+        private void ForAdvanceCheckboxEvent(object sender, ToggledEventArgs e)
+        {
+
+            CheckBox forAdvancePanelValue = (CheckBox)sender;
+            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
+            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
+            ListView advancesList = getListViewDA(parentGrid);
+            if (forAdvancePanelValue.IsChecked == true)
+            {
+                advancesList.IsVisible = true;
+            }
+            else
+            {
+                advancesList.IsVisible = false;
+            }
+        }
+
+        private void DACheckboxEvent(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox advanceDisbursement = (CheckBox)sender;
+            Grid parentGrid = (Grid)advanceDisbursement.Parent;
+            Label payeeType = (Label)parentGrid.Children[3];
+            Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
+            if (advanceDisbursement.IsChecked == true)
+            {
+                daGrid.IsVisible = true;
+            }
+            else
+            {
+                daGrid.IsVisible = false;
+            }
         }
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
@@ -160,7 +214,7 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[4];
                 Label payeeName = (Label)daGrid.Children[3];
-                payeeName.Text = "Rona Melissa Plana";
+                payeeName.Text = getCustomerFullname();
                 return daGrid;
             }
             if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
@@ -185,37 +239,6 @@ namespace nwtf_mobile.app
             }
         }
 
-        private void ForAdvanceCheckboxEvent(object sender, ToggledEventArgs e)
-        {
-
-            CheckBox forAdvancePanelValue = (CheckBox)sender;
-            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
-            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
-            ListView advancesList = (ListView)parentGrid.Children[9];
-            if (forAdvancePanelValue.IsChecked == true)
-            {
-                advancesList.IsVisible = true;
-            }
-            else
-            {
-                advancesList.IsVisible = false;
-            }
-        }
-        private void DACheckboxEvent(object sender, CheckedChangedEventArgs e)
-        {
-            CheckBox advanceDisbursement = (CheckBox)sender;
-            Grid parentGrid = (Grid)advanceDisbursement.Parent;
-            Label payeeType = (Label)parentGrid.Children[3];
-            Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
-            if (advanceDisbursement.IsChecked == true)
-            {
-                daGrid.IsVisible = true;                
-            }
-            else
-            {
-                daGrid.IsVisible = false;
-            }
-        }
         private void DefaultPayeePickerEvent(object sender, EventArgs e)
         {
             Picker defaultPayee = (Picker)sender;
@@ -232,11 +255,13 @@ namespace nwtf_mobile.app
             if (defaultPayeeValue == 0)
             {
                 payeeName.IsVisible = true;
-                payeeName.Text = claimdto.customer.customerLastName +", "+ claimdto.customer.customerFirstName +" "+ claimdto.customer.customerMiddleName;
+                payeeName.Text = getCustomerFullname();
             }
             else if (defaultPayeeValue == 1)
             {
-
+                List<views.vwDependent> depList = pcon.getListDependents(claimdto.customer);
+                List<string> depNames = depList.Select(x => x.dependentFullName).ToList();
+                dependentPicker.ItemsSource = depNames;
                 dependentPicker.IsVisible = true;
             }
             else if (defaultPayeeValue == 2)
@@ -265,7 +290,7 @@ namespace nwtf_mobile.app
         public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
         {
             Grid fullGrid = (Grid)parentGrid.Parent;
-            Grid claimTypeGrid = (Grid)fullGrid.Children[0];
+            Grid claimTypeGrid = getGridClaimType(fullGrid);
             Label claimBenefit = (Label)claimTypeGrid.Children[6];
             int cbl = Convert.ToInt32(claimBenefit.Text);
             Grid grd = (Grid)fullGrid.Children[cbl];

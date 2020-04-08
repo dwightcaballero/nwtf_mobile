@@ -149,11 +149,12 @@ namespace nwtf_mobile_bl
                 // Bind claim benefit to claim type
                 foreach (views.vwClaimTypes claimType in claimdto.listSelectedClaimType)
                 {
-                    views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
-                    claimType.claimBenefitUID = cblRec.id;
-                    claimType.claimBenefit = cblRec.claimBenefitsLimits;
-                    claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
+                        views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
+                        claimType.claimBenefitUID = cblRec.id;
+                        claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                        claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
                 }
+
                 if (claimdto.listSelectedClaimType.Count > 0)
                 {
                     loadRepeater?.Invoke(this, claimdto.listSelectedClaimType);
@@ -164,6 +165,42 @@ namespace nwtf_mobile_bl
                 }
             }
 
+            public List<views.vwDisbursementType> getListAdvances(List<views.vwDisbursementType> daList)
+            {
+                foreach (views.vwDisbursementType daRec in daList)
+                {
+                    daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
+                }
+                if (daList.Count > 0)
+                {
+                    return daList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public List<views.vwDependent> getListDependents(views.vwCustomer custRec)
+            {
+                List<views.vwDependent> depList = views.vwDependent.getListDependentByCustomerUID(custRec.id);
+                if (custRec.customerCivilStatus == "102002")
+                {
+                    views.vwDependent item = new views.vwDependent();
+                    item.customerID = custRec.id;
+                    item.dependentFullName = (custRec.spouseFirstName + " " + custRec.spouseMiddleName + " " + custRec.spouseLastName);
+                    item.dependentBirthdate = custRec.spouseBirthdate.ToString();
+                    depList.Add(item);
+                }
+                if (depList.Count > 0)
+                {
+                    return depList;
+                }
+                else
+                {
+                    return null; 
+                }
+            }
         }
     }
 }
