@@ -220,9 +220,22 @@ namespace nwtf_mobile.app
                 payeeName.Text = getCustomerFullname();
                 return daGrid;
             }
-            if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
+            if (payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
             {
                 daGrid = (Grid)parentGrid.Children[5];
+                Picker branchPayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
+                List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();
+                branchPayeePicker.ItemsSource = branchNames;
+                return daGrid;
+            }
+            else if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee))
+            {
+                daGrid = (Grid)parentGrid.Children[5];
+                Picker disbursePayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwDisbursementPayee> disbursePayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
+                List<string> DisburseNames = disbursePayeeList.Select(x => x.businessName).ToList();
+                disbursePayeePicker.ItemsSource = DisburseNames;
                 return daGrid;
             }
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
@@ -233,6 +246,10 @@ namespace nwtf_mobile.app
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
             {
                 daGrid = (Grid)parentGrid.Children[7];
+                Picker dependentPayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwDependent> depList = pcon.getListDependents(claimdto.customer);
+                List<string> depNames = depList.Select(x => x.dependentFullName).ToList();
+                dependentPayeePicker.ItemsSource = depNames;
                 return daGrid;
             }
             else
