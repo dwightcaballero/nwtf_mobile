@@ -124,20 +124,18 @@ namespace nwtf_mobile_bl
                 return totalAmount;
             }
 
-            public decimal calculateDays(DateTime dateFrom, DateTime dateTo)
+            public decimal calculateDays(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double days = (dateTo - dateFrom).TotalDays;
-                // sample data
-                decimal amount = Convert.ToDecimal(days * 200);
-                return amount;
+                decimal finalAmount = Convert.ToDecimal(days) * amount;
+                return finalAmount;
             }
 
-            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo)
+            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double weeks = (dateTo - dateFrom).TotalDays / 7;
-                // sample data
-                decimal amount = Convert.ToDecimal(weeks * 200);
-                return amount;
+                decimal finalAmount = Convert.ToDecimal(weeks) * amount;
+                return finalAmount;
             }
 
             public void getListRepeater(dto.claimDTO claimdto)

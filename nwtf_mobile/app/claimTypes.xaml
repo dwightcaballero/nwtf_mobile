@@ -71,12 +71,14 @@
                                         <RowDefinition Height="35" />
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center" IsVisible="False"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center" DateSelected="DateFromPicker" IsVisible="False"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center" DateSelected="DateFromPicker"/>
                                     <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center" IsVisible="False"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" DateSelected="DateToPicker" IsVisible="False"/>
+                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" DateSelected="DateToPicker"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text="Amount per Day:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="3" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
@@ -101,6 +103,8 @@
                                     <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" DateSelected="DateToPicker"/>
                                     <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text="Amount per Week:" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="3" VerticalTextAlignment="Center"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
@@ -227,12 +231,12 @@
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
             
-            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" WidthRequest="1010" BackgroundColor="Black"/>
 
-            <Grid HeightRequest="80">
+            <Grid HeightRequest="80" WidthRequest="1010">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"></ColumnDefinition>
                     <ColumnDefinition Width="350"></ColumnDefinition>
+                    <ColumnDefinition Width="250"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="200"></ColumnDefinition>
                 </Grid.ColumnDefinitions>

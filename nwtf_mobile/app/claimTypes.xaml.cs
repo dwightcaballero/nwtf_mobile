@@ -148,6 +148,9 @@ namespace nwtf_mobile.app
                 Label dateTo = (Label)grd.Children[2];
                 dateFrom.Text = cblRec.dateFrom;
                 dateTo.Text = cblRec.dateTo;
+                // Change Amount
+                Label amount = (Label)grd.Children[7];
+                amount.Text = cblRec.amount.ToString("N2");
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
@@ -295,17 +298,19 @@ namespace nwtf_mobile.app
             int cbl = Convert.ToInt32(claimBenefit.Text);
             Grid grd = (Grid)fullGrid.Children[cbl];
             Label computedAmount = (Label)grd.Children[5];
+            Label amountText = (Label)grd.Children[7];
+            decimal amount = Convert.ToDecimal(amountText.Text);
 
             if (dateFrom != null && dateTo != null)
             {
                 if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfDays))
                 {
-                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo);
+                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
                     computedAmount.Text = totalAmount.ToString("N2");
                 }
                 else if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
                 {
-                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo);
+                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
                     computedAmount.Text = totalAmount.ToString("N2");
                 }
 
