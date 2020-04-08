@@ -16,6 +16,7 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
         public static dto.claimDTO claimdto { get; set; }
+        public static bool checkDateRange { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
@@ -28,6 +29,7 @@ namespace nwtf_mobile.app
         public claimTypes()
         {
             InitializeComponent();
+            checkDateRange = false;
             subscribeToAllEvents();
             PopulateRepeater(claimdto);
             AccessControlsInRepeater(claimdto);
@@ -129,7 +131,6 @@ namespace nwtf_mobile.app
 
         public void setClaimBenefit(views.vwClaimBenefits cblRec, Grid control)
         {
-            // Sample data only
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
             grd.IsVisible = true;
             Decimal amount = Convert.ToDecimal(cblRec.amount);
@@ -145,11 +146,27 @@ namespace nwtf_mobile.app
             // Number of Days or Number of Weeks
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays) || cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
             {
+
                 // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
-                dateFrom.Text = cblRec.dateFrom;
-                dateTo.Text = cblRec.dateTo;
+                DatePicker dateFromValue = (DatePicker)grd.Children[1];
+                DatePicker dateToValue = (DatePicker)grd.Children[3];
+
+                if (checkDateRange == false)
+                {
+                    checkDateRange = true;
+                    dateFrom.Text = cblRec.dateFrom;
+                    dateTo.Text = cblRec.dateTo;
+                }
+                else
+                {
+                    dateFromValue.IsVisible = false;
+                    dateToValue.IsVisible = false;
+                    dateFrom.IsVisible = false;
+                    dateTo.IsVisible = false;
+                }
+
                 // Change Amount
                 Label amountText = (Label)grd.Children[7];
                 amountText.Text = amount.ToString("N2");
@@ -235,8 +252,6 @@ namespace nwtf_mobile.app
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
-            // Sample Data only
-            payeeType = 2;
             Grid daGrid;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
