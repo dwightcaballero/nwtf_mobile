@@ -1,15 +1,13 @@
 ﻿using nwtf_mobile_bl;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.CustomControls;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static nwtf_mobile_bl.views;
+using Xamarin.CustomControls;
 
 namespace nwtf_mobile.app
 {
@@ -27,28 +25,39 @@ namespace nwtf_mobile.app
         public claimTypes()
         {
             InitializeComponent();
-            PopulateClaimTypes(claimdto);
+            subscribeToAllEvents();
+            PopulateRepeater(claimdto);
             AccessControlsInRepeater(claimdto);
         }
 
-
-        public void PopulateClaimTypes(dto.claimDTO claimdto)
+        // subscribe to all events in the controller
+        void subscribeToAllEvents()
         {
-
-            Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);       
-            int claimantType = claimdto.claimant.claimantType;
-            string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
-
-            // Bind claim benefit to claim type
-            foreach (vwClaimTypes claimType in claimdto.listSelectedClaimType)
-            {
-                vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
-                claimType.claimBenefitUID = cblRec.id;
-                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
-                claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
-            }
-            claimTypeRepeater.ItemsSource = claimdto.listSelectedClaimType;
+            pcon.showMessage += Pcon_showMessage;
+            pcon.loadRepeater += Pcon_loadRepeater;
         }
+
+        // display messages
+        void displayMessage(string title, string message, string buttonName)
+        {
+           // DisplayAlert(title, message, buttonName);
+        }
+
+        private void Pcon_showMessage(object sender, (string, string, string) e)
+        {
+            displayMessage(e.Item1, e.Item2, e.Item3);
+        }
+
+        private void PopulateRepeater(dto.claimDTO claimDTO)
+        {
+            pcon.getListRepeater(claimdto);
+        }
+
+        private void Pcon_loadRepeater(object sender, List<views.vwClaimTypes> e)
+        {
+            claimTypeRepeater.ItemsSource = e;
+        }
+
 
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
@@ -61,17 +70,17 @@ namespace nwtf_mobile.app
                 Grid forAdvanceGrid = (Grid)item1.Children[8];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
 
-                foreach (vwClaimTypes item in control.ItemsSource)
+                foreach (views.vwClaimTypes item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
                         // Code to get claim benefit
-                        vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
+                        views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
                         if (cblRec == null) return;
                         setClaimBenefit(cblRec, item1);
 
                         // Code to get list of disbursement advances
-                        List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimant.claimantType);
+                        List<views.vwDisbursementType> daRec = views.vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimant.claimantType);
                         if (daRec == null) return;
                         setDisbursementAdvances(daRec, item1);
 
@@ -90,7 +99,7 @@ namespace nwtf_mobile.app
             }
         }
 
-        public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
+        public void setClaimBenefit(views.vwClaimBenefits cblRec, Grid control)
         {
             // Sample data only
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
@@ -133,9 +142,9 @@ namespace nwtf_mobile.app
         }
 
 
-        public void setDisbursementAdvances(List<vwDisbursementType> daList, Grid control)
+        public void setDisbursementAdvances(List<views.vwDisbursementType> daList, Grid control)
         {
-            foreach (vwDisbursementType daRec in daList)
+            foreach (views.vwDisbursementType daRec in daList)
             {
                 daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
             }
@@ -198,10 +207,9 @@ namespace nwtf_mobile.app
             Grid parentGrid = (Grid)advanceDisbursement.Parent;
             Label payeeType = (Label)parentGrid.Children[3];
             Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
-
             if (advanceDisbursement.IsChecked == true)
             {
-                daGrid.IsVisible = true;
+                daGrid.IsVisible = true;                
             }
             else
             {

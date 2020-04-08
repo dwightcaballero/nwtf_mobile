@@ -17,8 +17,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="80" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -115,7 +115,7 @@
                                 </Grid>
 
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="35" VerticalOptions="Center">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="30" VerticalOptions="Center">
                                     <CheckBox Grid.Row="0" Grid.Column="0" CheckedChanged="ForAdvanceCheckboxEvent"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false"/>
@@ -160,7 +160,7 @@
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="400" />
                                                     </Grid.ColumnDefinitions>
-                                                    <CheckBox Grid.Row="0" Grid.Column="0" CheckedChanged="DACheckboxEvent"/>
+                                                    <CheckBox x:Name="DACheckbox" Grid.Row="0" Grid.Column="0" CheckedChanged="DACheckboxEvent"/>
                                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding disbursementTypeName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountTypeText}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
@@ -221,6 +221,7 @@
                                                             </Picker.Items>
                                                         </Picker>
                                                     </Grid>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>

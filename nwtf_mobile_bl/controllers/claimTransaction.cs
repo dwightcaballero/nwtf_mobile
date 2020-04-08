@@ -13,6 +13,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
             public event EventHandler<List<views.vwClaimTypes>> loadClaimTypeGrid;
             public event EventHandler<List<views.vwClaimTypes>> saveClaimTypeSelected;
+            public event EventHandler<List<views.vwClaimTypes>> loadRepeater;
 
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
 
@@ -98,7 +99,7 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this, ("Error", "No requied Documents retrieved!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "No required Documents retrieved!", "Close"));
                 }
 
             }
@@ -137,7 +138,31 @@ namespace nwtf_mobile_bl
                 // sample data
                 decimal amount = Convert.ToDecimal(weeks * 200);
                 return amount;
-            }         
+            }
+
+            public void getListRepeater(dto.claimDTO claimdto)
+            {
+                Guid productUID = views.vwProduct.getUIDByProductID(claimdto.maf.productID);
+                int claimantType = claimdto.claimant.claimantType;
+                string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
+
+                // Bind claim benefit to claim type
+                foreach (views.vwClaimTypes claimType in claimdto.listSelectedClaimType)
+                {
+                    views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
+                    claimType.claimBenefitUID = cblRec.id;
+                    claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                    claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
+                }
+                if (claimdto.listSelectedClaimType.Count > 0)
+                {
+                    loadRepeater?.Invoke(this, claimdto.listSelectedClaimType);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
+                }
+            }
 
         }
     }
