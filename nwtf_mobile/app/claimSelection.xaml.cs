@@ -207,8 +207,6 @@ namespace nwtf_mobile.app
             if (claimDTO.listSelectedClaimType.Count > 0)
             {
                 hideStacks();
-                ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true, Color=Color.Blue};
-
                 var listClaimTypeIDs = claimDTO.listSelectedClaimType.Select(ct => ct.id).ToList();
                 pcon.getListClaimTypeSelected(listClaimTypeIDs);
 
