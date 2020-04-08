@@ -9,11 +9,12 @@
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="505" />
@@ -21,36 +22,36 @@
             </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="Center">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Transaction" VerticalTextAlignment="Center" TextColor="Red"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Claim Transaction" VerticalTextAlignment="Center" TextColor="Black" FontSize="Large"/>
                 </Grid>
                 
                 <Grid Grid.Row="1" Grid.ColumnSpan="2" VerticalOptions="Start">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Customer ID:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtCustID" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="2" Text="Customer Name:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtCustName" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Customer ID:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtCustID" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Customer Name:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtCustName" VerticalTextAlignment="Center" TextColor="Black"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Grid.ColumnSpan="2" VerticalOptions="Start">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Product ID:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtProdID" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="2" Text="Product Name:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtProdName" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Product ID:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtProdID" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Product Name:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtProdName" VerticalTextAlignment="Center" TextColor="Black"/>
                 </Grid>
 
                 <Grid Grid.Row="3" Grid.ColumnSpan="2" VerticalOptions="Start">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Claimant Name:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtClaimantName" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="2" Text="Claimant Relation:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtClaimantRel" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Claimant Name:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="txtClaimantName" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Claimant Relation:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="3" x:Name="txtClaimantRel" VerticalTextAlignment="Center" TextColor="Black"/>
                 </Grid>
 
                 <Grid Grid.Row="4" Grid.ColumnSpan="2" VerticalOptions="Start">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Selected Claim Types:" VerticalTextAlignment="Center"/>
-                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" x:Name="txtClaimTypesList" VerticalTextAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Selected Claim Types:" VerticalTextAlignment="Center" TextColor="Black"/>
+                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" x:Name="txtClaimTypesList" VerticalTextAlignment="Center" TextColor="Black"/>
                 </Grid>
 
-                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+                <BoxView Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" BackgroundColor="Black"/>
         </Grid>
         </StackLayout>
     </ContentView.Content>

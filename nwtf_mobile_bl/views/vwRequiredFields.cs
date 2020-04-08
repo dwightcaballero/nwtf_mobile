@@ -13,6 +13,11 @@ namespace nwtf_mobile_bl
             public String requiredFieldName { get; set; }
             [NotNull]
             public int requiredFieldType { get; set; }
+
+            public static List<views.vwRequiredFields> getRequiredFields()
+            {
+                return dataservices.requiredFields.GetRequiredFields();
+            }
         }
     }
 }
