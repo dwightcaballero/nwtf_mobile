@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
-using nwtf_mobile_bl;
 
 namespace nwtf_mobile.converters
 {
@@ -11,7 +9,7 @@ namespace nwtf_mobile.converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value!= null)
+            if (value != null)
             {
                 return systemconst.getClaimantDescription((int)value);
             }

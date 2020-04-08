@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace nwtf_mobile.custombinds
 {
-    class cbClaimSelectionHeader:INotifyPropertyChanged
+    class cbClaimSelectionHeader : INotifyPropertyChanged
     {
         public string _customerID { get; set; }
         public string customerID
@@ -77,7 +74,7 @@ namespace nwtf_mobile.custombinds
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)       
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

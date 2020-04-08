@@ -1,7 +1,6 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -15,11 +14,11 @@ namespace nwtf_mobile_bl
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
                     // use build or instead of foreach
-                        // query to get claimtype data
-                        string sql = "SELECT * FROM vwDisbursementType WHERE claimTypeID='" + claimTypeUID.ToString() + "' and claimantType='"+ claimantType +"';";
-                        List<views.vwDisbursementType> item = conn.Query<views.vwDisbursementType>(sql);
-                        listAdvances.AddRange(item);
-                    
+                    // query to get claimtype data
+                    string sql = "SELECT * FROM vwDisbursementType WHERE claimTypeID='" + claimTypeUID.ToString() + "' and claimantType='" + claimantType + "';";
+                    List<views.vwDisbursementType> item = conn.Query<views.vwDisbursementType>(sql);
+                    listAdvances.AddRange(item);
+
                 }
                 return listAdvances;
             }

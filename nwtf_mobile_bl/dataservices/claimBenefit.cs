@@ -1,8 +1,6 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -16,12 +14,12 @@ namespace nwtf_mobile_bl
                 views.vwClaimBenefits cblRec = new views.vwClaimBenefits();
                 using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
                 {
-                        // query to get productclaimtype  
-                        string getPCT = "SELECT * FROM vwProductClaimType WHERE productUID='" + productUID.ToString() + "' and claimantType='" + claimantType + "' and claimTypeUID='" + claimTypeUID.ToString() + "';";
-                        pctRec = conn.Query<views.vwProductClaimType>(getPCT).FirstOrDefault();
-                        if (pctRec == null) return cblRec;
-                        string getCBLrec = "SELECT * FROM vwClaimBenefits WHERE productClaimTypeUID='" + pctRec.id.ToString() + "';";
-                        cblRec = conn.Query<views.vwClaimBenefits>(getCBLrec).FirstOrDefault();
+                    // query to get productclaimtype  
+                    string getPCT = "SELECT * FROM vwProductClaimType WHERE productUID='" + productUID.ToString() + "' and claimantType='" + claimantType + "' and claimTypeUID='" + claimTypeUID.ToString() + "';";
+                    pctRec = conn.Query<views.vwProductClaimType>(getPCT).FirstOrDefault();
+                    if (pctRec == null) return cblRec;
+                    string getCBLrec = "SELECT * FROM vwClaimBenefits WHERE productClaimTypeUID='" + pctRec.id.ToString() + "';";
+                    cblRec = conn.Query<views.vwClaimBenefits>(getCBLrec).FirstOrDefault();
 
                 }
                 return cblRec;

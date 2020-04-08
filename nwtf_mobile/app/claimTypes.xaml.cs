@@ -1,11 +1,6 @@
 ﻿using nwtf_mobile_bl;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,7 +30,7 @@ namespace nwtf_mobile.app
         public void PopulateClaimTypes(dto.claimDTO claimdto)
         {
 
-            Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);       
+            Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);
             int claimantType = claimdto.claimant.claimantType;
             string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
 
@@ -44,7 +39,7 @@ namespace nwtf_mobile.app
             {
                 vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
                 claimType.claimBenefitUID = cblRec.id;
-                 claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                claimType.claimBenefit = cblRec.claimBenefitsLimits;
                 claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
             }
             claimTypeRepeater.ItemsSource = claimdto.listSelectedClaimType;
@@ -224,7 +219,7 @@ namespace nwtf_mobile.app
             if (defaultPayeeValue == 0)
             {
                 payeeName.IsVisible = true;
-                payeeName.Text = claimdto.customer.customerLastName +", "+ claimdto.customer.customerFirstName +" "+ claimdto.customer.customerMiddleName;
+                payeeName.Text = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
             }
             else if (defaultPayeeValue == 1)
             {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -33,7 +32,7 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this,("Error", "Customer Record Not Found!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "Customer Record Not Found!", "Close"));
                 }
             }
 
@@ -118,7 +117,7 @@ namespace nwtf_mobile_bl
 
             public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo)
             {
-                double weeks = (dateTo - dateFrom).TotalDays /7;
+                double weeks = (dateTo - dateFrom).TotalDays / 7;
                 decimal totalAmount = Convert.ToDecimal(weeks) * 200;
                 return totalAmount;
             }
@@ -137,7 +136,7 @@ namespace nwtf_mobile_bl
                 // sample data
                 decimal amount = Convert.ToDecimal(weeks * 200);
                 return amount;
-            }         
+            }
 
         }
     }

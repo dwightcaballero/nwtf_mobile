@@ -1,12 +1,8 @@
-﻿using Android;
-using nwtf_mobile_bl;
+﻿using nwtf_mobile_bl;
+using Plugin.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Plugin.Media;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

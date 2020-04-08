@@ -1,8 +1,5 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using nwtf_mobile_bl;
 using System.Linq;
 
 namespace nwtf_mobile_bl
@@ -18,7 +15,7 @@ namespace nwtf_mobile_bl
                 {
                     string sql = "SELECT id, username, branchCode, blockCode FROM vwTempUsers WHERE username=?";
                     tempUser = conn.Query<views.vwTempUsers>(sql, username).FirstOrDefault();
-                  
+
                     if (tempUser == null || tempUser.username != username)
                     {
                         return tempUser;

@@ -1,12 +1,11 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
-    public partial class dataservices{
+    public partial class dataservices
+    {
         public static class sids
         {
             public static views.vwSids getSID(Guid uid)

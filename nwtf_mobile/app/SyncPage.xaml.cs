@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using nwtf_mobile_bl;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using nwtf_mobile_bl;
 
 namespace nwtf_mobile.app
 {
@@ -22,7 +16,7 @@ namespace nwtf_mobile.app
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-           views.vwTempUsers userRec = views.vwTempUsers.getUser(usernameEntry.Text, passwordEntry.Text);
+            views.vwTempUsers userRec = views.vwTempUsers.getUser(usernameEntry.Text, passwordEntry.Text);
             if (userRec == null)
             {
                 await DisplayAlert("Error", "User is not in the database!", "Ok");
