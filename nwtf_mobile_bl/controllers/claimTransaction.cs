@@ -15,6 +15,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwClaimTypes>> saveClaimTypeSelected;
 
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
+            public event EventHandler<List<views.vwRequiredFields>> loadRequiredFields;
 
             public event EventHandler<(string, string, string)> showMessage;
 
@@ -139,6 +140,18 @@ namespace nwtf_mobile_bl
                 return amount;
             }         
 
+            public void getRequiredFields()
+            {
+                List<views.vwRequiredFields> lstRequiredFields = views.vwRequiredFields.getRequiredFields();
+                if (lstRequiredFields.Count != 0)
+                {
+                    loadRequiredFields?.Invoke(this, lstRequiredFields);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "No required fields retrieved!", "Close"));
+                }
+            }
         }
     }
 }
