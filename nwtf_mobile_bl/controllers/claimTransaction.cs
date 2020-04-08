@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -16,6 +15,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwClaimTypes>> loadRepeater;
 
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
+            public event EventHandler<List<views.vwRequiredFields>> loadRequiredFields;
 
             public event EventHandler<(string, string, string)> showMessage;
 
@@ -34,7 +34,7 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this,("Error", "Customer Record Not Found!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "Customer Record Not Found!", "Close"));
                 }
             }
 
@@ -197,6 +197,18 @@ namespace nwtf_mobile_bl
                 else
                 {
                     return null; 
+                }
+            }
+            public void getRequiredFields()
+            {
+                List<views.vwRequiredFields> lstRequiredFields = views.vwRequiredFields.getRequiredFields();
+                if (lstRequiredFields.Count != 0)
+                {
+                    loadRequiredFields?.Invoke(this, lstRequiredFields);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "No required fields retrieved!", "Close"));
                 }
             }
         }

@@ -13,6 +13,7 @@
                 <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:claimTypes></app:claimTypes>
                 <app:requiredDocuments></app:requiredDocuments>
+                <app:requiredFields></app:requiredFields>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using nwtf_mobile_bl;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using nwtf_mobile_bl;
 
 namespace nwtf_mobile.app
 {
@@ -18,7 +13,7 @@ namespace nwtf_mobile.app
             headerDetails.setClaimDTO(claimdto);
             claimTypes.setClaimDTO(claimdto);
             InitializeComponent();
-            
+
         }
     }
 }

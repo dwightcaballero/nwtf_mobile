@@ -1,0 +1,34 @@
+﻿@model nwtf_mobile_api.Models.vwRegistry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vwRegistry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.registry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.entry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.entry)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

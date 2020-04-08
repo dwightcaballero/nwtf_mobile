@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace nwtf_mobile_bl
+﻿namespace nwtf_mobile_bl
 {
     public class systemconst
     {
@@ -29,8 +25,8 @@ namespace nwtf_mobile_bl
 
         public enum amountType
         {
-            FixedAmount=1,
-            PercentOfBenefit=2
+            FixedAmount = 1,
+            PercentOfBenefit = 2
         }
 
         public enum cblList
@@ -114,7 +110,7 @@ namespace nwtf_mobile_bl
 
         public static string getAmountTypeDescription(int i)
         {
-            switch(i)
+            switch (i)
             {
                 case 1:
                     return "Fixed Amount";
@@ -127,7 +123,7 @@ namespace nwtf_mobile_bl
 
         public static int getAmountTypeNumber(string s)
         {
-            switch(s)
+            switch (s)
             {
                 case "Fixed Amount":
                     return 1;

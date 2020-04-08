@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace nwtf_mobile.converters
@@ -17,7 +15,7 @@ namespace nwtf_mobile.converters
             else
             {
                 return false;
-            }   
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -22,7 +21,7 @@ namespace nwtf_mobile_bl
             public string defaultPayeeName { get; set; }
             public int defaultPayeeType { get; set; }
 
-            public  Guid blockID { get; set; }
+            public Guid blockID { get; set; }
             public Guid branchID { get; set; }
 
             public List<views.vwCustomer> listCustomer { get; set; }

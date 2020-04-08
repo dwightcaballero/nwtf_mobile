@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SQLite;
+using System;
 using System.Linq;
-using System.Text;
-using SQLite;
 
 namespace nwtf_mobile_bl
 {
