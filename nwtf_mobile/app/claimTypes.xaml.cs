@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Xamarin.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static nwtf_mobile_bl.views;
 
 namespace nwtf_mobile.app
 {
@@ -17,54 +16,77 @@ namespace nwtf_mobile.app
     public partial class claimTypes : ContentView
     {
         public static dto.claimDTO claimdto { get; set; }
+        public static bool checkDateRange { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
         {
             claimdto = value;
+            // Sample Data
+            claimdto.branchID = Guid.Parse("34a1738a-27ac-4e86-ac7e-8eb52467366e");
         }
 
         public claimTypes()
         {
-            claimdto.claimantType = 1;
             InitializeComponent();
-            PopulateClaimTypes(claimdto);
+            checkDateRange = false;
+            subscribeToAllEvents();
+            PopulateRepeater(claimdto);
             AccessControlsInRepeater(claimdto);
         }
 
-
-        public void PopulateClaimTypes(dto.claimDTO claimdto)
+        // subscribe to all events in the controller
+        void subscribeToAllEvents()
         {
-            List<vwClaimTypes> claimTypeList = new List<vwClaimTypes>();
-            List<Guid> claimTypeUID = new List<Guid>();
+            pcon.showMessage += Pcon_showMessage;
+            pcon.loadRepeater += Pcon_loadRepeater;
+        }
 
-            // Uncomment once complete
-            // Guid productUID = vwProduct.getUIDByProductID(claimdto.maf.productID);
-            // int claimantType = claimdto.claimantType;
-            // claimTypeList = claimdto.listClaimType;
+        // display messages
+        void displayMessage(string title, string message, string buttonName)
+        {
+            App.Current.MainPage.DisplayAlert(title, message, buttonName);
+        }
 
-            // Sample data only
-            int claimantType = 1;
-            Guid productUID = Guid.Parse("3f87fae8-d287-4ea1-9685-4d22eca8e37d");
-            claimTypeUID.Add(Guid.Parse("8451c5ef-e0af-4038-8e39-90fe73ec1bee"));
-            claimTypeList = vwClaimTypes.getListClaimTypeSelected(claimTypeUID);
 
-            string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
+        private void Pcon_showMessage(object sender, (string, string, string) e)
+        {
+            displayMessage(e.Item1, e.Item2, e.Item3);
+        }
 
-            // Bind claim benefit to claim type
-            foreach (vwClaimTypes claimType in claimTypeList)
+        private void PopulateRepeater(dto.claimDTO claimDTO)
+        { 
+            try
             {
-                vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
-                claimType.claimBenefitUID = cblRec.id;
-                // Sample data only
-                claimType.claimBenefit = 3;
-                claimType.claimBenefitName = systemconst.getCBLDescription(3);
-                // Uncomment once complete
-                // claimType.claimBenefit = cblRec.claimBenefitsLimits;
-                // claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
+                pcon.getListRepeater(claimdto);
             }
+            catch 
+            {
+                displayMessage("Error", "Claim Benefit Record Was Not Found", "Close");
+            }
+        }
 
-            claimTypeRepeater.ItemsSource = claimTypeList;
+        private void Pcon_loadRepeater(object sender, List<views.vwClaimTypes> e)
+        {
+            claimTypeRepeater.ItemsSource = e;
+        }
+
+        // User Controls
+        public ListView getListViewDA(Grid control)
+        {
+            ListView advancesGrid = (ListView)control.Children[9];
+            return advancesGrid;
+        }
+        private Grid getGridClaimType(Grid control)
+        {
+            Grid claimTypeGrid = (Grid)control.Children[0];
+            return claimTypeGrid;
+        }
+
+        private string getCustomerFullname()
+        {
+            string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
+            return customerFullname;
         }
 
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
@@ -73,30 +95,30 @@ namespace nwtf_mobile.app
             if (control == null) return;
             foreach (Grid item1 in control.Children)
             {
-                Grid claimTypeGrid = (Grid)item1.Children[0];
+                Grid claimTypeGrid = getGridClaimType(item1);
                 Label claimTypeName = (Label)claimTypeGrid.Children[1];
                 Grid forAdvanceGrid = (Grid)item1.Children[8];
                 Label checkForAdvance = (Label)forAdvanceGrid.Children[2];
 
-                foreach (vwClaimTypes item in control.ItemsSource)
+                foreach (views.vwClaimTypes item in control.ItemsSource)
                 {
                     if (item.claimTypeName.ToString() == claimTypeName.Text)
                     {
                         // Code to get claim benefit
-                        vwClaimBenefits cblRec = vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
+                        views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
                         if (cblRec == null) return;
                         setClaimBenefit(cblRec, item1);
 
                         // Code to get list of disbursement advances
-                        List<vwDisbursementType> daRec = vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimantType);
+                        List<views.vwDisbursementType> daRec = views.vwDisbursementType.getAdvancesByClaimTypeID(item.id, claimdto.claimant.claimantType);
                         if (daRec == null) return;
                         setDisbursementAdvances(daRec, item1);
 
                         // Set for advance grid visible to false
-                        if (item.forAdvance == false)
+                        if (item.allowAdvances == false)
                         {
                             if (checkForAdvance == null) return;
-                            if (item.forAdvance.ToString() == checkForAdvance.Text)
+                            if (item.allowAdvances.ToString() == checkForAdvance.Text)
                             {
                                 if (forAdvanceGrid == null) return;
                                 forAdvanceGrid.IsVisible = false;
@@ -107,19 +129,16 @@ namespace nwtf_mobile.app
             }
         }
 
-        public void setClaimBenefit(vwClaimBenefits cblRec, Grid control)
+        public void setClaimBenefit(views.vwClaimBenefits cblRec, Grid control)
         {
-            // Sample data only
-            cblRec.claimBenefitsLimits = 3;
-            int weeksValue = 20;
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
             grd.IsVisible = true;
-
+            Decimal amount = Convert.ToDecimal(cblRec.amount);
             // Premiums Paid
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 // Get Weeks from Membership Date of Customer to Date
-               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now, amount);
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = weeksValue.ToString() + " weeks";
@@ -127,11 +146,30 @@ namespace nwtf_mobile.app
             // Number of Days or Number of Weeks
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays) || cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
             {
+
                 // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
-                dateFrom.Text = cblRec.dateFrom;
-                dateTo.Text = cblRec.dateTo;
+                DatePicker dateFromValue = (DatePicker)grd.Children[1];
+                DatePicker dateToValue = (DatePicker)grd.Children[3];
+
+                if (checkDateRange == false)
+                {
+                    checkDateRange = true;
+                    dateFrom.Text = cblRec.dateFrom;
+                    dateTo.Text = cblRec.dateTo;
+                }
+                else
+                {
+                    dateFromValue.IsVisible = false;
+                    dateToValue.IsVisible = false;
+                    dateFrom.IsVisible = false;
+                    dateTo.IsVisible = false;
+                }
+
+                // Change Amount
+                Label amountText = (Label)grd.Children[7];
+                amountText.Text = amount.ToString("N2");
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
@@ -144,23 +182,72 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 // Get Weeks from Effective Date to Date
-               // decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now, amount);
                 // Change Effective Amount
                 Label weeksFromEffectiveDate = (Label)grd.Children[1];
                 weeksFromEffectiveDate.Text = weeksValue.ToString() + " weeks";
             }
         }
 
-
-        public void setDisbursementAdvances(List<vwDisbursementType> daList, Grid control)
+        public void setDisbursementAdvances(List<views.vwDisbursementType> tempDAList, Grid control)
         {
-            foreach (vwDisbursementType daRec in daList)
-            {
-                daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
-            }
-            ListView advancesGrid = (ListView)control.Children[9];
-            advancesGrid.ItemsSource = daList;
+            List<views.vwDisbursementType> DAList = pcon.getListAdvances(tempDAList);
+            ListView advancesGrid = getListViewDA(control);
+            advancesGrid.ItemsSource = DAList;
+        }
 
+        private void ForAdvanceCheckboxEvent(object sender, ToggledEventArgs e)
+        {
+
+            CheckBox forAdvancePanelValue = (CheckBox)sender;
+            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
+            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
+            ListView advancesList = getListViewDA(parentGrid);
+            if (forAdvancePanelValue.IsChecked == true)
+            {
+                advancesList.IsVisible = true;
+            }
+            else
+            {
+                advancesList.IsVisible = false;
+            }
+        }
+
+        private void DACheckboxEvent(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox advanceDisbursement = (CheckBox)sender;
+            Grid parentGrid = (Grid)advanceDisbursement.Parent;
+            Label payeeType = (Label)parentGrid.Children[3];
+            Label amountTypeText = (Label)parentGrid.Children[8];
+            int amountType = Convert.ToInt32(amountTypeText.Text);
+            ViewCell grandparentGrid = (ViewCell)parentGrid.Parent;
+            ListView fullGrid = (ListView)grandparentGrid.Parent;
+            Grid fullGrid1 = (Grid)fullGrid.Parent;
+            Grid claimTypeGrid = getGridClaimType(fullGrid1);
+            Label claimBenefit = (Label)claimTypeGrid.Children[6];
+            int cbl = Convert.ToInt32(claimBenefit.Text);
+
+                Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
+                if (advanceDisbursement.IsChecked == true)
+                {
+                    if (cbl == Convert.ToInt32(systemconst.cblList.InsurerApprovedAmount))
+                    {
+                        if (amountType == Convert.ToInt32(systemconst.amountType.PercentOfBenefit))
+                        {
+                            displayMessage("Error", "Advances for Claim Benefit - Insurer Approved Amount with Amount Type - Percent of Benefit cannot be Selected.", "Close");
+                            advanceDisbursement.IsChecked = false;
+                        }
+                    }
+                    else
+                    {
+                            daGrid.IsVisible = true;
+                    }
+                }               
+                else
+                {
+                    daGrid.IsVisible = false;
+                }
+            
         }
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
@@ -170,12 +257,25 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[4];
                 Label payeeName = (Label)daGrid.Children[3];
-                payeeName.Text = "Rona Melissa Plana";
+                payeeName.Text = getCustomerFullname();
                 return daGrid;
             }
-            if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee) || payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
+            if (payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
             {
                 daGrid = (Grid)parentGrid.Children[5];
+                Picker branchPayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
+                List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();
+                branchPayeePicker.ItemsSource = branchNames;
+                return daGrid;
+            }
+            else if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee))
+            {
+                daGrid = (Grid)parentGrid.Children[5];
+                Picker disbursePayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwDisbursementPayee> disbursePayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
+                List<string> DisburseNames = disbursePayeeList.Select(x => x.businessName).ToList();
+                disbursePayeePicker.ItemsSource = DisburseNames;
                 return daGrid;
             }
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
@@ -186,6 +286,10 @@ namespace nwtf_mobile.app
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
             {
                 daGrid = (Grid)parentGrid.Children[7];
+                Picker dependentPayeePicker = (Picker)daGrid.Children[1];
+                List<views.vwDependent> depList = pcon.getListDependents(claimdto.customer);
+                List<string> depNames = depList.Select(x => x.dependentFullName).ToList();
+                dependentPayeePicker.ItemsSource = depNames;
                 return daGrid;
             }
             else
@@ -195,38 +299,6 @@ namespace nwtf_mobile.app
             }
         }
 
-        private void ForAdvanceCheckboxEvent(object sender, ToggledEventArgs e)
-        {
-
-            CheckBox forAdvancePanelValue = (CheckBox)sender;
-            Grid forAdvanceGrid = (Grid)forAdvancePanelValue.Parent;
-            Grid parentGrid = (Grid)forAdvanceGrid.Parent;
-            ListView advancesList = (ListView)parentGrid.Children[9];
-            if (forAdvancePanelValue.IsChecked == true)
-            {
-                advancesList.IsVisible = true;
-            }
-            else
-            {
-                advancesList.IsVisible = false;
-            }
-        }
-        private void DACheckboxEvent(object sender, CheckedChangedEventArgs e)
-        {
-            CheckBox advanceDisbursement = (CheckBox)sender;
-            Grid parentGrid = (Grid)advanceDisbursement.Parent;
-            Label payeeType = (Label)parentGrid.Children[3];
-            Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
-
-            if (advanceDisbursement.IsChecked == true)
-            {
-                daGrid.IsVisible = true;
-            }
-            else
-            {
-                daGrid.IsVisible = false;
-            }
-        }
         private void DefaultPayeePickerEvent(object sender, EventArgs e)
         {
             Picker defaultPayee = (Picker)sender;
@@ -243,11 +315,13 @@ namespace nwtf_mobile.app
             if (defaultPayeeValue == 0)
             {
                 payeeName.IsVisible = true;
-                payeeName.Text = claimdto.customer.customerLastName +", "+ claimdto.customer.customerFirstName +" "+ claimdto.customer.customerMiddleName;
+                payeeName.Text = getCustomerFullname();
             }
             else if (defaultPayeeValue == 1)
             {
-
+                List<views.vwDependent> depList = pcon.getListDependents(claimdto.customer);
+                List<string> depNames = depList.Select(x => x.dependentFullName).ToList();
+                dependentPicker.ItemsSource = depNames;
                 dependentPicker.IsVisible = true;
             }
             else if (defaultPayeeValue == 2)
@@ -276,22 +350,24 @@ namespace nwtf_mobile.app
         public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
         {
             Grid fullGrid = (Grid)parentGrid.Parent;
-            Grid claimTypeGrid = (Grid)fullGrid.Children[0];
+            Grid claimTypeGrid = getGridClaimType(fullGrid);
             Label claimBenefit = (Label)claimTypeGrid.Children[6];
             int cbl = Convert.ToInt32(claimBenefit.Text);
             Grid grd = (Grid)fullGrid.Children[cbl];
             Label computedAmount = (Label)grd.Children[5];
+            Label amountText = (Label)grd.Children[7];
+            decimal amount = Convert.ToDecimal(amountText.Text);
 
             if (dateFrom != null && dateTo != null)
             {
                 if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfDays))
                 {
-                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo);
+                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
                     computedAmount.Text = totalAmount.ToString("N2");
                 }
                 else if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
                 {
-                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo);
+                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
                     computedAmount.Text = totalAmount.ToString("N2");
                 }
 

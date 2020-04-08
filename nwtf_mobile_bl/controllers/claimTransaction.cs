@@ -13,6 +13,7 @@ namespace nwtf_mobile_bl
             public event EventHandler<(List<views.vwClaimant>, views.vwMafEnrollmentClosure)> loadClaimantGrid;
             public event EventHandler<List<views.vwClaimTypes>> loadClaimTypeGrid;
             public event EventHandler<List<views.vwClaimTypes>> saveClaimTypeSelected;
+            public event EventHandler<List<views.vwClaimTypes>> loadRepeater;
 
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
             public event EventHandler<List<views.vwRequiredFields>> loadRequiredFields;
@@ -99,7 +100,7 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this, ("Error", "No requied Documents retrieved!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "No required Documents retrieved!", "Close"));
                 }
 
             }
@@ -117,29 +118,88 @@ namespace nwtf_mobile_bl
                 }
             }
 
-            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo)
+            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double weeks = (dateTo - dateFrom).TotalDays /7;
-                decimal totalAmount = Convert.ToDecimal(weeks) * 200;
+                decimal totalAmount = Convert.ToDecimal(weeks) * amount;
                 return totalAmount;
             }
 
-            public decimal calculateDays(DateTime dateFrom, DateTime dateTo)
+            public decimal calculateDays(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double days = (dateTo - dateFrom).TotalDays;
-                // sample data
-                decimal amount = Convert.ToDecimal(days * 200);
-                return amount;
+                decimal finalAmount = Convert.ToDecimal(days) * amount;
+                return finalAmount;
             }
 
-            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo)
+            public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double weeks = (dateTo - dateFrom).TotalDays / 7;
-                // sample data
-                decimal amount = Convert.ToDecimal(weeks * 200);
-                return amount;
-            }         
+                decimal finalAmount = Convert.ToDecimal(weeks) * amount;
+                return finalAmount;
+            }
 
+            public void getListRepeater(dto.claimDTO claimdto)
+            {
+                Guid productUID = views.vwProduct.getUIDByProductID(claimdto.maf.productID);
+                int claimantType = claimdto.claimant.claimantType;
+                string claimantTypeDescription = systemconst.getClaimantDescription(claimantType);
+
+                // Bind claim benefit to claim type
+                foreach (views.vwClaimTypes claimType in claimdto.listSelectedClaimType)
+                {
+                        views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByProductClaimantClaimType(productUID, claimantTypeDescription, claimType.id);
+                        claimType.claimBenefitUID = cblRec.id;
+                        claimType.claimBenefit = cblRec.claimBenefitsLimits;
+                        claimType.claimBenefitName = systemconst.getCBLDescription(cblRec.claimBenefitsLimits);
+                }
+
+                if (claimdto.listSelectedClaimType.Count > 0)
+                {
+                    loadRepeater?.Invoke(this, claimdto.listSelectedClaimType);
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "Claim Type Records Not Found!", "Close"));
+                }
+            }
+
+            public List<views.vwDisbursementType> getListAdvances(List<views.vwDisbursementType> daList)
+            {
+                foreach (views.vwDisbursementType daRec in daList)
+                {
+                    daRec.amountTypeText = systemconst.getAmountTypeDescription(daRec.amountType);
+                }
+                if (daList.Count > 0)
+                {
+                    return daList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public List<views.vwDependent> getListDependents(views.vwCustomer custRec)
+            {
+                List<views.vwDependent> depList = views.vwDependent.getListDependentByCustomerUID(custRec.id);
+                if (custRec.customerCivilStatus == "102002")
+                {
+                    views.vwDependent item = new views.vwDependent();
+                    item.customerID = custRec.id;
+                    item.dependentFullName = (custRec.spouseFirstName + " " + custRec.spouseMiddleName + " " + custRec.spouseLastName);
+                    item.dependentBirthdate = custRec.spouseBirthdate.ToString();
+                    depList.Add(item);
+                }
+                if (depList.Count > 0)
+                {
+                    return depList;
+                }
+                else
+                {
+                    return null; 
+                }
+            }
             public void getRequiredFields()
             {
                 List<views.vwRequiredFields> lstRequiredFields = views.vwRequiredFields.getRequiredFields();

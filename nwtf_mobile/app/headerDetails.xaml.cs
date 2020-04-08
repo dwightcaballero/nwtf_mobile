@@ -39,8 +39,8 @@ namespace nwtf_mobile.app
             }
             txtProdID.Text = claimdto.maf.productID;
             txtProdName.Text = claimdto.maf.productName;
-            txtClaimantName.Text = claimdto.claimantID;
-            txtClaimantRel.Text = systemconst.getClaimantDescription(claimdto.claimantType);
+            txtClaimantName.Text = claimdto.claimant.claimantFullName;
+            txtClaimantRel.Text = claimdto.claimant.claimantRelation;
             txtClaimTypesList.Text = "Claim Type A, Claim Type B, Claim Type C";
         }
     }

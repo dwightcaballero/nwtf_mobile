@@ -16,7 +16,7 @@ namespace nwtf_mobile
             //dataservices.Database.initializeDB();
 
             //comment this after using
-            dataservices.Database.modifyInitialization();
+            //dataservices.Database.modifyInitialization();
 
             dto.claimDTO claimDTO = new dto.claimDTO();
             MainPage = new NavigationPage(new claimCreation(claimDTO));
