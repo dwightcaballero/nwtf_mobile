@@ -1,6 +1,7 @@
 ﻿using nwtf_mobile_bl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
