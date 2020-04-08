@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimTypes">
   <ContentView.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="1150">
             <customcontrols:RepeaterView x:Name="claimTypeRepeater">
                 <customcontrols:RepeaterView.ItemTemplate>
                     <DataTemplate>
@@ -22,10 +22,10 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="285" />
+                                    <ColumnDefinition Width="285" />
+                                    <ColumnDefinition Width="285" />
+                                    <ColumnDefinition Width="285" />
                                 </Grid.ColumnDefinitions>
                                 
                                 <Grid Grid.Row="0" Grid.ColumnSpan="4" HeightRequest="80" VerticalOptions="Start">
@@ -119,21 +119,21 @@
                                 </Grid>
 
 
-                                <Grid Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="30" VerticalOptions="Center">
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="30" VerticalOptions="Start">
                                     <CheckBox Grid.Row="0" Grid.Column="0" CheckedChanged="ForAdvanceCheckboxEvent"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="For Advance Processing" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Margin="50,0,50,0" Text="For Advance Processing" VerticalTextAlignment="Center"  TextColor="Black"/>
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false" TextColor="Black"/>
                                 </Grid>
 
-                                <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="100" WidthRequest="1010" IsVisible="false">
+                                <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="100" WidthRequest="1150" IsVisible="false">
                                     <ListView.Header>
 
-                                        <Grid ColumnSpacing="0">
+                                        <Grid ColumnSpacing="0" WidthRequest="1150">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="400" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="300" />
+                                                <ColumnDefinition Width="550" />
                                             </Grid.ColumnDefinitions>
 
                                             <Label HorizontalOptions="Fill" Grid.Column="0"
@@ -157,14 +157,14 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
-                                                <Grid ColumnSpacing="0">
+                                                <Grid ColumnSpacing="0" WidthRequest="1150">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="50" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="400" />
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="300" />
+                                                        <ColumnDefinition Width="550" />
                                                     </Grid.ColumnDefinitions>
-                                                    <CheckBox x:Name="DACheckbox" Grid.Row="0" Grid.Column="0" CheckedChanged="DACheckboxEvent"/>
+                                                    <CheckBox x:Name="DACheckbox" Grid.Row="0" Grid.Column="0" CheckedChanged="DACheckboxEvent" VerticalOptions="CenterAndExpand"/>
                                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding disbursementTypeName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountTypeText}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
@@ -221,9 +221,9 @@
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
             
-            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" WidthRequest="1010" BackgroundColor="Black"/>
+            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" WidthRequest="1150" BackgroundColor="Black"/>
 
-            <Grid HeightRequest="80" WidthRequest="1010">
+            <Grid HeightRequest="80" WidthRequest="1150">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350"></ColumnDefinition>
                     <ColumnDefinition Width="250"></ColumnDefinition>
