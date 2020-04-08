@@ -117,10 +117,10 @@ namespace nwtf_mobile_bl
                 }
             }
 
-            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo)
+            public decimal getWeeksfromDate(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
                 double weeks = (dateTo - dateFrom).TotalDays /7;
-                decimal totalAmount = Convert.ToDecimal(weeks) * 200;
+                decimal totalAmount = Convert.ToDecimal(weeks) * amount;
                 return totalAmount;
             }
 

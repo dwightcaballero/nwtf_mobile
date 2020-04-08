@@ -84,7 +84,7 @@
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="0" VerticalOptions="Start">
                                 </Grid>
 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="50" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="40" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
@@ -125,7 +125,7 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding allowAdvances}" IsVisible="false" TextColor="Black"/>
                                 </Grid>
 
-                                <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="140" WidthRequest="1010" IsVisible="false">
+                                <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="100" WidthRequest="1010" IsVisible="false">
                                     <ListView.Header>
 
                                         <Grid ColumnSpacing="0">
@@ -221,7 +221,7 @@
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
             
-            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" WidthRequest="1010" BackgroundColor="Black"/>
+            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" WidthRequest="1010" BackgroundColor="Black"/>
 
             <Grid HeightRequest="80" WidthRequest="1010">
                 <Grid.ColumnDefinitions>

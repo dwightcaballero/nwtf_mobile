@@ -9,11 +9,12 @@
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="505" />
@@ -50,7 +51,7 @@
                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" x:Name="txtClaimTypesList" VerticalTextAlignment="Center" TextColor="Black"/>
                 </Grid>
 
-                <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="End" BackgroundColor="Black"/>
+                <BoxView Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" BackgroundColor="Black"/>
         </Grid>
         </StackLayout>
     </ContentView.Content>

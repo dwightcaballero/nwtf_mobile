@@ -21,6 +21,8 @@ namespace nwtf_mobile.app
         public static void setClaimDTO(dto.claimDTO value)
         {
             claimdto = value;
+            // Sample Data
+            claimdto.branchID = Guid.Parse("34a1738a-27ac-4e86-ac7e-8eb52467366e");
         }
 
         public claimTypes()
@@ -130,12 +132,12 @@ namespace nwtf_mobile.app
             // Sample data only
             Grid grd = (Grid)control.Children[cblRec.claimBenefitsLimits];
             grd.IsVisible = true;
-
+            Decimal amount = Convert.ToDecimal(cblRec.amount);
             // Premiums Paid
             if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfPremiumsPaid))
             {
                 // Get Weeks from Membership Date of Customer to Date
-                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.customer.customerMembershipDate, DateTime.Now, amount);
                 // Change Membership Amount
                 Label weeksFromMembershipDate = (Label)grd.Children[1];
                 weeksFromMembershipDate.Text = weeksValue.ToString() + " weeks";
@@ -149,8 +151,8 @@ namespace nwtf_mobile.app
                 dateFrom.Text = cblRec.dateFrom;
                 dateTo.Text = cblRec.dateTo;
                 // Change Amount
-                Label amount = (Label)grd.Children[7];
-                amount.Text = cblRec.amount.ToString("N2");
+                Label amountText = (Label)grd.Children[7];
+                amountText.Text = amount.ToString("N2");
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
@@ -163,7 +165,7 @@ namespace nwtf_mobile.app
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.MembershipDate))
             {
                 // Get Weeks from Effective Date to Date
-                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now);
+                decimal weeksValue = pcon.getWeeksfromDate(claimdto.maf.effectiveDate, DateTime.Now, amount);
                 // Change Effective Amount
                 Label weeksFromEffectiveDate = (Label)grd.Children[1];
                 weeksFromEffectiveDate.Text = weeksValue.ToString() + " weeks";
@@ -199,19 +201,42 @@ namespace nwtf_mobile.app
             CheckBox advanceDisbursement = (CheckBox)sender;
             Grid parentGrid = (Grid)advanceDisbursement.Parent;
             Label payeeType = (Label)parentGrid.Children[3];
-            Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
-            if (advanceDisbursement.IsChecked == true)
-            {
-                daGrid.IsVisible = true;
-            }
-            else
-            {
-                daGrid.IsVisible = false;
-            }
+            Label amountTypeText = (Label)parentGrid.Children[8];
+            int amountType = Convert.ToInt32(amountTypeText.Text);
+            ViewCell grandparentGrid = (ViewCell)parentGrid.Parent;
+            ListView fullGrid = (ListView)grandparentGrid.Parent;
+            Grid fullGrid1 = (Grid)fullGrid.Parent;
+            Grid claimTypeGrid = getGridClaimType(fullGrid1);
+            Label claimBenefit = (Label)claimTypeGrid.Children[6];
+            int cbl = Convert.ToInt32(claimBenefit.Text);
+
+                Grid daGrid = setPayeeType(Convert.ToInt32(payeeType.Text), parentGrid);
+                if (advanceDisbursement.IsChecked == true)
+                {
+                    if (cbl == Convert.ToInt32(systemconst.cblList.InsurerApprovedAmount))
+                    {
+                        if (amountType == Convert.ToInt32(systemconst.amountType.PercentOfBenefit))
+                        {
+                            displayMessage("Error", "Advances for Claim Benefit - Insurer Approved Amount with Amount Type - Percent of Benefit cannot be Selected.", "Close");
+                            advanceDisbursement.IsChecked = false;
+                        }
+                    }
+                    else
+                    {
+                            daGrid.IsVisible = true;
+                    }
+                }               
+                else
+                {
+                    daGrid.IsVisible = false;
+                }
+            
         }
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
+            // Sample Data only
+            payeeType = 2;
             Grid daGrid;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
