@@ -126,15 +126,28 @@ namespace nwtf_mobile_bl
 
             public decimal calculateDays(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
-                double days = (dateTo - dateFrom).TotalDays;
-                decimal finalAmount = Convert.ToDecimal(days) * amount;
+                TimeSpan daysSpan = dateTo.Subtract(dateFrom);
+                int daysSpanValue = Convert.ToInt32(daysSpan.Days);
+                decimal days = 0;
+                if (daysSpanValue >= 0)
+                {
+                    days = daysSpanValue;
+                }
+                decimal finalAmount = days * amount;
                 return finalAmount;
             }
 
             public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
-                double weeks = (dateTo - dateFrom).TotalDays / 7;
-                decimal finalAmount = Convert.ToDecimal(weeks) * amount;
+                TimeSpan daysSpan = dateTo.Subtract(dateFrom);
+                int daysSpanValue = Convert.ToInt32(daysSpan.Days);
+                decimal weeks = 0;
+                if (daysSpanValue >= 0)
+                {
+                    decimal weeksValue = daysSpanValue / 7;
+                    weeks = Math.Floor(weeksValue);
+                }
+                decimal finalAmount = weeks * amount;
                 return finalAmount;
             }
 

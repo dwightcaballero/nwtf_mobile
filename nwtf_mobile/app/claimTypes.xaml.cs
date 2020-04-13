@@ -332,7 +332,8 @@ namespace nwtf_mobile.app
             DatePicker dateFrom = (DatePicker)sender;
             Grid parentGrid = (Grid)dateFrom.Parent;
             DatePicker dateTo = (DatePicker)parentGrid.Children[3];
-            setComputedAmount(parentGrid, dateFrom.Date, dateTo.Date);
+            Grid fullGrid = (Grid)parentGrid.Parent;
+            setComputedAmount(fullGrid, dateFrom.Date, dateTo.Date);
         }
 
         void DateToPicker(object sender, DateChangedEventArgs args)
@@ -340,16 +341,16 @@ namespace nwtf_mobile.app
             DatePicker dateTo = (DatePicker)sender;
             Grid parentGrid = (Grid)dateTo.Parent;
             DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
-            setComputedAmount(parentGrid, dateFrom.Date, dateTo.Date);
+            Grid fullGrid = (Grid)parentGrid.Parent;
+            setComputedAmount(fullGrid, dateFrom.Date, dateTo.Date);
         }
 
         public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
         {
-            Grid fullGrid = (Grid)parentGrid.Parent;
-            Grid claimTypeGrid = getGridClaimType(fullGrid);
+            Grid claimTypeGrid = getGridClaimType(parentGrid);
             Label claimBenefit = (Label)claimTypeGrid.Children[6];
             int cbl = Convert.ToInt32(claimBenefit.Text);
-            Grid grd = (Grid)fullGrid.Children[cbl];
+            Grid grd = (Grid)parentGrid.Children[cbl];
             Label computedAmount = (Label)grd.Children[5];
             Label amountText = (Label)grd.Children[7];
             decimal amount = Convert.ToDecimal(amountText.Text);
