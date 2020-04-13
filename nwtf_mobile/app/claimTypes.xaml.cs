@@ -142,6 +142,8 @@ namespace nwtf_mobile.app
             // Number of Days or Number of Weeks
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays) || cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
             {
+                grd = (Grid)control.Children[3];
+                Grid grd1 = (Grid)control.Children[6];
 
                 // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
@@ -151,21 +153,28 @@ namespace nwtf_mobile.app
 
                 if (checkDateRange == false)
                 {
+                    grd1.IsVisible = false;
+                    grd.IsVisible = true;
                     checkDateRange = true;
                     dateFrom.Text = cblRec.dateFrom;
                     dateTo.Text = cblRec.dateTo;
+                    // Change Amount
+                    Label amountText = (Label)grd.Children[7];
+                    amountText.Text = amount.ToString("N2");
                 }
                 else
                 {
+                    grd1.IsVisible = true;
+                    grd.IsVisible = false;
                     dateFromValue.IsVisible = false;
                     dateToValue.IsVisible = false;
                     dateFrom.IsVisible = false;
                     dateTo.IsVisible = false;
+                    // Change Amount
+                    Label amountText = (Label)grd1.Children[3];
+                    amountText.Text = amount.ToString("N2");
                 }
 
-                // Change Amount
-                Label amountText = (Label)grd.Children[7];
-                amountText.Text = amount.ToString("N2");
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
@@ -343,6 +352,7 @@ namespace nwtf_mobile.app
             DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
             Grid fullGrid = (Grid)parentGrid.Parent;
             setComputedAmount(fullGrid, dateFrom.Date, dateTo.Date);
+            setAllDateRangeValues(dateFrom.Date, dateTo.Date);
         }
 
         public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
@@ -368,6 +378,61 @@ namespace nwtf_mobile.app
                     computedAmount.Text = totalAmount.ToString("N2");
                 }
 
+            }
+        }
+
+        public void setAllDateRangeValues(DateTime dateFrom, DateTime dateTo)
+        {
+            var control = claimTypeRepeater as RepeaterView;
+            if (control == null) return;
+            foreach (Grid item1 in control.Children)
+            {
+                Grid claimTypeGrid = getGridClaimType(item1);
+                Label claimTypeName = (Label)claimTypeGrid.Children[1];
+
+                foreach (views.vwClaimTypes item in control.ItemsSource)
+                {
+                    if (item.claimTypeName.ToString() == claimTypeName.Text)
+                    {
+
+                        // Set all computed amount
+                        if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays) || item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                        {
+                            Grid cblGrid = (Grid)item1.Children[3];
+                            Label computedAmount = new Label();
+                            Label amountText = new Label();
+                            decimal amount;
+                            if (cblGrid.IsVisible == true) {
+                                computedAmount = (Label)cblGrid.Children[5];
+                                amountText = (Label)cblGrid.Children[7];
+                                amount = Convert.ToDecimal(amountText.Text);
+                            }
+                            else
+                            {
+                                cblGrid = (Grid)item1.Children[6];
+                                computedAmount = (Label)cblGrid.Children[1];
+                                amountText = (Label)cblGrid.Children[3];
+                                amount = Convert.ToDecimal(amountText.Text);
+                            }
+
+
+                            if (dateFrom != null && dateTo != null)
+                            {
+                                if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays))
+                                {
+                                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
+                                    computedAmount.Text = totalAmount.ToString("N2");
+                                }
+                                else if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                                {
+                                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
+                                    computedAmount.Text = totalAmount.ToString("N2");
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
         }
 

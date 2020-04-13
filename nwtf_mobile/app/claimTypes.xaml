@@ -86,19 +86,14 @@
                                     <Label Grid.Row="0" Grid.Column="1" Text="20" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"  TextColor="Black"/>
                                 </Grid>
 
-                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="40" VerticalOptions="Start">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="35" />
-                                        <RowDefinition Height="35" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="Date from:" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="1" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="200" DateSelected="DateFromPicker" TextColor="Black"/>
-                                    <Label Grid.Row="0" Grid.Column="2" Text="Date to:" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    <DatePicker Grid.Row="0" Grid.Column="3" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="200" DateSelected="DateToPicker" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text="Amount per Day:" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    <Label Grid.Row="1" Grid.Column="3" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Computed Amount:" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="Amount per Day:" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="3" VerticalTextAlignment="Center" TextColor="Black"/>
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" IsVisible="false" HeightRequest="80" VerticalOptions="Start">
