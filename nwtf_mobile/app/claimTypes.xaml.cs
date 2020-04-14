@@ -1,11 +1,7 @@
 ﻿using nwtf_mobile_bl;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,6 +13,8 @@ namespace nwtf_mobile.app
     {
         public static dto.claimDTO claimdto { get; set; }
         public static bool checkDateRange { get; set; }
+        public static string aggregateLabelFrom { get; set; }
+        public static string aggregateLabelTo { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
@@ -69,6 +67,9 @@ namespace nwtf_mobile.app
         private void Pcon_loadRepeater(object sender, List<views.vwClaimTypes> e)
         {
             claimTypeRepeater.ItemsSource = e;
+            var item = pcon.checkMultipleDateRanges(claimdto.listSelectedClaimType);
+            aggregateLabelFrom = item.Item1;
+            aggregateLabelTo = item.Item2;
         }
 
         // User Controls
@@ -88,7 +89,7 @@ namespace nwtf_mobile.app
             string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
             return customerFullname;
         }
-
+        
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
             var control = claimTypeRepeater as RepeaterView;
@@ -146,8 +147,9 @@ namespace nwtf_mobile.app
             // Number of Days or Number of Weeks
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfDays) || cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
             {
+                grd = (Grid)control.Children[3];
+                Grid grd1 = (Grid)control.Children[6];
 
-                // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromValue = (DatePicker)grd.Children[1];
@@ -155,21 +157,37 @@ namespace nwtf_mobile.app
 
                 if (checkDateRange == false)
                 {
+                    grd1.IsVisible = false;
+                    grd.IsVisible = true;
                     checkDateRange = true;
-                    dateFrom.Text = cblRec.dateFrom;
-                    dateTo.Text = cblRec.dateTo;
+                    //  Change Date Labels
+                    if (aggregateLabelFrom != "" && aggregateLabelTo != "")
+                    {
+                        dateFrom.Text = aggregateLabelFrom;
+                        dateTo.Text = aggregateLabelTo;
+                    }
+                    else
+                    {
+                        dateFrom.Text = cblRec.dateFrom;
+                        dateTo.Text = cblRec.dateTo;
+                    }
+                    // Change Amount
+                    Label amountText = (Label)grd.Children[7];
+                    amountText.Text = amount.ToString("N2");
                 }
                 else
                 {
+                    grd1.IsVisible = true;
+                    grd.IsVisible = false;
                     dateFromValue.IsVisible = false;
                     dateToValue.IsVisible = false;
                     dateFrom.IsVisible = false;
                     dateTo.IsVisible = false;
+                    // Change Amount
+                    Label amountText = (Label)grd1.Children[3];
+                    amountText.Text = amount.ToString("N2");
                 }
 
-                // Change Amount
-                Label amountText = (Label)grd.Children[7];
-                amountText.Text = amount.ToString("N2");
             }
             // Fixed Amount
             else if (cblRec.claimBenefitsLimits == Convert.ToInt32(systemconst.cblList.FixedAmount))
@@ -217,7 +235,7 @@ namespace nwtf_mobile.app
         {
             CheckBox advanceDisbursement = (CheckBox)sender;
             Grid parentGrid = (Grid)advanceDisbursement.Parent;
-            Label payeeType = (Label)parentGrid.Children[3];
+            Label payeeType = (Label)parentGrid.Children[9];
             Label amountTypeText = (Label)parentGrid.Children[8];
             int amountType = Convert.ToInt32(amountTypeText.Text);
             ViewCell grandparentGrid = (ViewCell)parentGrid.Parent;
@@ -253,6 +271,7 @@ namespace nwtf_mobile.app
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
+            payeeType = 3;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
                 daGrid = (Grid)parentGrid.Children[4];
@@ -264,6 +283,7 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[5];
                 Picker branchPayeePicker = (Picker)daGrid.Children[1];
+                branchPayeePicker.Title = "Select a Branch Personnel";
                 List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
                 List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();
                 branchPayeePicker.ItemsSource = branchNames;
@@ -273,6 +293,7 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[5];
                 Picker disbursePayeePicker = (Picker)daGrid.Children[1];
+                disbursePayeePicker.Title = "Select a Disbursement Payee";
                 List<views.vwDisbursementPayee> disbursePayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
                 List<string> DisburseNames = disbursePayeeList.Select(x => x.businessName).ToList();
                 disbursePayeePicker.ItemsSource = DisburseNames;
@@ -336,7 +357,7 @@ namespace nwtf_mobile.app
             DatePicker dateFrom = (DatePicker)sender;
             Grid parentGrid = (Grid)dateFrom.Parent;
             DatePicker dateTo = (DatePicker)parentGrid.Children[3];
-            setComputedAmount(parentGrid, dateFrom.Date, dateTo.Date);
+            setAllDateRangeValues(dateFrom.Date, dateTo.Date);
         }
 
         void DateToPicker(object sender, DateChangedEventArgs args)
@@ -344,33 +365,61 @@ namespace nwtf_mobile.app
             DatePicker dateTo = (DatePicker)sender;
             Grid parentGrid = (Grid)dateTo.Parent;
             DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
-            setComputedAmount(parentGrid, dateFrom.Date, dateTo.Date);
+            setAllDateRangeValues(dateFrom.Date, dateTo.Date);
         }
 
-        public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
+        public void setAllDateRangeValues(DateTime dateFrom, DateTime dateTo)
         {
-            Grid fullGrid = (Grid)parentGrid.Parent;
-            Grid claimTypeGrid = getGridClaimType(fullGrid);
-            Label claimBenefit = (Label)claimTypeGrid.Children[6];
-            int cbl = Convert.ToInt32(claimBenefit.Text);
-            Grid grd = (Grid)fullGrid.Children[cbl];
-            Label computedAmount = (Label)grd.Children[5];
-            Label amountText = (Label)grd.Children[7];
-            decimal amount = Convert.ToDecimal(amountText.Text);
-
-            if (dateFrom != null && dateTo != null)
+            var control = claimTypeRepeater as RepeaterView;
+            if (control == null) return;
+            foreach (Grid item1 in control.Children)
             {
-                if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfDays))
-                {
-                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
-                    computedAmount.Text = totalAmount.ToString("N2");
-                }
-                else if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
-                {
-                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
-                    computedAmount.Text = totalAmount.ToString("N2");
-                }
+                Grid claimTypeGrid = getGridClaimType(item1);
+                Label claimTypeName = (Label)claimTypeGrid.Children[1];
 
+                foreach (views.vwClaimTypes item in control.ItemsSource)
+                {
+                    if (item.claimTypeName.ToString() == claimTypeName.Text)
+                    {
+
+                        // Set all computed amount
+                        if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays) || item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                        {
+                            Grid cblGrid = (Grid)item1.Children[3];
+                            Label computedAmount = new Label();
+                            Label amountText = new Label();
+                            decimal amount;
+                            if (cblGrid.IsVisible == true) {
+                                computedAmount = (Label)cblGrid.Children[5];
+                                amountText = (Label)cblGrid.Children[7];
+                                amount = Convert.ToDecimal(amountText.Text);
+                            }
+                            else
+                            {
+                                cblGrid = (Grid)item1.Children[6];
+                                computedAmount = (Label)cblGrid.Children[1];
+                                amountText = (Label)cblGrid.Children[3];
+                                amount = Convert.ToDecimal(amountText.Text);
+                            }
+
+
+                            if (dateFrom != null && dateTo != null)
+                            {
+                                if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays))
+                                {
+                                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
+                                    computedAmount.Text = totalAmount.ToString("N2");
+                                }
+                                else if (item.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                                {
+                                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
+                                    computedAmount.Text = totalAmount.ToString("N2");
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
         }
 

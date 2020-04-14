@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -37,7 +36,7 @@ namespace nwtf_mobile_bl
                 }
                 else
                 {
-                    showMessage?.Invoke(this,("Error", "Customer Record Not Found!", "Close"));
+                    showMessage?.Invoke(this, ("Error", "Customer Record Not Found!", "Close"));
                 }
             }
 
@@ -129,15 +128,28 @@ namespace nwtf_mobile_bl
 
             public decimal calculateDays(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
-                double days = (dateTo - dateFrom).TotalDays;
-                decimal finalAmount = Convert.ToDecimal(days) * amount;
+                TimeSpan daysSpan = dateTo.Subtract(dateFrom);
+                int daysSpanValue = Convert.ToInt32(daysSpan.Days);
+                decimal days = 0;
+                if (daysSpanValue >= 0)
+                {
+                    days = daysSpanValue;
+                }
+                decimal finalAmount = days * amount;
                 return finalAmount;
             }
 
             public decimal calculateWeeks(DateTime dateFrom, DateTime dateTo, Decimal amount)
             {
-                double weeks = (dateTo - dateFrom).TotalDays / 7;
-                decimal finalAmount = Convert.ToDecimal(weeks) * amount;
+                TimeSpan daysSpan = dateTo.Subtract(dateFrom);
+                int daysSpanValue = Convert.ToInt32(daysSpan.Days);
+                decimal weeks = 0;
+                if (daysSpanValue >= 0)
+                {
+                    decimal weeksValue = daysSpanValue / 7;
+                    weeks = Math.Floor(weeksValue);
+                }
+                decimal finalAmount = weeks * amount;
                 return finalAmount;
             }
 
@@ -200,6 +212,29 @@ namespace nwtf_mobile_bl
                 else
                 {
                     return null; 
+                }
+            }
+
+            public (string,string) checkMultipleDateRanges(List<views.vwClaimTypes> claimTypesSelected)
+            {
+                int countcbl = 0;
+                foreach (var ct in claimTypesSelected)
+                {
+                    if (ct.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays)|| ct.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                    {
+                        countcbl += 1;
+                    }
+                }
+
+                if (countcbl > 1){
+
+                    string getDateFrom = views.vwRegistry.getEntry("aggregateDateFrom");
+                    string getDateTo = views.vwRegistry.getEntry("aggregateDateTo");
+                    return (getDateFrom, getDateTo);
+                }
+                else
+                {
+                    return ("", "");
                 }
             }
             public void getRequiredFields()

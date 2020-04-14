@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nwtf_mobile", "nwtf_mobile\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nwtf_mobile_bl", "nwtf_mobile_bl\nwtf_mobile_bl.csproj", "{6A48A9EA-19F9-4F00-B93C-550C0A468865}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nwtf_mobile_api", "nwtf_mobile_api\nwtf_mobile_api.csproj", "{6A1D7F05-ADD5-4F7C-AE3F-9A8194523048}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A48A9EA-19F9-4F00-B93C-550C0A468865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1D7F05-ADD5-4F7C-AE3F-9A8194523048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1D7F05-ADD5-4F7C-AE3F-9A8194523048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1D7F05-ADD5-4F7C-AE3F-9A8194523048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1D7F05-ADD5-4F7C-AE3F-9A8194523048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

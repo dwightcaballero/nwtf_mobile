@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
+﻿using SQLite;
+using System;
 
 namespace nwtf_mobile_bl
 {
@@ -19,5 +17,5 @@ namespace nwtf_mobile_bl
             }
         }
     }
-    
+
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace nwtf_mobile_bl
+﻿namespace nwtf_mobile_bl
 {
     public partial class entities
     {
@@ -10,5 +6,5 @@ namespace nwtf_mobile_bl
         {
         }
     }
-    
+
 }

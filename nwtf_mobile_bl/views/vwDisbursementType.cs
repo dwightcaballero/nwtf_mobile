@@ -1,7 +1,6 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -9,7 +8,7 @@ namespace nwtf_mobile_bl
     {
         public class vwDisbursementType
         {
-            [PrimaryKey,NotNull]
+            [PrimaryKey, NotNull]
             public Guid id { get; set; }
             public int disbursementType { get; set; }
             public String disbursementTypeName { get; set; }

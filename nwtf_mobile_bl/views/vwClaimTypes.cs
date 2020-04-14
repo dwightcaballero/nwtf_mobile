@@ -1,7 +1,6 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace nwtf_mobile_bl
 {
@@ -9,8 +8,8 @@ namespace nwtf_mobile_bl
     {
         public class vwClaimTypes
         {
-            [PrimaryKey,NotNull]
-            public Guid id {get; set;}
+            [PrimaryKey, NotNull]
+            public Guid id { get; set; }
             public string claimTypeName { get; set; }
             public bool include { get; set; }
             public string claimTypeCode { get; set; }

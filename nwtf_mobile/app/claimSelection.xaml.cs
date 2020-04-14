@@ -1,12 +1,9 @@
-﻿using System;
+﻿using nwtf_mobile_bl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using nwtf_mobile_bl;
 
 namespace nwtf_mobile.app
 {
@@ -16,7 +13,7 @@ namespace nwtf_mobile.app
         dto.claimDTO claimDTO = new dto.claimDTO();
         custombinds.cbClaimSelectionHeader cbClaimSelectionHeader = new custombinds.cbClaimSelectionHeader();
         controllers.claimTransaction pcon = new controllers.claimTransaction();
-       
+
         public claimSelection()
         {
             InitializeComponent();
@@ -35,7 +32,7 @@ namespace nwtf_mobile.app
             stackMAF.IsVisible = false;
             stackClaimant.IsVisible = false;
             stackClaimType.IsVisible = false;
-        }   
+        }
 
         // subscribe to all events in the controller
         void subscribeToAllEvents()
@@ -106,7 +103,7 @@ namespace nwtf_mobile.app
         {
             var listClaimant = e.Item1;
             var maf = e.Item2;
-            
+
             cbClaimSelectionHeader.productName = maf.productName;
             cbClaimSelectionHeader.productID = maf.productID;
 
@@ -156,12 +153,12 @@ namespace nwtf_mobile.app
             {
                 string searchText = sbar.Text.ToUpper();
                 var listFilteredCustomer = (from cust in claimDTO.listCustomer
-                                           where cust.dungganonID.Contains(searchText) ||
-                                                 cust.customerLastName.Contains(searchText) ||
-                                                 cust.customerFirstName.Contains(searchText) ||
-                                                 cust.customerMiddleName.Contains(searchText)
-                                           orderby cust.customerLastName, cust.customerFirstName
-                                           select cust).ToList();
+                                            where cust.dungganonID.Contains(searchText) ||
+                                                  cust.customerLastName.Contains(searchText) ||
+                                                  cust.customerFirstName.Contains(searchText) ||
+                                                  cust.customerMiddleName.Contains(searchText)
+                                            orderby cust.customerLastName, cust.customerFirstName
+                                            select cust).ToList();
 
                 lvCustomer.ItemsSource = listFilteredCustomer;
             }
@@ -215,7 +212,7 @@ namespace nwtf_mobile.app
             else
             {
                 displayMessage("Error", "Please select atleast one claim type!", "Close");
-            } 
+            }
         }
 
         private void Pcon_saveClaimTypeSelected(object sender, List<views.vwClaimTypes> e)

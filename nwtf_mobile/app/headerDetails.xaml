@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.headerDetails">
   <ContentView.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="1150">
             <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
@@ -17,8 +17,8 @@
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="505" />
-                <ColumnDefinition Width="505" />
+                <ColumnDefinition Width="575" />
+                <ColumnDefinition Width="575" />
             </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="Center">

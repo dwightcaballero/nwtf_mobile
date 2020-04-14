@@ -16,7 +16,8 @@ namespace nwtf_mobile_bl
             StringBuilder sql = new StringBuilder();
             foreach (Guid ID in listIDs)
             {
-                if (!string.IsNullOrEmpty(sql.ToString())){
+                if (!string.IsNullOrEmpty(sql.ToString()))
+                {
                     sql.Append(" or ");
                 }
 

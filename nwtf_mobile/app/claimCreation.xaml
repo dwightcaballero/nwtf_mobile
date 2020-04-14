@@ -4,8 +4,18 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:app="clr-namespace:nwtf_mobile.app"
+             xmlns:converters="clr-namespace:nwtf_mobile.converters"
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimCreation">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:cvDatetimeToBoolean x:Key="cvDatetimeToBoolean" />
+            <converters:cvDatetimeToBoolean2 x:Key="cvDatetimeToBoolean2" />
+            <converters:cvStringToBoolean x:Key="cvStringToBoolean"/>
+            <converters:cvEnumIntToDescription x:Key="cvEnumIntToDescription"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="5" x:Name="layout">

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using SQLite;
 
 namespace nwtf_mobile_bl
 {
@@ -38,7 +37,7 @@ namespace nwtf_mobile_bl
                     string sql = "SELECT m.id, m.productID, p.productName, m.effectiveDate, m.closingDate " +
                                  "FROM vwMafEnrollmentClosure as m " +
                                  "INNER JOIN vwProduct as p ON m.productID = p.productID " +
-                                 "WHERE m.customerID = '" + customerID + "' " + 
+                                 "WHERE m.customerID = '" + customerID + "' " +
                                  "ORDER BY p.productName;";
                     listMAF = conn.Query<views.vwMafEnrollmentClosure>(sql);
                 }
