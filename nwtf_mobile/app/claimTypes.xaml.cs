@@ -245,11 +245,18 @@ namespace nwtf_mobile.app
             }
         }
 
-        public void checkFinalPayee(bool isfinalPayee, bool checkIfInclude)
+        public void checkFinalPayee()
         {
             Grid defaultPayeeGrid = this.FindByName<Grid>("defaultPayeeGrid");
-
-            if (isfinalPayee == true && checkIfInclude ==true)
+            int finalPayeeCount = 0;
+            foreach (var da in claimdto.listSelectedDA)
+            {
+                if (da.isFinalPayee = true && da.include == true)
+                {
+                    finalPayeeCount += 1;
+                }
+            }
+            if (finalPayeeCount >= 1)
             {
                 defaultPayeeGrid.IsVisible = false;
             }
@@ -298,7 +305,7 @@ namespace nwtf_mobile.app
                     daRec.include = false;
                     daGrid.IsVisible = false;
                 }
-            checkFinalPayee(isFinalPayee, daRec.include);
+            checkFinalPayee();
         }
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
