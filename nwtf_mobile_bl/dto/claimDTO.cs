@@ -29,6 +29,8 @@ namespace nwtf_mobile_bl
             public List<views.vwClaimant> listClaimant { get; set; }
             public List<views.vwClaimTypes> listClaimType { get; set; }
             public List<views.vwClaimTypes> listSelectedClaimType { get; set; }
+            public List<views.vwClaimBenefits> listSelectedCTCBL { get; set; }
+            public List<views.vwDisbursementType> listSelectedDA { get; set; }
 
             public claimDTO()
             {
@@ -41,6 +43,8 @@ namespace nwtf_mobile_bl
                 listClaimant = new List<views.vwClaimant>();
                 listClaimType = new List<views.vwClaimTypes>();
                 listSelectedClaimType = new List<views.vwClaimTypes>();
+                listSelectedCTCBL = new List<views.vwClaimBenefits>();
+                listSelectedDA = new List<views.vwDisbursementType>();
             }
         }
     }

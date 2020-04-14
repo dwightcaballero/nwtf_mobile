@@ -1,5 +1,6 @@
 ﻿
 using nwtf_mobile_bl;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,5 +16,11 @@ namespace nwtf_mobile.app
             InitializeComponent();
 
         }
+
+        public void saveClaimTransaction(object sender, EventArgs e)
+        {
+           claimTypes.gatherRepeater();
+        }
+
     }
 }

@@ -21,6 +21,7 @@
             <StackLayout Spacing="5" x:Name="layout">
                 <app:headerDetails></app:headerDetails>
                 <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
+                <Button Text="Save" Clicked="saveClaimTransaction" />
                 <app:claimTypes></app:claimTypes>
                 <app:requiredDocuments></app:requiredDocuments>
                 <app:requiredFields></app:requiredFields>

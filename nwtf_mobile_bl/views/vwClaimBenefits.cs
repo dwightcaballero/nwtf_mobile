@@ -20,13 +20,12 @@ namespace nwtf_mobile_bl
             public DateTime dateFromVal { get; set; }
             public DateTime dateToVal { get; set; }
             public double amount { get; set; }
-            //Based from the productclaimanttypeclaimbenefits views
-            //decimal maximumAmountTemp { get; set; }
-            //decimal maximumValueTemp { get; set; }
-            //decimal accumulatedAmount { get; set; }
-            //decimal accumulatedValue { get; set; }
-            //string claimTypeName { get; set; }
-            //Guid claimTypeClaimTransactionUID { get; set; }
+            public double computedAmount { get; set; }
+            public decimal maximumAmountTemp { get; set; }
+            public decimal maximumValueTemp { get; set; }
+            public decimal accumulatedAmount { get; set; }
+            public decimal accumulatedValue { get; set; }
+            public Guid claimTypeClaimTransactionUID { get; set; }
             public static views.vwClaimBenefits getClaimBenefitByProductClaimantClaimType(Guid productUID, string claimantType, Guid claimTypeUID)
             {
                 return dataservices.claimBenefit.getClaimBenefitByProductClaimantClaimType(productUID, claimantType, claimTypeUID);
