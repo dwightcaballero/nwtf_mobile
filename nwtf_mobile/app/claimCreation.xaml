@@ -22,13 +22,9 @@
                 <app:headerDetails></app:headerDetails>
                 <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:claimTypes></app:claimTypes>
-                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
-                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:requiredDocuments></app:requiredDocuments>
-                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:requiredFields></app:requiredFields>
-                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
-                <Button Text="Save" Clicked="saveClaimTransaction" WidthRequest="1150" />
+                <Button Text="Save" Clicked="saveClaimTransaction" WidthRequest="900" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

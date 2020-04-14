@@ -124,7 +124,7 @@
                                 </Grid>
 
                                 <ListView Grid.Row="3" Grid.ColumnSpan="4" HasUnevenRows="True" HeightRequest="120" WidthRequest="1150" IsVisible="false">
-                                    <ListView.Header>
+                                        <ListView.Header>
 
                                         <Grid ColumnSpacing="0" WidthRequest="1150">
                                             <Grid.ColumnDefinitions>
@@ -216,6 +216,7 @@
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding id}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding isFinalPayee}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>
@@ -227,9 +228,9 @@
                 </customcontrols:RepeaterView.ItemTemplate>
             </customcontrols:RepeaterView>
             
-            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" WidthRequest="1150" BackgroundColor="Black"/>
+            <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="2" VerticalOptions="Center" WidthRequest="1150"/>
 
-            <Grid HeightRequest="80" WidthRequest="1150">
+            <Grid HeightRequest="80" WidthRequest="1150" x:Name="defaultPayeeGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="285"></ColumnDefinition>
                     <ColumnDefinition Width="285"></ColumnDefinition>

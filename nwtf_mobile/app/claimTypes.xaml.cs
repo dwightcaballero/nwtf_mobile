@@ -57,12 +57,12 @@ namespace nwtf_mobile.app
         }
 
         private void PopulateRepeater(dto.claimDTO claimDTO)
-        { 
+        {
             try
             {
                 pcon.getListRepeater(claimdto);
             }
-            catch 
+            catch
             {
                 displayMessage("Error", "Claim Benefit Record Was Not Found", "Close");
             }
@@ -99,7 +99,7 @@ namespace nwtf_mobile.app
             string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
             return customerFullname;
         }
-        
+
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
             control = claimTypeRepeater as RepeaterView;
@@ -245,6 +245,19 @@ namespace nwtf_mobile.app
             }
         }
 
+        public void checkFinalPayee(bool isfinalPayee, bool checkIfInclude)
+        {
+            Grid defaultPayeeGrid = this.FindByName<Grid>("defaultPayeeGrid");
+
+            if (isfinalPayee == true && checkIfInclude ==true)
+            {
+                defaultPayeeGrid.IsVisible = false;
+            }
+            else
+            {
+                defaultPayeeGrid.IsVisible = true;
+            }
+        }
         private void DACheckboxEvent(object sender, CheckedChangedEventArgs e)
         {
             CheckBox advanceDisbursement = (CheckBox)sender;
@@ -252,6 +265,8 @@ namespace nwtf_mobile.app
             Label amountTypeText = (Label)parentGrid.Children[8];
             Label payeeType = (Label)parentGrid.Children[9];
             Label daUID = (Label)parentGrid.Children[10];
+            Label isFinalPayeeLabel = (Label)parentGrid.Children[11];
+            bool isFinalPayee = bool.Parse(isFinalPayeeLabel.Text);
             int amountType = Convert.ToInt32(amountTypeText.Text);
             ViewCell grandparentGrid = (ViewCell)parentGrid.Parent;
             ListView fullGrid = (ListView)grandparentGrid.Parent;
@@ -282,13 +297,13 @@ namespace nwtf_mobile.app
                 {
                     daRec.include = false;
                     daGrid.IsVisible = false;
-                }            
+                }
+            checkFinalPayee(isFinalPayee, daRec.include);
         }
 
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
-            payeeType = 3;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
                 daGrid = (Grid)parentGrid.Children[4];
