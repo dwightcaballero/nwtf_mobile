@@ -238,7 +238,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" TextColor="Black">Choose a Default Payee:</Label>
-                <Picker Grid.Row="0" Grid.Column="1" WidthRequest="220" FontSize="Small" Title="Select a Default Payee" x:Name="defaultPayee" VerticalOptions="Center" HorizontalOptions="Start" SelectedIndexChanged="DefaultPayeePickerEvent">
+                <Picker Grid.Row="0" Grid.Column="1" WidthRequest="220" FontSize="Small" Title="Select a Default Payee" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" SelectedIndexChanged="DefaultPayeePickerEvent">
                     <Picker.Items>
                         <x:String>Member</x:String>
                         <x:String>Dependent</x:String>

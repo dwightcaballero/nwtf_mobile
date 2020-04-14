@@ -21,10 +21,14 @@
             <StackLayout Spacing="5" x:Name="layout">
                 <app:headerDetails></app:headerDetails>
                 <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
-                <Button Text="Save" Clicked="saveClaimTransaction" />
                 <app:claimTypes></app:claimTypes>
+                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
+                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:requiredDocuments></app:requiredDocuments>
+                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
                 <app:requiredFields></app:requiredFields>
+                <BoxView HeightRequest="10" HorizontalOptions="FillAndExpand" />
+                <Button Text="Save" Clicked="saveClaimTransaction" WidthRequest="1150" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

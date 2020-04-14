@@ -14,7 +14,7 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" WidthRequest="1010">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" WidthRequest="1150">
             <Label Text="Required Fields" TextColor="Red"></Label>
             <ListView x:Name="lstVwRequiredFields">
                 <ListView.ItemTemplate>

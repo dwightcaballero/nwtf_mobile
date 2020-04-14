@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.requiredDocuments">
     <ContentView.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" WidthRequest="1010">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" WidthRequest="1150">
             <StackLayout x:Name="stkRequiredDocuments" Margin="0" Padding="0" VerticalOptions="FillAndExpand">
                 <Label Text="Required Documents" TextColor="Red"></Label>
                 <ListView x:Name="lstVwRequiredDocument">
