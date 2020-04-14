@@ -20,6 +20,8 @@ namespace nwtf_mobile_bl
 
             public event EventHandler<(string, string, string)> showMessage;
 
+            public event EventHandler<(string, Guid, Byte[], String)> requiredDocumentChecked;
+
             public void getListCustomerForGrid()
             {
                 loadCustomerGrid?.Invoke(this, views.vwCustomer.getListCustomersForGrid());
@@ -212,6 +214,27 @@ namespace nwtf_mobile_bl
                     showMessage?.Invoke(this, ("Error", "No required fields retrieved!", "Close"));
                 }
             }
+
+            public void checkRequiredDocument(String requiredDocumentName, Guid requiredDocumentID, Byte[] requiredDocumentFile, String requiredDocumentDescription)
+            {
+                if (requiredDocumentFile != null)
+                {
+                    if(requiredDocumentDescription != null)
+                    {
+                        requiredDocumentChecked?.Invoke(this, (requiredDocumentName, requiredDocumentID, requiredDocumentFile, requiredDocumentDescription));
+                    }
+                    else
+                    {
+                        showMessage?.Invoke(this, ("Error", "There is no description provided!", "Close"));
+                    }
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "No file is uploaded!", "Close"));
+                }
+            }
+
+
         }
     }
 }
