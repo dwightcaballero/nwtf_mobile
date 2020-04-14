@@ -13,6 +13,8 @@ namespace nwtf_mobile.app
     {
         public static dto.claimDTO claimdto { get; set; }
         public static bool checkDateRange { get; set; }
+        public static string aggregateLabelFrom { get; set; }
+        public static string aggregateLabelTo { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
@@ -65,6 +67,9 @@ namespace nwtf_mobile.app
         private void Pcon_loadRepeater(object sender, List<views.vwClaimTypes> e)
         {
             claimTypeRepeater.ItemsSource = e;
+            var item = pcon.checkMultipleDateRanges(claimdto.listSelectedClaimType);
+            aggregateLabelFrom = item.Item1;
+            aggregateLabelTo = item.Item2;
         }
 
         // User Controls
@@ -84,7 +89,7 @@ namespace nwtf_mobile.app
             string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
             return customerFullname;
         }
-
+        
         public void AccessControlsInRepeater(dto.claimDTO claimdto)
         {
             var control = claimTypeRepeater as RepeaterView;
@@ -145,7 +150,6 @@ namespace nwtf_mobile.app
                 grd = (Grid)control.Children[3];
                 Grid grd1 = (Grid)control.Children[6];
 
-                // Change Date Labels
                 Label dateFrom = (Label)grd.Children[0];
                 Label dateTo = (Label)grd.Children[2];
                 DatePicker dateFromValue = (DatePicker)grd.Children[1];
@@ -156,8 +160,17 @@ namespace nwtf_mobile.app
                     grd1.IsVisible = false;
                     grd.IsVisible = true;
                     checkDateRange = true;
-                    dateFrom.Text = cblRec.dateFrom;
-                    dateTo.Text = cblRec.dateTo;
+                    //  Change Date Labels
+                    if (aggregateLabelFrom != "" && aggregateLabelTo != "")
+                    {
+                        dateFrom.Text = aggregateLabelFrom;
+                        dateTo.Text = aggregateLabelTo;
+                    }
+                    else
+                    {
+                        dateFrom.Text = cblRec.dateFrom;
+                        dateTo.Text = cblRec.dateTo;
+                    }
                     // Change Amount
                     Label amountText = (Label)grd.Children[7];
                     amountText.Text = amount.ToString("N2");

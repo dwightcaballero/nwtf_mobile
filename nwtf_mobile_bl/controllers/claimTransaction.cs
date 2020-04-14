@@ -212,6 +212,29 @@ namespace nwtf_mobile_bl
                     return null; 
                 }
             }
+
+            public (string,string) checkMultipleDateRanges(List<views.vwClaimTypes> claimTypesSelected)
+            {
+                int countcbl = 0;
+                foreach (var ct in claimTypesSelected)
+                {
+                    if (ct.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfDays)|| ct.claimBenefit == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
+                    {
+                        countcbl += 1;
+                    }
+                }
+
+                if (countcbl > 1){
+
+                    string getDateFrom = views.vwRegistry.getEntry("aggregateDateFrom");
+                    string getDateTo = views.vwRegistry.getEntry("aggregateDateTo");
+                    return (getDateFrom, getDateTo);
+                }
+                else
+                {
+                    return ("", "");
+                }
+            }
             public void getRequiredFields()
             {
                 List<views.vwRequiredFields> lstRequiredFields = views.vwRequiredFields.getRequiredFields();
