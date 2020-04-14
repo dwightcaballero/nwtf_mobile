@@ -11,7 +11,18 @@ namespace nwtf_mobile.converters
         {
             if (value != null)
             {
-                return systemconst.getClaimantDescription((int)value);
+                if (parameter.ToString() == "amountType")
+                {
+                    return systemconst.getAmountTypeDescription((int)value);
+                }
+                else if (parameter.ToString() == "payeeType")
+                {
+                    return systemconst.getPayeeTypeDescription((int)value);
+                }
+                else
+                {
+                    return systemconst.getClaimantDescription((int)value);
+                }
             }
             return 0;
         }

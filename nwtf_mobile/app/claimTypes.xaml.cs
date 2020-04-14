@@ -222,7 +222,7 @@ namespace nwtf_mobile.app
         {
             CheckBox advanceDisbursement = (CheckBox)sender;
             Grid parentGrid = (Grid)advanceDisbursement.Parent;
-            Label payeeType = (Label)parentGrid.Children[3];
+            Label payeeType = (Label)parentGrid.Children[9];
             Label amountTypeText = (Label)parentGrid.Children[8];
             int amountType = Convert.ToInt32(amountTypeText.Text);
             ViewCell grandparentGrid = (ViewCell)parentGrid.Parent;
@@ -258,6 +258,7 @@ namespace nwtf_mobile.app
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
+            payeeType = 3;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
                 daGrid = (Grid)parentGrid.Children[4];
@@ -269,6 +270,7 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[5];
                 Picker branchPayeePicker = (Picker)daGrid.Children[1];
+                branchPayeePicker.Title = "Select a Branch Personnel";
                 List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
                 List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();
                 branchPayeePicker.ItemsSource = branchNames;
@@ -278,6 +280,7 @@ namespace nwtf_mobile.app
             {
                 daGrid = (Grid)parentGrid.Children[5];
                 Picker disbursePayeePicker = (Picker)daGrid.Children[1];
+                disbursePayeePicker.Title = "Select a Disbursement Payee";
                 List<views.vwDisbursementPayee> disbursePayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
                 List<string> DisburseNames = disbursePayeeList.Select(x => x.businessName).ToList();
                 disbursePayeePicker.ItemsSource = DisburseNames;
@@ -341,8 +344,7 @@ namespace nwtf_mobile.app
             DatePicker dateFrom = (DatePicker)sender;
             Grid parentGrid = (Grid)dateFrom.Parent;
             DatePicker dateTo = (DatePicker)parentGrid.Children[3];
-            Grid fullGrid = (Grid)parentGrid.Parent;
-            setComputedAmount(fullGrid, dateFrom.Date, dateTo.Date);
+            setAllDateRangeValues(dateFrom.Date, dateTo.Date);
         }
 
         void DateToPicker(object sender, DateChangedEventArgs args)
@@ -350,35 +352,7 @@ namespace nwtf_mobile.app
             DatePicker dateTo = (DatePicker)sender;
             Grid parentGrid = (Grid)dateTo.Parent;
             DatePicker dateFrom = (DatePicker)parentGrid.Children[1];
-            Grid fullGrid = (Grid)parentGrid.Parent;
-            setComputedAmount(fullGrid, dateFrom.Date, dateTo.Date);
             setAllDateRangeValues(dateFrom.Date, dateTo.Date);
-        }
-
-        public void setComputedAmount(Grid parentGrid, DateTime dateFrom, DateTime dateTo)
-        {
-            Grid claimTypeGrid = getGridClaimType(parentGrid);
-            Label claimBenefit = (Label)claimTypeGrid.Children[6];
-            int cbl = Convert.ToInt32(claimBenefit.Text);
-            Grid grd = (Grid)parentGrid.Children[cbl];
-            Label computedAmount = (Label)grd.Children[5];
-            Label amountText = (Label)grd.Children[7];
-            decimal amount = Convert.ToDecimal(amountText.Text);
-
-            if (dateFrom != null && dateTo != null)
-            {
-                if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfDays))
-                {
-                    decimal totalAmount = pcon.calculateDays(dateFrom, dateTo, amount);
-                    computedAmount.Text = totalAmount.ToString("N2");
-                }
-                else if (cbl == Convert.ToInt32(systemconst.cblList.NumberOfWeeks))
-                {
-                    decimal totalAmount = pcon.calculateWeeks(dateFrom, dateTo, amount);
-                    computedAmount.Text = totalAmount.ToString("N2");
-                }
-
-            }
         }
 
         public void setAllDateRangeValues(DateTime dateFrom, DateTime dateTo)

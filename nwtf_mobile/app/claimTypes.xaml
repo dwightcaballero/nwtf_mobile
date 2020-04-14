@@ -5,9 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:customcontrols="clr-namespace:Xamarin.CustomControls;assembly=Xamarin.CustomControls.RepeaterView"
              xmlns:app="clr-namespace:nwtf_mobile.app"
+             xmlns:converters="clr-namespace:nwtf_mobile.converters"
              mc:Ignorable="d"
              x:Class="nwtf_mobile.app.claimTypes">
-  <ContentView.Content>
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:cvDatetimeToBoolean x:Key="cvDatetimeToBoolean" />
+            <converters:cvDatetimeToBoolean2 x:Key="cvDatetimeToBoolean2" />
+            <converters:cvStringToBoolean x:Key="cvStringToBoolean"/>
+            <converters:cvEnumIntToDescription x:Key="cvEnumIntToDescription"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" WidthRequest="1150">
             <customcontrols:RepeaterView x:Name="claimTypeRepeater">
                 <customcontrols:RepeaterView.ItemTemplate>
@@ -121,8 +130,9 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="100" />
                                                 <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="200" />
                                                 <ColumnDefinition Width="300" />
-                                                <ColumnDefinition Width="550" />
+                                                <ColumnDefinition Width="350" />
                                             </Grid.ColumnDefinitions>
 
                                             <Label HorizontalOptions="Fill" Grid.Column="0"
@@ -133,11 +143,15 @@
                                    TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
-                                            <Label Text="Amount Type" HorizontalOptions="Fill" Grid.Column="2"
+                                            <Label Text="Payee Type" HorizontalOptions="Fill" Grid.Column="2"
+                                   TextColor="Black" BackgroundColor="#49AC8F" 
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />                                            
+                                            
+                                            <Label Text="Amount Type" HorizontalOptions="Fill" Grid.Column="3"
                                    TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
-                                            <Label Text="Payee Name" HorizontalOptions="Fill" Grid.Column="3"
+                                            <Label Text="Payee Name" HorizontalOptions="Fill" Grid.Column="4"
                                    TextColor="Black" BackgroundColor="#49AC8F" 
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
@@ -150,29 +164,38 @@
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="100" />
                                                         <ColumnDefinition Width="200" />
-                                                        <ColumnDefinition Width="300" />
-                                                        <ColumnDefinition Width="550" />
+                                                        <ColumnDefinition Width="200" />
+                                                        <ColumnDefinition Width="250" />
+                                                        <ColumnDefinition Width="400" />
                                                     </Grid.ColumnDefinitions>
                                                     <CheckBox x:Name="DACheckbox" Grid.Row="0" Grid.Column="0" CheckedChanged="DACheckboxEvent" VerticalOptions="CenterAndExpand"/>
                                                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding disbursementTypeName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
-                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountTypeText}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
-                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType, Converter={StaticResource cvEnumIntToDescription}, ConverterParameter='payeeType'}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
+                                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding amountType, Converter={StaticResource cvEnumIntToDescription}, ConverterParameter='amountType'}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
 
-                                                    <Grid Grid.Row="0" Grid.Column="3" IsVisible="false">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="35" />
-                                                            <RowDefinition Height="35" />
-                                                        </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0" Grid.Column="4" IsVisible="false">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="250" />
+                                                        </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0" Grid.Column="0" Text="Payee Name:" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black"/>
                                                         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black"/>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="0" Grid.Column="3" HeightRequest="50" IsVisible="false">
+                                                    <Grid Grid.Row="0" Grid.Column="4" IsVisible="false">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="250" />
+                                                        </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0" Grid.Column="0" Text="Choose a Payee:" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="Black"/>
                                                         <Picker Grid.Row="0" Grid.Column="1" FontSize="Small" Title="Select a Payee" VerticalOptions="Center" TextColor="Black"/>
                                                     </Grid>
 
-                                                    <Grid Grid.Row="0" Grid.Column="3" IsVisible="false">
+                                                    <Grid Grid.Row="0" Grid.Column="4" IsVisible="false">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="250" />
+                                                        </Grid.ColumnDefinitions>
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="35" />
                                                             <RowDefinition Height="35" />
@@ -182,11 +205,16 @@
                                                         <Label Grid.Row="1" Grid.Column="0"  Text="Payee Relation:" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" TextColor="Black"/>
                                                         <Entry Grid.Row="1" Grid.Column="1" Keyboard="Text" FontSize="Small" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="Black"/>
                                                     </Grid>
-                                                    <Grid Grid.Row="0" Grid.Column="3" HeightRequest="50" IsVisible="false">
+                                                    <Grid Grid.Row="0" Grid.Column="4" IsVisible="false">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="250" />
+                                                        </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0" Grid.Column="0" Text="Choose a Dependent:" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="Black"/>
                                                         <Picker Grid.Row="0" Grid.Column="1" FontSize="Small" Title="Select a Dependent" x:Name="payeeName" VerticalOptions="Center" TextColor="Black"/>
                                                     </Grid>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>
