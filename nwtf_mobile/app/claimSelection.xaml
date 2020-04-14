@@ -263,7 +263,7 @@
                                     <Label Grid.Column="2" Text ="{Binding claimantBirthdate, StringFormat='{0:d}'}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                                    <Label Grid.Column="3" Text ="{Binding claimantType, Converter={StaticResource cvEnumIntToDescription}}"
+                                    <Label Grid.Column="3" Text ="{Binding claimantType, Converter={StaticResource cvEnumIntToDescription}, ConverterParameter='claimantType'}"
                                            TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                                     <Label Grid.Column="4" Text ="{Binding claimantRelation}"
