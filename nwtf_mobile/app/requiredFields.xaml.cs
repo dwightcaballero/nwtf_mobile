@@ -25,12 +25,8 @@ namespace nwtf_mobile.app
 
         private void Pcon_loadRequiredFields(object sender, List<views.vwRequiredFields> e)
         {
+            lstVwRequiredFields.HeightRequest = (30 * e.Count) + (10 * e.Count);
             lstVwRequiredFields.ItemsSource = e;
-        }
-
-        private void requiredFieldsControls()
-        {
-
         }
     }
 }

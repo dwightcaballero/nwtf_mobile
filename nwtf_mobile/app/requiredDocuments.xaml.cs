@@ -26,11 +26,25 @@ namespace nwtf_mobile.app
             pcon.getRequiredDocuments();
             stkAddFile.IsVisible = false;
             stkUploadRequiredDocument.IsVisible = false;
-            stkRequiredDocuments.IsVisible = false;
+            //loadListRecDocImage();
+            //stkRequiredDocuments.IsVisible = false;
+        }
+
+        void loadListRecDocImage()
+        {
+            List<views.vwClaimTypeRequiredDocumentImage> lstReqDocImags = new List<views.vwClaimTypeRequiredDocumentImage>();
+
+            lstReqDocImags.Add( new views.vwClaimTypeRequiredDocumentImage { id = Guid.NewGuid(), claimTypeRequiredDocumentID = Guid.NewGuid(), requiredDocumentDescription="Try", requiredDocumentImageName="try.jpg" }) ;
+            lstReqDocImags.Add( new views.vwClaimTypeRequiredDocumentImage { id = Guid.NewGuid(), claimTypeRequiredDocumentID = Guid.NewGuid(), requiredDocumentDescription="Try2", requiredDocumentImageName="try2.jpg" }) ;
+            lstReqDocImags.Add( new views.vwClaimTypeRequiredDocumentImage { id = Guid.NewGuid(), claimTypeRequiredDocumentID = Guid.NewGuid(), requiredDocumentDescription="Try3", requiredDocumentImageName="try3.jpg" }) ;
+            
+            lstVwUploadedFiles.HeightRequest = (60 * lstReqDocImags.Count) + (10 * lstReqDocImags.Count);
+            lstVwUploadedFiles.ItemsSource = lstReqDocImags;
         }
 
         private void Pcon_loadrequiredDocuments(object sender, List<views.vwRequiredDocuments> e)
         {
+            lstVwRequiredDocument.HeightRequest = (60 * e.Count) + (10 * e.Count);
             lstVwRequiredDocument.ItemsSource = e;
         }
 
@@ -59,7 +73,7 @@ namespace nwtf_mobile.app
 
             if(!CrossMedia.Current.IsPickPhotoSupported)
             {
-                //Toast.MakeText(this, "upload not supported on this device", ToastLength.Short).Show();
+                Toast.MakeText(Android.App.Application.Context, "upload not supported on this device", ToastLength.Short).Show();
                 return;
             }
 
@@ -72,6 +86,7 @@ namespace nwtf_mobile.app
 
         private void btnFileUpload_Clicked(object sender, EventArgs e)
         {
+            loadListRecDocImage();
             Xamarin.Forms.Button btnFileUpload = (Xamarin.Forms.Button)sender;
             var row = Grid.GetRow(btnFileUpload);
             var grd = btnFileUpload.Parent as Grid;

@@ -4,7 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:nwtf_mobile.converters"
              x:Class="nwtf_mobile.app.requiredFields">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:cvIntToBooleanFreeText x:Key="cvIntToBooleanFreeText" />
+            <converters:cvIntToBooleanDate x:Key="cvIntToBooleanDate" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <ContentView.Content>
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0" WidthRequest="1010">
             <Label Text="Required Fields" TextColor="Red"></Label>
@@ -16,10 +24,9 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding requiredFieldType}"></Label>
-                                <Entry Grid.Row="0" Grid.Column="2"></Entry>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding requiredFieldName}"></Label>
-                                <DatePicker Grid.Row="0" Grid.Column="3" x:Name="pkrDate"/>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding requiredFieldName}"></Label>
+                                <Entry Grid.Row="0" Grid.Column="1" IsVisible="{Binding requiredFieldType, Converter={StaticResource cvIntToBooleanFreeText}}" ></Entry>
+                                <DatePicker Grid.Row="0" Grid.Column="1" x:Name="pkrDate" IsVisible="{Binding requiredFieldType, Converter={StaticResource cvIntToBooleanDate}}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
