@@ -9,6 +9,8 @@ namespace nwtf_mobile.app
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class claimCreation : ContentPage
     {
+        public static dto.claimDTO claimdto { get; set; }
+
         public claimCreation(dto.claimDTO claimdto)
         {
             headerDetails.setClaimDTO(claimdto);
@@ -19,7 +21,7 @@ namespace nwtf_mobile.app
 
         public void saveClaimTransaction(object sender, EventArgs e)
         {
-           claimTypes.gatherRepeater();
+           claimdto = claimTypes.gatherRepeater();
         }
 
     }

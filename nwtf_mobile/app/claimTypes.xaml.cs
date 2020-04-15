@@ -19,6 +19,9 @@ namespace nwtf_mobile.app
         public static string aggregateLabelTo { get; set; }
         public static RepeaterView control { get; set; }
         public static Guid daUID { get; set; }
+        public static Entry freeTextName { get; set; }
+        public static Entry freeTextRelation { get; set; }
+
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
@@ -50,7 +53,7 @@ namespace nwtf_mobile.app
         }
 
         // display messages
-        void displayMessage(string title, string message, string buttonName)
+        static void displayMessage(string title, string message, string buttonName)
         {
             App.Current.MainPage.DisplayAlert(title, message, buttonName);
         }
@@ -99,7 +102,7 @@ namespace nwtf_mobile.app
             return claimTypeGrid;
         }
 
-        private string getCustomerFullname()
+        private static string getCustomerFullname()
         {
             string customerFullname = claimdto.customer.customerLastName + ", " + claimdto.customer.customerFirstName + " " + claimdto.customer.customerMiddleName;
             return customerFullname;
@@ -175,16 +178,18 @@ namespace nwtf_mobile.app
                     grd1.IsVisible = false;
                     grd.IsVisible = true;
                     checkDateRange = true;
+                    
                     //  Change Date Labels
-                    if (aggregateLabelFrom != "" && aggregateLabelTo != "")
+                    if (string.IsNullOrWhiteSpace(aggregateLabelFrom) && string.IsNullOrWhiteSpace(aggregateLabelTo))
                     {
-                        dateFrom.Text = aggregateLabelFrom;
-                        dateTo.Text = aggregateLabelTo;
+
+                        dateFrom.Text = cblRec.dateFrom;
+                        dateTo.Text = cblRec.dateTo;
                     }
                     else
                     {
-                        dateFrom.Text = cblRec.dateFrom;
-                        dateTo.Text = cblRec.dateTo;
+                        dateFrom.Text = aggregateLabelFrom;
+                        dateTo.Text = aggregateLabelTo;
                     }
                     // Change Amount
                     Label amountText = (Label)grd.Children[7];
@@ -316,7 +321,6 @@ namespace nwtf_mobile.app
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
-            payeeType = 3;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
                 daGrid = (Grid)parentGrid.Children[4];
@@ -347,6 +351,10 @@ namespace nwtf_mobile.app
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
             {
                 daGrid = (Grid)parentGrid.Children[6];
+                Entry payeeName = (Entry)daGrid.Children[1];
+                Entry payeeRel = (Entry)daGrid.Children[3];
+                freeTextName = payeeName;
+                freeTextRelation = payeeRel;
                 return daGrid;
             }
             else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
@@ -373,11 +381,18 @@ namespace nwtf_mobile.app
             Label daUIDText = (Label)parentGrid.Children[10];
             daUID = Guid.Parse(daUIDText.Text);
             object payeeName = payeePicker.SelectedItem;
-            payeeType.Text = "3";
-            pcon.setPayeeDTO(Convert.ToInt32(payeeType.Text), payeeName.ToString(), claimdto);
-
+            if (payeeType != null && payeeName != null)
+            {
+                pcon.setPayeeDTO(Convert.ToInt32(payeeType.Text), payeeName.ToString(), claimdto);
+            }
+            else
+            {
+                views.vwDisbursementType daRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
+                daRec.payeeGUID = Guid.Empty;
+                daRec.payeeID = "";
+                daRec.payeeName = "";
+            }
         }
-
         private void Pcon_loadDisbursementPayee(object sender, views.vwDisbursementPayee e)
         {
             views.vwDisbursementType daRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
@@ -514,26 +529,30 @@ namespace nwtf_mobile.app
             }
         }
 
-        public static void gatherRepeater()
+        public static dto.claimDTO gatherRepeater()
         {
-            if (control == null) return;
-            foreach (Grid item1 in control.Children)
+            if (control != null)
             {
-                Grid claimTypeGrid = getGridClaimType(item1);
-                Label claimTypeName = (Label)claimTypeGrid.Children[1];
-
-                foreach (views.vwClaimTypes item in control.ItemsSource)
+                foreach (Grid item1 in control.Children)
                 {
-                    if (item.claimTypeName.ToString() == claimTypeName.Text)
+                    Grid claimTypeGrid = getGridClaimType(item1);
+                    Label claimTypeName = (Label)claimTypeGrid.Children[1];
+
+                    foreach (views.vwClaimTypes item in control.ItemsSource)
                     {
-                        // get CBL record
-                        views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
-                        if (cblRec == null) return;
-                        gatherCBL(cblRec, item1);
+                        if (item.claimTypeName.ToString() == claimTypeName.Text)
+                        {
+                            // get CBL record
+                            views.vwClaimBenefits cblRec = views.vwClaimBenefits.getClaimBenefitByUID(item.claimBenefitUID);
+                            gatherCBL(cblRec, item1);
+                            // get DA record
+                            gatherDA(item.id);
+                        }
                     }
                 }
+                // get default payee record
             }
-            // get default payee record
+            return claimdto;
         }
         public static void gatherCBL(views.vwClaimBenefits cblRec, Grid control)
         {
@@ -590,5 +609,29 @@ namespace nwtf_mobile.app
                 cblSelectedRec.computedAmount = Convert.ToDouble(computedAmount.Text);
             }
         }
+        public static void gatherDA(Guid ctUID)
+        {
+                List<views.vwDisbursementType> daList = claimdto.listSelectedDA.Where(x => x.claimTypeID == ctUID).ToList();
+                foreach (var daRec in daList)
+                {
+                    if (daRec.payeeType == Convert.ToInt32(systemconst.payeeType.FreeText))
+                    {
+                        if (string.IsNullOrWhiteSpace(freeTextName.Text) && string.IsNullOrWhiteSpace(freeTextRelation.Text))
+                        {
+                            displayMessage("Error", "Please fill-up all payee details in the disbursement type: " + daRec.disbursementTypeName + "", "Close");
+                        }
+                        else
+                        {
+                            daRec.payeeName = freeTextName.Text;
+                            daRec.payeeRelation = freeTextRelation.Text;
+                        }
+                    }
+                    else if (daRec.payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
+                    {
+                            daRec.payeeName = getCustomerFullname();
+                    }
+                }
+        }       
+       
     }
 }
