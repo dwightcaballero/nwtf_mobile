@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace nwtf_mobile_bl
 {
@@ -14,7 +15,10 @@ namespace nwtf_mobile_bl
             public event EventHandler<List<views.vwClaimTypes>> saveClaimTypeSelected;
             public event EventHandler<List<views.vwClaimTypes>> loadRepeater;
             public event EventHandler<List<views.vwClaimBenefits>> loadCBL;
-
+            public event EventHandler<views.vwBranchEmployee> loadBranchEmployee;
+            public event EventHandler<views.vwDisbursementPayee> loadDisbursementPayee;
+            public event EventHandler<views.vwDependent> loadDependent;
+            public event EventHandler<views.vwCustomer> loadSpouse;
             public event EventHandler<List<views.vwRequiredDocuments>> loadrequiredDocuments;
             public event EventHandler<List<views.vwRequiredFields>> loadRequiredFields;
 
@@ -259,6 +263,62 @@ namespace nwtf_mobile_bl
                 else
                 {
                     return ("", "");
+                }
+            }
+
+            public void setPayeeDTO(int payeeType, string payeeName, dto.claimDTO claimdto)
+            {
+                if (payeeType == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel))
+                {
+                    List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
+                    Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+
+                    foreach (var item in branchPayeeList)
+                    {
+                        values.Add(item.id, item.employeeName);
+                    }
+                    var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
+                    var branchEmpRec = views.vwBranchEmployee.getBranchEmployeeByUID(id);
+                    loadBranchEmployee?.Invoke(this, branchEmpRec);
+                }
+                else if (payeeType == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee))
+                {
+                    List<views.vwDisbursementPayee> disbursementPayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
+                    Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+
+                    foreach (var item in disbursementPayeeList)
+                    {
+                        values.Add(item.id, item.businessName);
+                    }
+                    var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
+                    var disbursePayeeRec = views.vwDisbursementPayee.getDisbursementPayeeByUID(id);
+                    loadDisbursementPayee?.Invoke(this, disbursePayeeRec);
+                }
+                else if (payeeType == Convert.ToInt32(systemconst.payeeType.AnyDependents))
+                {
+                    List<views.vwDependent> dependentPayee = getListDependents(claimdto.customer);
+                    Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+
+                    foreach (var item in dependentPayee)
+                    {
+                        values.Add(item.id, item.dependentFullName);
+                    }
+
+                    var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
+                    var depRec = views.vwDependent.getDependentRecByUID(id);
+                    if (depRec != null)
+                    {
+                        loadDependent?.Invoke(this, depRec);
+                    }
+                    else
+                    {
+                        var spouseRec = views.vwCustomer.getCustomerByID(id);
+                        loadSpouse?.Invoke(this, spouseRec);
+                    }
+                }
+                else
+                {
+                    showMessage?.Invoke(this, ("Error", "No payee data retrieved!", "Close"));
                 }
             }
             public void getRequiredFields()

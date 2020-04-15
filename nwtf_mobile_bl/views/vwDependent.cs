@@ -19,6 +19,10 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.dependent.getListDependentByCustomerUID(customerUID);
             }
+            public static vwDependent getDependentRecByUID(Guid dependentUID)
+            {
+                return dataservices.dependent.getDependentRecByUID(dependentUID);
+            }
         }
     }
 }

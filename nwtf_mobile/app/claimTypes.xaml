@@ -211,7 +211,7 @@
                                                             <ColumnDefinition Width="250" />
                                                         </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0" Grid.Column="0" Text="Choose a Dependent:" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="Black"/>
-                                                        <Picker Grid.Row="0" Grid.Column="1" FontSize="Small" Title="Select a Dependent" x:Name="payeeName" VerticalOptions="Center" TextColor="Black"/>
+                                                        <Picker Grid.Row="0" Grid.Column="1" FontSize="Small" Title="Select a Dependent" x:Name="payeeName" VerticalOptions="Center" TextColor="Black" SelectedIndexChanged="PayeePickerEvent"/>
                                                     </Grid>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding amountType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Text="{Binding payeeType}" IsVisible="false" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black"/>

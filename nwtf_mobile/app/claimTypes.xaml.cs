@@ -18,6 +18,7 @@ namespace nwtf_mobile.app
         public static string aggregateLabelFrom { get; set; }
         public static string aggregateLabelTo { get; set; }
         public static RepeaterView control { get; set; }
+        public static Guid daUID { get; set; }
         controllers.claimTransaction pcon = new controllers.claimTransaction();
 
         public static void setClaimDTO(dto.claimDTO value)
@@ -42,6 +43,10 @@ namespace nwtf_mobile.app
             pcon.showMessage += Pcon_showMessage;
             pcon.loadRepeater += Pcon_loadRepeater;
             pcon.loadCBL += Pcon_loadCBL;
+            pcon.loadDisbursementPayee += Pcon_loadDisbursementPayee;
+            pcon.loadBranchEmployee += Pcon_loadBranchEmployee;
+            pcon.loadDependent += Pcon_loadDependent;
+            pcon.loadSpouse += Pcon_loadSpouse;
         }
 
         // display messages
@@ -365,42 +370,46 @@ namespace nwtf_mobile.app
             Grid pickerGrid = (Grid)payeePicker.Parent;
             Grid parentGrid = (Grid)pickerGrid.Parent;
             Label payeeType = (Label)parentGrid.Children[9];
+            Label daUIDText = (Label)parentGrid.Children[10];
+            daUID = Guid.Parse(daUIDText.Text);
             object payeeName = payeePicker.SelectedItem;
-            Label daUID = (Label)parentGrid.Children[10];
-            views.vwDisbursementType daRec = claimdto.listSelectedDA.Where(x => x.id == Guid.Parse(daUID.Text)).FirstOrDefault();
-            daRec.payeeName = payeeName.ToString();
             payeeType.Text = "3";
-            if (Convert.ToInt32(payeeType.Text) == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel)){
-                List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
-                Dictionary<Guid, string> values = new Dictionary<Guid, string>();
-               
-                foreach (var item in branchPayeeList)
-                {
-                    values.Add(item.id, item.employeeName);
-                }
-                var data = payeePicker.Items[payeePicker.SelectedIndex];
-                var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
-                var branchEmpRec=views.vwBranchEmployee.getBranchEmployeeByUID(id);
-                daRec.payeeGUID = branchEmpRec.id;
-                daRec.payeeID = branchEmpRec.payeeID;
-                daRec.payeeName = branchEmpRec.employeeName;
-            }
-            else if (Convert.ToInt32(payeeType.Text) == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee)){
-                List<views.vwDisbursementPayee> disbursementPayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
-                Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+            pcon.setPayeeDTO(Convert.ToInt32(payeeType.Text), payeeName.ToString(), claimdto);
 
-                foreach (var item in disbursementPayeeList)
-                {
-                    values.Add(item.id, item.businessName);
-                }
-                var data = payeePicker.Items[payeePicker.SelectedIndex];
-                var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
-                var disbursePayeeRec = views.vwDisbursementPayee.getDisbursementPayeeByUID(id);
-                daRec.payeeGUID = disbursePayeeRec.id;
-                daRec.payeeID = disbursePayeeRec.payeeID;
-                daRec.payeeName = disbursePayeeRec.businessName;
+        }
+
+        private void Pcon_loadDisbursementPayee(object sender, views.vwDisbursementPayee e)
+        {
+            views.vwDisbursementType daRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
+            daRec.payeeGUID = e.id;
+            daRec.payeeID = e.payeeID;
+            daRec.payeeName = e.businessName;
+        }
+        private void Pcon_loadBranchEmployee(object sender, views.vwBranchEmployee e)
+        {
+            views.vwDisbursementType empRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
+            if (empRec != null)
+            {
+                empRec.payeeGUID = e.id;
+                empRec.payeeID = e.payeeID;
+                empRec.payeeName = e.employeeName;
             }
         }
+        private void Pcon_loadDependent(object sender, views.vwDependent e)
+        {
+            views.vwDisbursementType empRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
+            empRec.payeeGUID = e.id;
+            empRec.payeeID = e.dependentID;
+            empRec.payeeName = e.dependentFullName;
+        }
+        private void Pcon_loadSpouse(object sender, views.vwCustomer e)
+        {
+            views.vwDisbursementType empRec = claimdto.listSelectedDA.Where(x => x.id == daUID).FirstOrDefault();
+            empRec.payeeGUID = e.id;
+            empRec.payeeID = e.spouseID;
+            empRec.payeeName = e.spouseFirstName +" "+ e.spouseMiddleName +" "+ e.spouseLastName;
+        }
+
 
         private void DefaultPayeePickerEvent(object sender, EventArgs e)
         {
