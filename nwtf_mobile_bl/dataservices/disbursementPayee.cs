@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace nwtf_mobile_bl
@@ -19,6 +20,16 @@ namespace nwtf_mobile_bl
 
                 }
                 return listDisbursementPayee;
+            }
+            public static views.vwDisbursementPayee getDisbursementPayeeByUID(Guid disPayUID)
+            {
+                views.vwDisbursementPayee disbursementPayee = new views.vwDisbursementPayee();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT * FROM vwDisbursementPayee WHERE id='" + disPayUID.ToString() + "';";
+                    disbursementPayee = conn.Query<views.vwDisbursementPayee>(sql).FirstOrDefault();
+                }
+                return disbursementPayee;
             }
         }
     }

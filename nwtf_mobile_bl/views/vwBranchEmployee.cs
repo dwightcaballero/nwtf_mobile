@@ -17,6 +17,10 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.branchEmployee.getListBranchEmployees(branchId);
             }
+            public static vwBranchEmployee getBranchEmployeeByUID(Guid branchEmpUID)
+            {
+                return dataservices.branchEmployee.getBranchEmployeeByUID(branchEmpUID);
+            }
         }
     }
 }

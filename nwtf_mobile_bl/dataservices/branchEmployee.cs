@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace nwtf_mobile_bl
@@ -18,6 +19,16 @@ namespace nwtf_mobile_bl
                     listBranchEmployees = conn.Query<views.vwBranchEmployee>(sql);
                 }
                 return listBranchEmployees;
+            }
+            public static views.vwBranchEmployee getBranchEmployeeByUID(Guid branchEmpUID)
+            {
+                views.vwBranchEmployee branchEmployee = new views.vwBranchEmployee();
+                using (SQLiteConnection conn = new SQLiteConnection(Database.DatabasePath))
+                {
+                    string sql = "SELECT * FROM vwBranchEmployee WHERE id='" + branchEmpUID.ToString() + "';";
+                    branchEmployee = conn.Query<views.vwBranchEmployee>(sql).FirstOrDefault();
+                }
+                return branchEmployee;
             }
         }
     }

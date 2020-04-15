@@ -311,6 +311,7 @@ namespace nwtf_mobile.app
         public Grid setPayeeType(int payeeType, Grid parentGrid)
         {
             Grid daGrid;
+            payeeType = 3;
             if (payeeType == Convert.ToInt32(systemconst.payeeType.MemberAsPayee))
             {
                 daGrid = (Grid)parentGrid.Children[4];
@@ -324,7 +325,7 @@ namespace nwtf_mobile.app
                 Picker branchPayeePicker = (Picker)daGrid.Children[1];
                 branchPayeePicker.Title = "Select a Branch Personnel";
                 List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
-                List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();
+                List<string> branchNames = branchPayeeList.Select(x => x.employeeName).ToList();  
                 branchPayeePicker.ItemsSource = branchNames;
                 return daGrid;
             }
@@ -368,12 +369,36 @@ namespace nwtf_mobile.app
             Label daUID = (Label)parentGrid.Children[10];
             views.vwDisbursementType daRec = claimdto.listSelectedDA.Where(x => x.id == Guid.Parse(daUID.Text)).FirstOrDefault();
             daRec.payeeName = payeeName.ToString();
-
+            payeeType.Text = "3";
             if (Convert.ToInt32(payeeType.Text) == Convert.ToInt32(systemconst.payeeType.FromBranchPersonnel)){
-                // views.vwBranchEmployee.
+                List<views.vwBranchEmployee> branchPayeeList = views.vwBranchEmployee.getListBranchEmployees(claimdto.branchID);
+                Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+               
+                foreach (var item in branchPayeeList)
+                {
+                    values.Add(item.id, item.employeeName);
+                }
+                var data = payeePicker.Items[payeePicker.SelectedIndex];
+                var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
+                var branchEmpRec=views.vwBranchEmployee.getBranchEmployeeByUID(id);
+                daRec.payeeGUID = branchEmpRec.id;
+                daRec.payeeID = branchEmpRec.payeeID;
+                daRec.payeeName = branchEmpRec.employeeName;
             }
             else if (Convert.ToInt32(payeeType.Text) == Convert.ToInt32(systemconst.payeeType.FromDisbursementPayee)){
-               // views.vwDisbursementPayee.
+                List<views.vwDisbursementPayee> disbursementPayeeList = views.vwDisbursementPayee.getListDisbursementPayee(claimdto.branchID);
+                Dictionary<Guid, string> values = new Dictionary<Guid, string>();
+
+                foreach (var item in disbursementPayeeList)
+                {
+                    values.Add(item.id, item.businessName);
+                }
+                var data = payeePicker.Items[payeePicker.SelectedIndex];
+                var id = values.FirstOrDefault(x => x.Value == payeeName.ToString()).Key;
+                var disbursePayeeRec = views.vwDisbursementPayee.getDisbursementPayeeByUID(id);
+                daRec.payeeGUID = disbursePayeeRec.id;
+                daRec.payeeID = disbursePayeeRec.payeeID;
+                daRec.payeeName = disbursePayeeRec.businessName;
             }
         }
 

@@ -17,6 +17,10 @@ namespace nwtf_mobile_bl
             {
                 return dataservices.disbursementPayee.getListDisbursementPayee(branchId);
             }
+            public static vwDisbursementPayee getDisbursementPayeeByUID(Guid disPayUID)
+            {
+                return dataservices.disbursementPayee.getDisbursementPayeeByUID(disPayUID);
+            }
         }
     }
 }
